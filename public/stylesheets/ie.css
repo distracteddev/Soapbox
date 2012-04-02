@@ -1,0 +1,40 @@
+/* line 8, ../sass/ie.scss */
+div.panel {
+  border: 1px solid #cccccc;
+}
+
+/* line 12, ../sass/ie.scss */
+.lt-ie8 .nav-bar li.has-flyout a {
+  padding-right: 20px;
+}
+/* line 14, ../sass/ie.scss */
+.lt-ie8 .nav-bar li.has-flyout a:after {
+  border-top: none;
+}
+
+/* line 18, ../sass/ie.scss */
+.lt-ie8 input[type=submit].nice.button {
+  filter: chroma(color=black);
+  position: relative;
+  top: -2px;
+}
+
+/* line 23, ../sass/ie.scss */
+.lt-ie8 input[type=submit].tiny.button {
+  padding: 5px 5px 7px;
+}
+
+/* line 26, ../sass/ie.scss */
+.lt-ie8 input[type=submit].small.button {
+  padding: 8px 7px 9px;
+}
+
+/* line 29, ../sass/ie.scss */
+.lt-ie8 input[type=submit].medium.button {
+  padding: 9px 13px 9px;
+}
+
+/* line 32, ../sass/ie.scss */
+.lt-ie8 input[type=submit].large.button {
+  padding: 9px 18px 10px;
+}

@@ -1,0 +1,116 @@
+/* Artfully masterminded by ZURB  */
+// SASS VARIABLES //
+$text-color: #333;
+// $orange: rgba(255, 85, 0, 0.9);
+// $pale-green: rgba(100, 100, 0, 0.4);
+@import "settings";
+@import "compass";
+
+
+// body styles
+body {
+	//background-image: url('../images/blu_stripes.png');
+	//background-image: url('../images/little_pluses.png');
+	background-image: url('../images/pinstripe.png');
+}
+
+// header styles
+#headerRow {
+	margin-top: 20px;
+	margin-bottom: 50px;
+
+	h1, h2, p {
+		text-align: center;
+		color: rgba($pale-green, 1.0);
+		font: 400 95px/1.6 'Pacifico', Georgia, serif;
+		letter-spacing: 22px;
+
+	}
+
+	p {
+		margin-top: 40px;
+		font: 400 17px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
+		font-variant: small-caps;
+		letter-spacing: 7px;
+	}
+
+	h1 {		 
+		line-height: 62px;
+		text-shadow: 
+			1px 4px 6px #eeeeee, 0 0 0 #555, 
+			1px 4px 6px #eeeeee, 0px 0px 1px rgba(0,0,0,.5);
+		color: rgba($pale-green, .5);		
+		//color: rgba(255, 66, 0, 0.7);
+		//color: rgba(255, 66, 0, 0.7);
+	}
+
+	dl {
+
+		dd {
+			font: 400 21px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
+			font-family: 'Allan', Helvetica, Arial, sans-serif;
+			font: 400 21px/1.2 'Nixie One', Georgia, serif;
+			padding: 10px;
+			
+			.active a {
+				background-color: none;
+			}
+		}
+
+		&.sub-nav dd.active a {
+			background-color: transparent;
+			color: rgba($pale-green, 1.0);
+			//color: #fff;	
+			padding-bottom: 3px; //space between word and line
+			padding: 10px 20px;
+			//border-bottom: 7px solid $pale-green;
+			@include box-shadow(rgba(100,100,0,.25) 0px 0px 10px inset);
+		}
+	}
+
+
+}
+
+hr {
+	border-color: $pale-green;
+	border-width: 2px;
+}
+
+.post {
+
+	h1, h2, h3, h4, h5, p {
+  		font: 400 42px/1.2 'Nixie One', Georgia, serif;
+  		color: rgba($pale-green, 1.0);
+  		letter-spacing: 4px;
+	}
+ 
+	h5 {
+	  font: 400 14px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
+	  letter-spacing: 2px;
+	  margin: -4px 0px 20px 0px;
+	  color: rgba($pale-green, 0.6);
+	}
+
+	p {	  
+		font: 400 17px/1.6 'Gudea', Verdana, Helvetica, sans-serif;
+		letter-spacing: 1px;
+	}
+}
+
+
+// CSS Helper Classes
+.mock {
+	//background-color: #eee;
+}
+
+.ctr-ctn {
+	float: left;
+	position: relative;
+	left: 50%;
+}
+
+.ctr-block {
+	float: left;
+	position: relative;
+	left: -50%;
+}

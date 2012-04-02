@@ -1,0 +1,18 @@
+{
+  "description": "A Single-Page Personal Blogging Experiment",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "union": "0.1.7",
+    "flatiron": "0.1.16"
+  },
+  "devDependencies": {
+    "api-easy": "0.3.4",
+    "vows": "0.6.2"
+  },
+  "scripts": {
+    "test": "vows test/*-test.js",
+    "start": "node app.js"
+  },
+  "name": "soapbox"
+}
