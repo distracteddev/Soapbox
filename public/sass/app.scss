@@ -23,7 +23,7 @@ body {
 		text-align: center;
 		color: rgba($pale-green, 1.0);
 		font: 400 95px/1.6 'Pacifico', Georgia, serif;
-		letter-spacing: 22px;
+		letter-spacing: 3px;
 
 	}
 
@@ -36,10 +36,10 @@ body {
 
 	h1 {		 
 		line-height: 62px;
-		text-shadow: 
+		@include text-shadow( 
 			1px 4px 6px #eeeeee, 0 0 0 #555, 
-			1px 4px 6px #eeeeee, 0px 0px 1px rgba(0,0,0,.5);
-		color: rgba($pale-green, .5);		
+			1px 4px 6px #eeeeee, 0px 0px 1px rgba(0,0,0,.5));
+		color: rgba($pale-green, .8);		
 		//color: rgba(255, 66, 0, 0.7);
 		//color: rgba(255, 66, 0, 0.7);
 	}
@@ -96,15 +96,16 @@ hr {
 		font: 400 15px/1.6 'Gudea', Verdana, Helvetica, sans-serif;
 		font: 400 14px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
 		letter-spacing: 1px;
+		color: darken(rgba($pale-green, 1.0), 5%);
 	}
 
 	p:first-letter {
 		font-size: 64px;
 		line-height: 10px;
 		float: left;
-		padding-right: 10px;		
-		font: 400 42px/1.2 'Nixie One', Georgia, serif;
+		padding-right: 10px;				
 		font: 400 45px/.8 'Pacifico', Georgia, serif;
+		
 	}
 }
 

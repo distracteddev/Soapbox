@@ -14,7 +14,7 @@ body {
   text-align: center;
   color: #646400;
   font: 400 95px/1.6 "Pacifico", Georgia, serif;
-  letter-spacing: 22px;
+  letter-spacing: 3px;
 }
 /* line 30, ../sass/app.scss */
 #headerRow p {
@@ -27,7 +27,7 @@ body {
 #headerRow h1 {
   line-height: 62px;
   text-shadow: 1px 4px 6px #eeeeee, 0 0 0 #555555, 1px 4px 6px #eeeeee, 0px 0px 1px rgba(0, 0, 0, 0.5);
-  color: rgba(100, 100, 0, 0.5);
+  color: rgba(100, 100, 0, 0.8);
 }
 /* line 49, ../sass/app.scss */
 #headerRow dl dd {
@@ -77,25 +77,25 @@ hr {
   font: 400 15px/1.6 "Gudea", Verdana, Helvetica, sans-serif;
   font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
+  color: #4a4b00;
 }
-/* line 101, ../sass/app.scss */
+/* line 102, ../sass/app.scss */
 .post p:first-letter {
   font-size: 64px;
   line-height: 10px;
   float: left;
   padding-right: 10px;
-  font: 400 42px/1.2 "Nixie One", Georgia, serif;
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
 
-/* line 117, ../sass/app.scss */
+/* line 118, ../sass/app.scss */
 .ctr-ctn {
   float: left;
   position: relative;
   left: 50%;
 }
 
-/* line 123, ../sass/app.scss */
+/* line 124, ../sass/app.scss */
 .ctr-block {
   float: left;
   position: relative;
