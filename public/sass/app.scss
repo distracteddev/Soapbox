@@ -89,11 +89,22 @@ hr {
 	  letter-spacing: 2px;
 	  margin: -4px 0px 20px 0px;
 	  color: rgba($pale-green, 0.6);
+	  font-variant: small-caps;
 	}
 
-	p {	  
-		font: 400 17px/1.6 'Gudea', Verdana, Helvetica, sans-serif;
+	p, blockquote {	  
+		font: 400 15px/1.6 'Gudea', Verdana, Helvetica, sans-serif;
+		font: 400 14px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
 		letter-spacing: 1px;
+	}
+
+	p:first-letter {
+		font-size: 64px;
+		line-height: 10px;
+		float: left;
+		padding-right: 10px;		
+		font: 400 42px/1.2 'Nixie One', Georgia, serif;
+		font: 400 45px/.8 'Pacifico', Georgia, serif;
 	}
 }
 

@@ -70,21 +70,32 @@ hr {
   letter-spacing: 2px;
   margin: -4px 0px 20px 0px;
   color: rgba(100, 100, 0, 0.6);
+  font-variant: small-caps;
 }
-/* line 94, ../sass/app.scss */
-.post p {
-  font: 400 17px/1.6 "Gudea", Verdana, Helvetica, sans-serif;
+/* line 95, ../sass/app.scss */
+.post p, .post blockquote {
+  font: 400 15px/1.6 "Gudea", Verdana, Helvetica, sans-serif;
+  font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
 }
+/* line 101, ../sass/app.scss */
+.post p:first-letter {
+  font-size: 64px;
+  line-height: 10px;
+  float: left;
+  padding-right: 10px;
+  font: 400 42px/1.2 "Nixie One", Georgia, serif;
+  font: 400 45px/0.8 "Pacifico", Georgia, serif;
+}
 
-/* line 106, ../sass/app.scss */
+/* line 117, ../sass/app.scss */
 .ctr-ctn {
   float: left;
   position: relative;
   left: 50%;
 }
 
-/* line 112, ../sass/app.scss */
+/* line 123, ../sass/app.scss */
 .ctr-block {
   float: left;
   position: relative;
