@@ -13,8 +13,8 @@ app.use(flatiron.plugins.http, {
 		//connect.directory(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
 		connect.bodyParser(),
-		connect.cookieParser('lolcats'),
-		connect.session(),
+		//connect.cookieParser('lolcats'),
+		//connect.session(),
 		connect.methodOverride()
 	],
 
@@ -65,5 +65,5 @@ app.router.path('/\/animals', function () {
 });
 
 
-app.start(9000);
+app.start(process.env.C9_PORT);
 app.log.info("Started at http://localhost:9000/");
