@@ -4,6 +4,7 @@ var flatiron = require('flatiron'),
     path = require('path'),
     director = require('director'),
     fs = require('fs'),
+    routes = require('./routes'),
     app = flatiron.app;
 
 
@@ -55,6 +56,12 @@ app.router.path('/', function () {
 	});
 });
 
+
+app.router.path('/\/blog/', function() {
+	this.get(routes.getBP);
+	this.post(routes.postBP);
+});
+
 app.router.path('/\/animals', function () {
 	this.get(hello);
 	this.get('/dog/', bark);
@@ -65,5 +72,7 @@ app.router.path('/\/animals', function () {
 });
 
 
-app.start(process.env.C9_PORT);
-app.log.info("Started at http://localhost:9000/");
+//var port = process_env.C9_PORT;
+var port = 9000;
+app.start(port);
+app.log.info("Started at http://localhost:" + port + "/");
