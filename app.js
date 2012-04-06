@@ -5,15 +5,16 @@ var flatiron = require('flatiron'),
     director = require('director'),
     fs = require('fs'),
     routes = require('./routes'),
+    //qs = require('querystring'),
     app = flatiron.app;
 
 
 app.use(flatiron.plugins.http, {
 	before: [
+		//connect.bodyParser(),
 		connect.static(__dirname + '/public'),
 		//connect.directory(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
-		connect.bodyParser(),
 		//connect.cookieParser('lolcats'),
 		//connect.session(),
 		connect.methodOverride()
@@ -41,7 +42,7 @@ var hello = function () {
   this.res.json({ 'hello': 'animal world' });
 };
 
-app.router.path('/', function () {
+app.router.path('/', function (req, res) {
 	this.get(function () {
 		var self = this;
 		fs.readFile('index.html', function(err, data) {
@@ -53,6 +54,13 @@ app.router.path('/', function () {
 			self.res.writeHead(200, {'Content-Type': 'text/html'});
 			self.res.end(data);
 		});
+	});
+
+	this.post('jsonTest', function (req, res) {
+		console.log("I Started");
+		console.log(this.req.body);
+		var self = this;
+		self.res.end(JSON.stringify(this.req.body));
 	});
 });
 

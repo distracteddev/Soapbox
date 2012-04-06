@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "union": "0.1.7",
-    "flatiron": "0.1.16"
+    "union": "git://github.com/flatiron/union.git",
+    "flatiron": "0.1.16",
+    "connect": "git://github.com/senchalabs/connect.git"
   },
   "devDependencies": {
     "api-easy": "0.3.4",
