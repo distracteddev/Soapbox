@@ -3,7 +3,8 @@ var Resourceful = require('resourceful');
 var BlogPost = Resourceful.define('blogpost', function () {
     
 	this.use('couchdb', {
-		uri: 'couchdb://zeus.iriscouch.com/blogposts/'
+		uri: 'couchdb://zeus.iriscouch.com/blogposts'
+		//uri: 'couchdb://127.0.0.1:5984/blogposts'
 	});
 
 	this.string('title');
@@ -19,3 +20,19 @@ var BlogPost = Resourceful.define('blogpost', function () {
 exports.BlogPost = function() {
 	return BlogPost; 
 };
+
+
+var BlogSettings = Resourceful.define('settings', function () {
+	this.use('couchdb', {
+		uri: 'couchdb://zeus.iriscouch.com/settings'
+	});
+	
+	this.string('blogTitle');
+	this.string('blogSubTitle');
+	this.timestamps();
+
+});
+
+exports.BlogSettings = function () {
+	return BlogSettings;
+}

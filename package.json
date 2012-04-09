@@ -5,7 +5,8 @@
   "dependencies": {
     "union": "git://github.com/flatiron/union.git",
     "flatiron": "0.1.16",
-    "connect": "git://github.com/senchalabs/connect.git"
+    "connect": "git://github.com/senchalabs/connect.git",
+    "winston": "*"
   },
   "devDependencies": {
     "api-easy": "0.3.4",

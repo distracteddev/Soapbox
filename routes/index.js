@@ -1,34 +1,114 @@
-var Resourceful = require('resourceful')
-  , BlogPost = require('../models').BlogPost();
+var Resourceful = require('resourceful'),
+	winston = require('winston'),
+	BlogSettings = require('../models').BlogSettings(),
+	BlogPost = require('../models').BlogPost();
 
+winston.cli();
 
-exports.getBP = function(req, res) {
-	var BlogPosts = BlogPost.all(function(err, docs) {
+var throwError = function (err) {
+	if (err) {
+		winston.error(err);
+		throw err;
+	}
+};
+
+exports.getBP = function(id) {
+	var self = this;
+	if (arguments.length < 2) {
+		BlogPost.all(function(err, docs) {
+			if (err) throw err;
+			self.res.end(JSON.stringify(docs) + '\n');
+			winston.debug(docs);
+			return docs;
+		});
+	}
+	else {
+		console.log('ID: ' + id);
+		BlogPost.find({_id:id}, function(err, post) {
+			if (err) throw err;
+			self.res.end(JSON.stringify(post) + '\n');
+			winston.debug(post);
+			return post;
+		});
+	}
+};
+
+exports.postBP = function () {
+	console.log(this.req.body);
+	var self = this;
+	if (!id) {
+		BlogPost.create(this.req.body, function (err, doc) {
+			if (err) { 
+				winston.log(err);
+				throw new(Error)(err);
+			}
+
+			console.log(doc);
+			doc.save(function() {
+				if (!err) {
+					winston.log('Saved');
+					self.res.end('Saved');				
+				}
+				else {				
+					throw err;
+				}
+			});		
+		});
+	}
+	else {
+		BlogPost.get(id, function (err, post) {
+			post.update(self.req.body, function() {
+				if (err) throw err;
+				this.res.end('Post Updated\n');
+			});
+		});
+	}
+	
+};
+
+exports.getSettings = function () {
+	var self = this;
+	var settings = BlogSettings.all(function (err, settings) {
 		if (err) throw err;
-		res.end(JSON.stringify(docs));
-		
+		// Check if the function has been called
+		// as a response handler.
+		if (self !== undefined) {
+		self.res.end(JSON.stringify(settings));
+		}
+		winston.debug(settings);
+		return settings;
 	});
-	console.log(BlogPost);
+	return settings;
 };
 
-exports.postBP = function (req, res) {
-	console.log(req.body);
-	console.log(BlogPost);
-	BlogPost.create(req.body, function (err, document) {
-		if (err) { 
-			console.log(err);
-			throw new(Error)(err);
-		 }
 
-		console.log(req.body);
-		console.log(document);
-		document.save(function() {
-			if (!err) {
-				res.end('Saved');				
-			}
-			else {				
-				throw err;
-			}
-		});		
+exports.postSettings = function () {
+	var self = this;
+	console.log(self.req.body);
+	// If there are no settings, create them.
+	BlogSettings.all(function (err, settings) {
+		winston.debug(JSON.stringify(settings));
+		if (settings === undefined) {
+			BlogSettings.create(self.req.body, function (err, settings) {
+				if (err) { 
+					winston.error(err);
+					throw new(Error)(err);
+				}
+				self.res.end(JSON.stringify(settings));
+				winston.debug(settings);
+			});
+		}
+		// If there are settings, update them.
+		else {
+			settings[0].update(self.req.body, function (err) {
+				if (err) { 
+					winston.error(err);
+					throw err;				
+				}
+				self.res.end("Settings Updated\n");
+			});
+		}
 	});
+	
 };
+

@@ -42,7 +42,7 @@ var hello = function () {
   this.res.json({ 'hello': 'animal world' });
 };
 
-app.router.path('/', function (req, res) {
+app.router.path('/', function () {
 	this.get(function () {
 		var self = this;
 		fs.readFile('index.html', function(err, data) {
@@ -56,18 +56,28 @@ app.router.path('/', function (req, res) {
 		});
 	});
 
-	this.post('jsonTest', function (req, res) {
+	this.post('jsonTest', function () {
 		console.log("I Started");
 		console.log(this.req.body);
 		var self = this;
-		self.res.end(JSON.stringify(this.req.body));
+		self.res.end(JSON.stringify(this.req.body) + '\n');
 	});
 });
 
 
+app.router.path('/\/blog/:id', function() {
+	this.get(routes.getBP);
+	this.post(routes.postBP);
+});
+
 app.router.path('/\/blog/', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
+});
+
+app.router.path('/\/blog_settings', function() {
+	this.get(routes.getSettings);
+	this.post(routes.postSettings);
 });
 
 app.router.path('/\/animals', function () {

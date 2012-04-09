@@ -37,6 +37,20 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<script type="text/x-handlebars" data-template-name="blogpost">
+		<div class="row">
+			<section class="post columns eight centered mock">
+				<section class="post-header">
+					<h2>Post Title</h2>
+					<h5>Subtitle - March 21, 2012</h5>
+					<p class="post-body">
+				</section>
+			</section>
+		</div>
+	</script>
+
+
+
 
 </head>
 <body>
@@ -44,10 +58,12 @@
 	<!-- container -->
 	<div class="container">
 
+
+	<script type="text/x-handlebars" data-template-name="header">
 		<div class="row" id="headerRow">
 			<div class="six columns centered clearfix">
-				<h1>zeus</h1>
-				<p>A Node &amp; Ember.js Experiment</p>
+				<h1>{{title}}</h1>
+				<p>{{subTitle}}</p>
 				<hr />
 				<div class="ctr-ctn">
 					<dl class="sub-nav ctr-block">				  
@@ -61,24 +77,8 @@
 			</div>
 		</div>
 		<!-- End of Header Row -->
+	</script>
 
-		<div class="row">
-			<section class="post columns eight centered mock">
-				<section class="post-header">
-					<h2>Post Title</h2>
-					<h5>Subtitle - March 21, 2012</h5>
-					<p class="post-body">
-						Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor. Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-
-						Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Etiam porta sem malesuada magna mollis euismod. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-					</p>
-					<blockquote>
-						“Computer science education cannot make anybody an expert programmer any more than studying brushes and pigment can make somebody an expert painter.”
-- Eric S. Raymond
-					</blockquote>
-				</section>
-			</section>
-		</div>
 
 	</div>
 	<!-- container -->
@@ -93,8 +93,10 @@
 	<script src="javascripts/jquery.customforms.js"></script>
 	<script src="javascripts/jquery.placeholder.min.js"></script>
 	<script src="javascripts/jquery.tooltips.js"></script>
-	<script src="js/libs/ember-0.9.6.min.js"></script>
+	<script src="javascripts/lib/ember.js"></script>
+	<script src="javascripts/lib/ember-data.js"></script>
 	<script src="javascripts/app.js"></script>
+	<script src="app.js"></script>
 
 
 </body>
