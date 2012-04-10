@@ -73,7 +73,7 @@ exports.getSettings = function () {
 		// Check if the function has been called
 		// as a response handler.
 		if (self !== undefined) {
-		self.res.end(JSON.stringify(settings));
+		self.res.end('{"blog_settings": ' + JSON.stringify(settings) + " }");
 		}
 		winston.debug(settings);
 		return settings;

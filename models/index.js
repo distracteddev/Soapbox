@@ -27,8 +27,8 @@ var BlogSettings = Resourceful.define('settings', function () {
 		uri: 'couchdb://zeus.iriscouch.com/settings'
 	});
 	
-	this.string('blogTitle');
-	this.string('blogSubTitle');
+	this.string('blog_itle');
+	this.string('blog_sub_title');
 	this.timestamps();
 
 });

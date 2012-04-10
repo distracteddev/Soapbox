@@ -49,38 +49,41 @@
 		</div>
 	</script>
 
-
-
+	<script type="text/x-handlebars" data-template-name="header">
+		<div class="container">
+			<div class="row" id="headerRow">
+				<div class="six columns centered clearfix">	
+					{{#each content}}			
+					<h1>{{blog_title}}</h1>
+					{{/each}}
+					{{#each content}}
+					<p>{{blog_sub_title}}</p>				
+					{{/each}}
+					<hr />
+					<div class="ctr-ctn">
+						<dl class="sub-nav ctr-block">				  
+						  <dd class="active"><a href="#">Home</a></dd>
+						  <dd><a href="#">Proramming</a></dd>
+						  <dd><a href="#">Espresso</a></dd>
+						  <dd><a href="#">Me</a></dd>						  
+						</dl>
+					</div>			
+				</div>
+			</div>
+		</div>
+	</script>	
 
 </head>
 <body>
 
 	<!-- container -->
-	<div class="container">
+	
 
 
-	<script type="text/x-handlebars" data-template-name="header">
-		<div class="row" id="headerRow">
-			<div class="six columns centered clearfix">
-				<h1>{{title}}</h1>
-				<p>{{subTitle}}</p>
-				<hr />
-				<div class="ctr-ctn">
-					<dl class="sub-nav ctr-block">				  
-					  <dd class="active"><a href="#">Home</a></dd>
-					  <dd><a href="#">Proramming</a></dd>
-					  <dd><a href="#">Espresso</a></dd>
-					  <dd><a href="#">Me</a></dd>
-					  <!-- <dd><a href="#">Portfolio</a></dd> -->
-					</dl>
-				</div>			
-			</div>
-		</div>
-		<!-- End of Header Row -->
-	</script>
 
 
-	</div>
+
+	
 	<!-- container -->
 
 
