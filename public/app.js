@@ -24,14 +24,25 @@ App.BlogSetting = DS.Model.extend({
 
 App.BlogPost = DS.Model.extend({
 	title: DS.attr('string'),
-	subTitle: DS.attr('string'),
+	sub_title: DS.attr('string'),
 	body: DS.attr('string'),
-	tags: DS.hasMany('string', {embedded: true})
+	tags: DS.hasMany('string', {embedded: true}),
+	_id: DS.attr('string'),
+	_rev: DS.attr('string'),
+	ctime: DS.attr('date'),
+	mtime: DS.attr('date'),
+	primaryKey: "_id"
 });
 
 App.Settings = App.store.findAll(App.BlogSetting);
 
+App.BlogPosts = App.store.findAll(App.BlogPost);
+
 App.HeaderController = Ember.ArrayProxy.create({
+	content: []
+});
+
+App.PostController = Ember.ArrayProxy.create({
 	content: []
 });
 
@@ -41,6 +52,17 @@ App.HeaderView = Em.View.create({
 	contentBinding: 'App.HeaderController.content'
 });
 
+App.PostView = Em.View.create({
+	templateName: "posts",
+	contentBinding: "App.PostController.content"
+});
+
 App.HeaderView.append();
+App.PostView.append();
 
 App.HeaderController.set('content', App.store.findAll(App.BlogSetting));
+App.PostController.set('content', App.store.findAll(App.BlogPost));
+
+
+
+

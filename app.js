@@ -64,13 +64,13 @@ app.router.path('/', function () {
 	});
 });
 
-
-app.router.path('/\/blog/:id', function() {
+app.router.path('/\/blog_posts/', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
+	this.get('/tags',routes.getTags);
 });
 
-app.router.path('/\/blog/', function() {
+app.router.path('/\/blog_posts/:id', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
 });

@@ -37,16 +37,18 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script type="text/x-handlebars" data-template-name="blogpost">
+	<script type="text/x-handlebars" data-template-name="posts">
+		{{#each content}}
 		<div class="row">
 			<section class="post columns eight centered mock">
 				<section class="post-header">
-					<h2>Post Title</h2>
-					<h5>Subtitle - March 21, 2012</h5>
-					<p class="post-body">
+					<h2>{{title}}</h2>
+					<h5>{{sub_title}}</h5>
+					<p class="post-body">{{body}}</p>
 				</section>
 			</section>
 		</div>
+		{{/each}}
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="header">

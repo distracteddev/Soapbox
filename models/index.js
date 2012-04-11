@@ -13,6 +13,22 @@ var BlogPost = Resourceful.define('blogpost', function () {
 	this.array('tags');
 	this.timestamps();
 
+	var data = {};
+	data.resource = 'blogpost';
+	data.options = {};
+	data.filter = {
+		map: function (post) {
+			post.tags.forEach(function (tag) {
+				emit(tag, 1);
+			});
+		},
+		reduce: function(keys, values) {
+			return sum(values);
+			
+		}
+	};
+	this.filter("tagFilter", data);
+
 });
 
 

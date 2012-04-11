@@ -15,18 +15,18 @@ var throwError = function (err) {
 exports.getBP = function(id) {
 	var self = this;
 	if (arguments.length < 2) {
-		BlogPost.all(function(err, docs) {
+		BlogPost.all(function(err, posts) {
 			if (err) throw err;
-			self.res.end(JSON.stringify(docs) + '\n');
-			winston.debug(docs);
-			return docs;
+			self.res.end('{"blog_posts":' + JSON.stringify(posts) + "}");
+			winston.debug(posts);
+			return posts;
 		});
 	}
 	else {
 		console.log('ID: ' + id);
 		BlogPost.find({_id:id}, function(err, post) {
 			if (err) throw err;
-			self.res.end(JSON.stringify(post) + '\n');
+			self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
 			winston.debug(post);
 			return post;
 		});
@@ -65,6 +65,7 @@ exports.postBP = function () {
 	}
 	
 };
+
 
 exports.getSettings = function () {
 	var self = this;
