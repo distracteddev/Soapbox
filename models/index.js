@@ -1,5 +1,19 @@
 var Resourceful = require('resourceful');
 
+var data = {};
+data.filter = {
+	map: function (post) {
+		post.tags.forEach(function (tag) {
+			emit(tag, 1);
+		});
+	},
+	reduce: function(keys, values) {
+		return sum(values);
+		
+	}
+};
+
+
 var BlogPost = Resourceful.define('blogpost', function () {
     
 	this.use('couchdb', {
@@ -12,26 +26,9 @@ var BlogPost = Resourceful.define('blogpost', function () {
 	this.string('body');
 	this.array('tags');
 	this.timestamps();
-
-	var data = {};
-	data.resource = 'blogpost';
-	data.options = {};
-	data.filter = {
-		map: function (post) {
-			post.tags.forEach(function (tag) {
-				emit(tag, 1);
-			});
-		},
-		reduce: function(keys, values) {
-			return sum(values);
-			
-		}
-	};
 	this.filter("tagFilter", data);
 
 });
-
-
 
 exports.BlogPost = function() {
 	return BlogPost; 
@@ -51,4 +48,4 @@ var BlogSettings = Resourceful.define('settings', function () {
 
 exports.BlogSettings = function () {
 	return BlogSettings;
-}
+};
