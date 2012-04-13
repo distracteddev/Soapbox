@@ -1,7 +1,7 @@
 var Resourceful = require('resourceful');
 
-var data = {};
-data.filter = {
+
+var tagFilter = {
 	map: function (post) {
 		post.tags.forEach(function (tag) {
 			emit(tag, 1);
@@ -12,6 +12,8 @@ data.filter = {
 		
 	}
 };
+
+var options = {}
 
 
 var BlogPost = Resourceful.define('blogpost', function () {
@@ -26,7 +28,8 @@ var BlogPost = Resourceful.define('blogpost', function () {
 	this.string('body');
 	this.array('tags');
 	this.timestamps();
-	this.filter("tagFilter", data);
+	debugger;
+	this.filter("tagFilter",options, tagFilter);
 
 });
 

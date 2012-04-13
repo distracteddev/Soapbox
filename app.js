@@ -4,9 +4,10 @@ var flatiron = require('flatiron'),
     path = require('path'),
     director = require('director'),
     fs = require('fs'),
-    routes = require('./routes'),
     //qs = require('querystring'),
     app = flatiron.app;
+
+var routes = require('./routes');
 
 
 app.use(flatiron.plugins.http, {
