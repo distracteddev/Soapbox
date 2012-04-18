@@ -22,7 +22,7 @@ App.BlogSetting = DS.Model.extend({
 	}
 });
 
-App.BlogPost = DS.Model.extend({
+App.BlogPost = DS.Model.extend({	
 	title: DS.attr('string'),
 	sub_title: DS.attr('string'),
 	body: DS.attr('string'),
@@ -32,6 +32,11 @@ App.BlogPost = DS.Model.extend({
 	ctime: DS.attr('date'),
 	mtime: DS.attr('date'),
 	primaryKey: "_id"
+});
+
+
+App.Tags = DS.Model.extend({
+
 });
 
 App.Settings = App.store.findAll(App.BlogSetting);

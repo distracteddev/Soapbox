@@ -8,12 +8,13 @@ var tagFilter = {
 		});
 	},
 	reduce: function(keys, values) {
-		return sum(values);
-		
+		return sum(values);	
 	}
 };
 
-var options = {}
+var options = {
+	"group": "true"
+};
 
 
 var BlogPost = Resourceful.define('blogpost', function () {
@@ -29,7 +30,7 @@ var BlogPost = Resourceful.define('blogpost', function () {
 	this.array('tags');
 	this.timestamps();
 	debugger;
-	this.filter("tagFilter",options, tagFilter);
+	this.filter("tagFilter", options, tagFilter);
 
 });
 
