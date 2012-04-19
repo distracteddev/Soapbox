@@ -66,12 +66,14 @@ exports.postBP = function () {
 	
 };
 
+
+
 exports.getTags = function () {
 	var self = this;
 	BlogPost.tagFilter(function(err, tags) {
 		if (err) throw err;
 		console.log(tags);
-		self.res.end(JSON.stringify(tags));
+		self.res.end('{"tags":' + JSON.stringify(tags) + "}");
 	});
 };
 

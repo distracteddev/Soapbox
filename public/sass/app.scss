@@ -99,7 +99,7 @@ hr {
 		color: darken(rgba($pale-green, 1.0), 5%);
 	}
 
-	p:first-letter {
+	p.post-body:first-letter {
 		font-size: 64px;
 		line-height: 10px;
 		float: left;

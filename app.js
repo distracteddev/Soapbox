@@ -63,12 +63,15 @@ app.router.path('/', function () {
 		var self = this;
 		self.res.end(JSON.stringify(this.req.body) + '\n');
 	});
+
+	this.get('/tags',routes.getTags);
+
+	
 });
 
 app.router.path('/\/blog_posts/', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
-	this.get('/tags',routes.getTags);
 });
 
 app.router.path('/\/blog_posts/:id', function() {

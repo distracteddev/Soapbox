@@ -1,5 +1,16 @@
 var App = Em.Application.create();
 
+
+DS.attr.transforms.array = {
+    from: function(serialized) {
+        return serialized;
+    },
+
+    to: function(deserialized) {
+    	return deserialized
+    }
+};
+
 App.store = DS.Store.create({
 	revision: 4,
 	adapter: DS.RESTAdapter.create({bulkCommit: false})
@@ -16,8 +27,8 @@ App.BlogSetting = DS.Model.extend({
 	blog_sub_title: DS.attr('string'),
 
 	didLoad: function() {
-		console.log("BlogSettings Loaded with id: " + this.get("_id"));	
-		console.log(this);
+		//console.log("BlogSettings Loaded with id: " + this.get("_id"));	
+		//console.log(this);
 		App.HeaderController.set('content', App.store.findAll(App.BlogSetting));
 	}
 });
@@ -26,22 +37,39 @@ App.BlogPost = DS.Model.extend({
 	title: DS.attr('string'),
 	sub_title: DS.attr('string'),
 	body: DS.attr('string'),
-	tags: DS.hasMany('string', {embedded: true}),
+	tags: DS.attr('array'),
 	_id: DS.attr('string'),
 	_rev: DS.attr('string'),
 	ctime: DS.attr('date'),
 	mtime: DS.attr('date'),
-	primaryKey: "_id"
+	primaryKey: "_id",
+
+	didLoad: function() {
+		App.PostController.set('content', App.store.findAll(App.BlogPost));
+		//console.log(this.get('tags'));
+	}
+
+
+
 });
 
 
-App.Tags = DS.Model.extend({
+App.Tag = DS.Model.extend({
+	key: DS.attr('string'),
+	value: DS.attr('number'),
+	primaryKey: "key",
 
+	didLoad: function() {
+		App.TagController.set('content', App.store.findAll(App.Tag));
+		console.log(this);		
+	}
 });
 
-App.Settings = App.store.findAll(App.BlogSetting);
+//fill the cache
+// App.Settings = App.store.findAll(App.BlogSetting);
+// App.BlogPosts = App.store.findAll(App.BlogPost);
+// App.Tags = App.store.findAll(App.Tag);
 
-App.BlogPosts = App.store.findAll(App.BlogPost);
 
 App.HeaderController = Ember.ArrayProxy.create({
 	content: []
@@ -51,10 +79,15 @@ App.PostController = Ember.ArrayProxy.create({
 	content: []
 });
 
+App.TagController = Ember.ArrayProxy.create({
+	content: []
+});
+
 
 App.HeaderView = Em.View.create({
 	templateName: "header",
-	contentBinding: 'App.HeaderController.content'
+	contentBinding: 'App.HeaderController.content',
+	tagsBinding: 'App.TagController.content'
 });
 
 App.PostView = Em.View.create({
@@ -67,6 +100,7 @@ App.PostView.append();
 
 App.HeaderController.set('content', App.store.findAll(App.BlogSetting));
 App.PostController.set('content', App.store.findAll(App.BlogPost));
+App.TagController.set('content', App.store.findAll(App.Tag));
 
 
 

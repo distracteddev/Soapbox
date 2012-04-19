@@ -44,6 +44,9 @@
 				<section class="post-header">
 					<h2>{{title}}</h2>
 					<h5>{{sub_title}}</h5>
+					{{#each tags}}
+						<p>{{this}}</p>
+					{{/each}}
 					<p class="post-body">{{body}}</p>
 				</section>
 			</section>
@@ -56,20 +59,18 @@
 			<div class="row" id="headerRow">
 				<div class="six columns centered clearfix">	
 					{{#each content}}			
-					<h1>{{blog_title}}</h1>
-					{{/each}}
-					{{#each content}}
-					<p>{{blog_sub_title}}</p>				
+						<h1>{{blog_title}}</h1>
+						<p>{{blog_sub_title}}</p>						
 					{{/each}}
 					<hr />
 					<div class="ctr-ctn">
-						<dl class="sub-nav ctr-block">				  
-						  <dd class="active"><a href="#">Home</a></dd>
-						  <dd><a href="#">Proramming</a></dd>
-						  <dd><a href="#">Espresso</a></dd>
-						  <dd><a href="#">Me</a></dd>						  
-						</dl>
+						<dl class="sub-nav ctr-block">
+						  {{#each tags}}
+						  <dd><a href="#">{{key}}</a></dd>	  
+						  {{/each}}
+						</dl>					
 					</div>			
+					
 				</div>
 			</div>
 		</div>
