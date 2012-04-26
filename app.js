@@ -5,20 +5,76 @@ var flatiron = require('flatiron'),
     director = require('director'),
     fs = require('fs'),
     //qs = require('querystring'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
     app = flatiron.app;
 
 var routes = require('./routes');
 
+var users = [
+    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
+];
+
+function findById(id, fn) {
+  var idx = id - 1;
+  if (users[idx]) {
+    fn(null, users[idx]);
+  } else {
+    fn(new Error('User ' + id + ' does not exist'));
+  }
+}
+
+function findByUsername(username, fn) {
+  for (var i = 0, len = users.length; i < len; i++) {
+    var user = users[i];
+    if (user.username === username) {
+      return fn(null, user);
+    }
+  }
+  return fn(null, null);
+}
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+      
+      // Find the user by username.  If there is no user with the given
+      // username, or the password is not correct, set the user to `false` to
+      // indicate failure and set a flash message.  Otherwise, return the
+      // authenticated `user`.
+      findByUsername(username, function(err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false, { message: 'Unkown user ' + username }); }
+        if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
+        return done(null, user);
+      })
+    });
+  }
+));
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  findById(id, function (err, user) {
+    done(err, user);
+  });
+});
 
 app.use(flatiron.plugins.http, {
 	before: [
 		//connect.bodyParser(),
-		connect.static(__dirname + '/public'),
-		//connect.directory(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
-		//connect.cookieParser('lolcats'),
-		//connect.session(),
-		connect.methodOverride()
+		connect.cookieParser('lolcats'),
+		connect.session({secret: "9ajk21mas8"}),
+		connect.static(__dirname + '/public'),
+		connect.methodOverride(),
+		passport.initialize(),
+		passport.session()
 	],
 
 	after: []
@@ -66,6 +122,22 @@ app.router.path('/', function () {
 
 	this.get('/tags',routes.getTags);
 
+	this.post('/login',
+		function() {
+			self = this;
+			function next() {
+				console.log('next wrap');
+				self.res.emit('next');
+			}
+			passport.authenticate('local', function(err, user) {
+				console.log(user);
+				//debugger;
+				if (err) { self.res.end("SERVER ERROR") }
+		        if (!user) { self.res.end("No User Found") }
+		        else {self.res.end("Authenticated")}
+			})(this.req, this.res, next);
+		}
+	);
 	
 });
 
