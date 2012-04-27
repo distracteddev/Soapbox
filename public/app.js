@@ -95,13 +95,14 @@ App.PostView = Em.View.create({
 	contentBinding: "App.PostController.content"
 });
 
-App.HeaderView.append();
-App.PostView.append();
 
 App.HeaderController.set('content', App.store.findAll(App.BlogSetting));
 App.PostController.set('content', App.store.findAll(App.BlogPost));
 App.TagController.set('content', App.store.findAll(App.Tag));
 
-
-
+// Wrap our dom-affecting calls in a jQuery's ready callback
+$(function() {
+  App.HeaderView.append();
+  App.PostView.append();
+});
 
