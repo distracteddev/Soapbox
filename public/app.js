@@ -207,9 +207,7 @@ App.routeManager = Ember.RouteManager.create({
 /*
  *END OF EMBER ROUTE MANAGER
  */
-  App.layout.set('header', App.headerView);
-  App.layout.set('content', App.postView);
-  App.layout.append();
+
 
 
 /*
@@ -261,7 +259,9 @@ $(function() {
   // Start the Route Manager so that it listens for URL changes
   App.routeManager.start();
   // Initialize my layout and append it to the body
-
+  App.layout.set('header', App.headerView);
+  App.layout.set('content', App.postView);
+  App.layout.append();
 
   // Bind the reveal:close event so that it replaces the route-managers
   // state with its previous one.

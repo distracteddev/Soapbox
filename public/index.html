@@ -44,9 +44,9 @@
 				<section class="post-header">
 					<h2>{{editable title}}</h2>
 					<h5>{{editable sub_title}}</h5>
-          //{{#each tags}}
-						<p>{{editable tags.0}}</p>
-					//{{/each}}
+          {{#each tags}}
+						<p>{{editable this}}</p>
+				  {{/each}}
 					<p class="post-body">{{editable body textArea="true"}}</p>
 				</section>
 			</section>
@@ -86,12 +86,7 @@
 			<div class="row">
 				<div class="six columns centered">
 					<h2>Create A Post</h2>
-					<label for=""></label>
-					<input type="">
-					<label for=""></label>
-					<input type="">
-					<label for=""></label>
-					<input type="">
+
 				</div>
 			</div>
 	</script>	
