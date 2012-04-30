@@ -84,6 +84,9 @@
       function closeAnimation() {
         if (!locked) {
           lockModal();
+          // SOAPBOX CUSTOMIZATION
+          // App.routeManager.set('location','');
+          // END SOAPBOX CUZTOMIZATION
           if (options.animation === "fadeAndPop") {
             modal.animate({
               "top":  $(document).scrollTop() - topOffset + 'px',

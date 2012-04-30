@@ -3,44 +3,52 @@
 body {
   background-image: url("../images/pinstripe.png");
 }
-
+/* line 16, ../sass/app.scss */
+body div.alert-box {
+  display: none;
+}
 /* line 18, ../sass/app.scss */
+body div.alert-box .close {
+  margin-left: 10px;
+}
+
+/* line 26, ../sass/app.scss */
 #headerRow {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-/* line 22, ../sass/app.scss */
+/* line 30, ../sass/app.scss */
 #headerRow h1, #headerRow h2, #headerRow p {
   text-align: center;
   color: #646400;
   font: 400 95px/1.6 "Pacifico", Georgia, serif;
   letter-spacing: 3px;
 }
-/* line 30, ../sass/app.scss */
+/* line 38, ../sass/app.scss */
 #headerRow p {
   margin-top: 40px;
   font: 400 17px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   font-variant: small-caps;
   letter-spacing: 7px;
 }
-/* line 37, ../sass/app.scss */
+/* line 45, ../sass/app.scss */
 #headerRow h1 {
   line-height: 62px;
   text-shadow: 1px 4px 6px #eeeeee, 0 0 0 #555555, 1px 4px 6px #eeeeee, 0px 0px 1px rgba(0, 0, 0, 0.5);
   color: rgba(100, 100, 0, 0.8);
 }
-/* line 49, ../sass/app.scss */
+/* line 57, ../sass/app.scss */
 #headerRow dl dd {
   font: 400 21px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   font-family: 'Allan', Helvetica, Arial, sans-serif;
   font: 400 21px/1.2 "Nixie One", Georgia, serif;
   padding: 10px;
 }
-/* line 55, ../sass/app.scss */
+/* line 63, ../sass/app.scss */
 #headerRow dl dd .active a {
   background-color: none;
 }
-/* line 60, ../sass/app.scss */
+/* line 68, ../sass/app.scss */
 #headerRow dl.sub-nav dd.active a {
   background-color: transparent;
   color: #646400;
@@ -52,19 +60,19 @@ body {
   box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
 }
 
-/* line 74, ../sass/app.scss */
+/* line 82, ../sass/app.scss */
 hr {
   border-color: rgba(100, 100, 0, 0.4);
   border-width: 2px;
 }
 
-/* line 81, ../sass/app.scss */
+/* line 89, ../sass/app.scss */
 .post h1, .post h2, .post h3, .post h4, .post h5, .post p {
   font: 400 42px/1.2 "Nixie One", Georgia, serif;
   color: #646400;
   letter-spacing: 4px;
 }
-/* line 87, ../sass/app.scss */
+/* line 95, ../sass/app.scss */
 .post h5 {
   font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 2px;
@@ -72,14 +80,14 @@ hr {
   color: rgba(100, 100, 0, 0.6);
   font-variant: small-caps;
 }
-/* line 95, ../sass/app.scss */
+/* line 103, ../sass/app.scss */
 .post p, .post blockquote {
   font: 400 15px/1.6 "Gudea", Verdana, Helvetica, sans-serif;
   font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
   color: #4a4b00;
 }
-/* line 102, ../sass/app.scss */
+/* line 110, ../sass/app.scss */
 .post p.post-body:first-letter {
   font-size: 64px;
   line-height: 10px;
@@ -88,14 +96,20 @@ hr {
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
 
-/* line 118, ../sass/app.scss */
+/* line 120, ../sass/app.scss */
+#reveal-Login {
+  width: 300px;
+  margin-left: -200px;
+}
+
+/* line 130, ../sass/app.scss */
 .ctr-ctn {
   float: left;
   position: relative;
   left: 50%;
 }
 
-/* line 124, ../sass/app.scss */
+/* line 136, ../sass/app.scss */
 .ctr-block {
   float: left;
   position: relative;

@@ -33,11 +33,11 @@ exports.getBP = function(id) {
 	}
 };
 
-exports.postBP = function () {
-	console.log(this.req.body);
+exports.postBP = function (id) {
+	console.log(this.req.body.blog_post);
 	var self = this;
 	if (!id) {
-		BlogPost.create(this.req.body, function (err, doc) {
+		BlogPost.create(self.req.body.blog_post, function (err, doc) {
 			if (err) { 
 				winston.log(err);
 				throw new(Error)(err);
@@ -57,9 +57,9 @@ exports.postBP = function () {
 	}
 	else {
 		BlogPost.get(id, function (err, post) {
-			post.update(self.req.body, function() {
+			post.update(self.req.body.blog_post, function() {
 				if (err) throw err;
-				this.res.end('Post Updated\n');
+				self.res.end('Post Updated\n');
 			});
 		});
 	}

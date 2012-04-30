@@ -113,11 +113,11 @@ app.router.path('/', function () {
 		});
 	});
 
-	this.post('jsonTest', function () {
+	this.get('jsonTest', function () {
 		console.log("I Started");
 		console.log(this.req.body);
 		var self = this;
-		self.res.end(JSON.stringify(this.req.body) + '\n');
+		self.res.end(JSON.stringify(this.req.isAuthenticated()) + '\n');
 	});
 
 	this.get('/tags',routes.getTags);
@@ -131,10 +131,17 @@ app.router.path('/', function () {
 			}
 			passport.authenticate('local', function(err, user) {
 				console.log(user);
-				//debugger;
-				if (err) { self.res.end("SERVER ERROR") }
-		        if (!user) { self.res.end("No User Found") }
-		        else {self.res.end("Authenticated")}
+				if (err) { self.res.end("SERVER ERROR\n") }
+		        if (!user) { self.res.end("false") }
+		        else {
+		        	self.req.logIn(user, function(err) {
+		        		if (err) {throw err}
+		                self.res.writeHead(200, {'Content-Type': 'text/html',
+		            		'Authentication': JSON.stringify(self.req._passport.session)});
+		        		self.res.end("true");
+		        	});
+		        	
+		        }
 			})(this.req, this.res, next);
 		}
 	);
@@ -149,6 +156,7 @@ app.router.path('/\/blog_posts/', function() {
 app.router.path('/\/blog_posts/:id', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
+	this.put(routes.postBP);
 });
 
 app.router.path('/\/blog_settings', function() {

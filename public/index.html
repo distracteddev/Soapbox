@@ -39,78 +39,130 @@
 	<![endif]-->
 	<script type="text/x-handlebars" data-template-name="posts">
 		{{#each content}}
-		<div class="row">
-			<section class="post columns eight centered mock">
+    <div class="row">
+      <section class="post columns eight centered mock">
 				<section class="post-header">
-					<h2>{{title}}</h2>
-					<h5>{{sub_title}}</h5>
-					{{#each tags}}
-						<p>{{this}}</p>
-					{{/each}}
-					<p class="post-body">{{body}}</p>
+					<h2>{{editable title}}</h2>
+					<h5>{{editable sub_title}}</h5>
+          //{{#each tags}}
+						<p>{{editable tags.0}}</p>
+					//{{/each}}
+					<p class="post-body">{{editable body textArea="true"}}</p>
 				</section>
 			</section>
 		</div>
 		{{/each}}
 	</script>
 
-	<script type="text/x-handlebars" data-template-name="header">
-		<div class="container">
-			<div class="row" id="headerRow">
-				<div class="six columns centered clearfix">	
-					{{#each content}}			
-						<h1>{{blog_title}}</h1>
-						<p>{{blog_sub_title}}</p>						
-					{{/each}}
-					<hr />
-					<div class="ctr-ctn">
-						<dl class="sub-nav ctr-block">
-						  {{#each tags}}
-						  <dd><a href="#">{{key}}</a></dd>	  
-						  {{/each}}
-						</dl>					
-					</div>			
-					
-				</div>
-			</div>
-		</div>
+  <script type="text/x-handlebars" data-template-name="header">
+
+
+    <div class="six columns centered clearfix">	
+      <div class="alert-box success" id="login-sucess">
+        Go Write Some Shit.
+        <a href="#" class="close">&times;</a>
+      </div>
+
+      {{#each content}}			
+      <h1>
+        <a href="#login">{{editable blog_title}}</a>
+      </h1>
+        <p>{{editable blog_sub_title}}</p>						
+      {{/each}}
+      <hr />
+      <div class="ctr-ctn">
+        <dl class="sub-nav ctr-block">
+          {{#each tags}}
+          <dd>
+            <a href="#">{{key}}</a>
+          </dd>
+          {{/each}}
+        </dl>					
+      </div> <!-- End of ctr-ctn -->	
+    </div> <!-- End of six columns -->
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="create-post">
-		<div class="container">
 			<div class="row">
-			
+				<div class="six columns centered">
+					<h2>Create A Post</h2>
+					<label for=""></label>
+					<input type="">
+					<label for=""></label>
+					<input type="">
+					<label for=""></label>
+					<input type="">
+				</div>
 			</div>
-		</div> 
 	</script>	
 
+
+  <script type="text/x-handlebars" data-template-name="main-layout">
+    <div class="container">
+      <header class="row" id="headerRow">
+        {{dynamicView header}}
+      </header>
+      <section id="content">
+        {{dynamicView}}
+      </section>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="edit-field">
+    {{#if isEditing}}
+    <form class="nice" onLoad="window.Expander">
+          {{#if textArea}}
+            {{view Ember.TextArea valueBinding="value" classNames="input-text expand"}}
+          {{else}}
+            {{view Ember.TextField valueBinding="value" classNames="input-text expand"}}
+          {{/if}}
+        </form>
+      {{else}}
+        {{#if value}}
+          {{value}}
+        {{else}}
+          <span class="no-name">Double Click to Start Editing</span>
+        {{/if}}
+      {{/if}}
+   </script>
 </head>
 <body>
 
-	<!-- container -->
-	
-
-
-
-
-
-	
-	<!-- container -->
-
-
-
-
-	<!-- Included JS Files -->
+  <!--Load Javascript within the body so it doesn't slow down page rendering-->
 	<script src="javascripts/jquery.min.js"></script>
 	<script src="javascripts/jquery.reveal.js"></script>
 	<script src="javascripts/jquery.orbit-1.4.0.js"></script>
 	<script src="javascripts/jquery.customforms.js"></script>
 	<script src="javascripts/jquery.placeholder.min.js"></script>
 	<script src="javascripts/jquery.tooltips.js"></script>
+	<script src="javascripts/jquery.text-expander.js"></script>
 	<script src="javascripts/lib/ember.js"></script>
 	<script src="javascripts/lib/ember-data.js"></script>
+	<script src="javascripts/lib/ember-routemanager.js"></script>
+	<script src="javascripts/lib/ember-layout.js"></script>
+	<script src="javascripts/lib/move.js"></script>
 	<script src="javascripts/app.js"></script>
 	<script src="app.js"></script>
+
+  <div class="reveal-modal" id="reveal-Login">
+    <div class="alert-box error five centered columns" id="login-fail">
+      Wow, what an asshole. Cant even remember your password.
+      <a href="#" class="close">&times;</a>
+    </div>
+    <h2>Login</h2>
+    <form action="/login" id="login-form" class="nice" method="post">
+      <label>username</label>
+      <input type="text" class="input-text" name="username" />
+      <label>password</label>
+      <input type="password" class="input-text" name="password" />
+      <button id="submit-login" class="nice small radius blue button">Log In</button>
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+
+
+
 
 
 </body>

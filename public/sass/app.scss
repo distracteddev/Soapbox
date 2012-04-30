@@ -12,6 +12,14 @@ body {
 	//background-image: url('../images/blu_stripes.png');
 	//background-image: url('../images/little_pluses.png');
 	background-image: url('../images/pinstripe.png');
+
+  div.alert-box {
+      display: none;
+      .close {
+        margin-left: 10px;
+      }
+   }
+
 }
 
 // header styles
@@ -109,6 +117,10 @@ hr {
 	}
 }
 
+#reveal-Login {
+  width: 300px;
+  margin-left: -200px;
+}
 
 // CSS Helper Classes
 .mock {
