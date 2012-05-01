@@ -34,7 +34,6 @@ App.BlogSetting = DS.Model.extend({
 	didLoad: function() {
 		//console.log("BlogSettings Loaded with id: " + this.get("_id"));	
 		//console.log(this);
-		App.HeaderController.set('content', App.store.findAll(App.BlogSetting));
 	}
 });
 
@@ -50,8 +49,7 @@ App.BlogPost = DS.Model.extend({
 	primaryKey: "_id",
 
 	didLoad: function() {
-		App.PostController.set('content', App.store.findAll(App.BlogPost));
-		//console.log(this.get('tags'));
+		console.log(this.get('tags'));
 	}
 });
 
@@ -61,7 +59,6 @@ App.Tag = DS.Model.extend({
 	primaryKey: "key",
 
 	didLoad: function() {
-		App.TagController.set('content', App.store.findAll(App.Tag));
 		console.log(this.get('key'));		
 	}
 });
@@ -79,8 +76,25 @@ App.HeaderController = Ember.ArrayProxy.create({
 	content: []
 });
 
-App.PostController = Ember.ArrayProxy.create({
-	content: []
+App.PostController = Ember.ArrayController.create({
+	content: [],
+  selectedPost: null,
+  selectedIndex: null,
+
+  selectLatestPost: function() {
+    this.set('selectedPost', this.get('firstObject'));
+    this.set('selectedIndex', 0)
+  },
+
+  selectNextPost: function() {
+    if (this.selectedPost === null || this.selectedPost === undefined) {
+      this.selectLatestPost();
+    }
+    else {
+      this.set('selectedIndex', this.selectedIndex + 1);
+      this.set('selectedPost', this.objectAt(this.selectedIndex));
+    }
+  }
 });
 
 App.TagController = Ember.ArrayProxy.create({
@@ -111,7 +125,8 @@ App.postView = Em.View.create({
 });
 
 App.selectedPostView = Em.View.create({
-  templateName: "posts"
+  templateName: "single-post",
+  selectedPostBinding: "App.PostController.selectedPost"
 });
 
 /*
@@ -120,10 +135,9 @@ App.selectedPostView = Em.View.create({
 
 // Fetch the data models from the server and pass them into our
 // controllers
-App.HeaderController.set('content', App.store.findAll(App.BlogSetting));
-App.PostController.set('content', App.store.findAll(App.BlogPost));
-App.TagController.set('content', App.store.findAll(App.Tag));
-
+App.HeaderController.set('content', App.store.find(App.BlogSetting));
+App.PostController.set('content', App.store.find(App.BlogPost));
+App.TagController.set('content', App.store.find(App.Tag));
 // CUSTOM FIELD VIEW FOR EMBER TO ALLOW FOR INLINE PAGE EDITING
 // This field uses the property 'isEditing' as a signal to its
 // associated template to display an input box when double clicked.
@@ -256,33 +270,37 @@ var Author = new objectHider(ExposedAuthor);
 // Place all initialization code that requires a loaded within this
 // function.
 $(function() {
-  // Start the Route Manager so that it listens for URL changes
-  App.routeManager.start();
-  // Initialize my layout and append it to the body
-  App.layout.set('header', App.headerView);
-  App.layout.set('content', App.postView);
-  App.layout.append();
+  Ember.run(function() {
+    // Start the Route Manager so that it listens for URL changes
+    App.routeManager.start();
+    // Initialize my layout and append it to the body
+    App.layout.set('header', App.headerView);
+    App.layout.set('content', App.selectedPostView);
+    App.layout.append();
+    // Bind the reveal:close event so that it replaces the route-managers
+    // state with its previous one.
+    $('body').bind('reveal:close', function () {
+      console.log("reveal was closed");
+      App.routeManager.set('location',''); 
+    });
 
-  // Bind the reveal:close event so that it replaces the route-managers
-  // state with its previous one.
-  $('body').bind('reveal:close', function () {
-    console.log("reveal was closed");
-    App.routeManager.set('location',''); 
-  });
-
-  $("#submit-login").click(function() {
-    Author.getObject().logIn();
-    return false;
-  });
-  
-  Ember.run.next(function() {
-    $(".alert-box").delegate("a.close", "click", function(event) {
-      event.preventDefault();
-      $(this).closest(".alert-box").fadeOut(function(event){
-        $(this).remove();
+    $("#submit-login").click(function() {
+      Author.getObject().logIn();
+      return false;
+    });
+    
+    Ember.run.next(function() {
+      $(".alert-box").delegate("a.close", "click", function(event) {
+        event.preventDefault();
+        $(this).closest(".alert-box").fadeOut(function(event){
+          $(this).remove();
+        });
       });
     });
+    Ember.run.later(function() {
+      App.PostController.selectLatestPost();
+      console.log("i Ran");
+    }, 400);
   });
-
 
 });

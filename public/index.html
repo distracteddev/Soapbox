@@ -54,9 +54,26 @@
 		{{/each}}
 	</script>
 
+	<script type="text/x-handlebars" data-template-name="single-post">
+    <div class="row">
+      {{#with selectedPost}}
+      <section class="post columns eight centered mock">
+				<section class="post-header">
+					<h2>{{editable title}}</h2>
+					<h5>{{editable sub_title}}</h5>
+          {{#each tags}}
+						<p>{{editable this}}</p>
+				  {{/each}}
+					<p class="post-body">{{editable body textArea="true"}}</p>
+				</section>
+      </section>
+      {{/with}}
+		</div>
+	</script>
+
+
+
   <script type="text/x-handlebars" data-template-name="header">
-
-
     <div class="six columns centered clearfix">	
       <div class="alert-box success" id="login-sucess">
         Go Write Some Shit.
