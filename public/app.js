@@ -3,11 +3,11 @@ var App = Em.Application.create();
 // Custom Ember Data Structure to Store an Array of tags
 DS.attr.transforms.array = {
     from: function(serialized) {
-        return serialized;
+        return serialized.join(', ');
     },
 
     to: function(deserialized) {
-    	return deserialized
+    	return deserialized.split(', ');
     }
 };
 
@@ -78,6 +78,7 @@ App.HeaderController = Ember.ArrayProxy.create({
 
 App.PostController = Ember.ArrayController.create({
 	content: [],
+  backupContent:[],
   selectedPost: null,
   selectedIndex: null,
 
@@ -94,6 +95,10 @@ App.PostController = Ember.ArrayController.create({
       this.set('selectedIndex', this.selectedIndex + 1);
       this.set('selectedPost', this.objectAt(this.selectedIndex));
     }
+  },
+
+  contentDidChange: function() {
+    console.log("Content Did Change");
   }
 });
 
@@ -137,6 +142,7 @@ App.selectedPostView = Em.View.create({
 // controllers
 App.HeaderController.set('content', App.store.find(App.BlogSetting));
 App.PostController.set('content', App.store.find(App.BlogPost));
+App.PostController.set('backupConent', App.store.find(App.BlogPost));
 App.TagController.set('content', App.store.find(App.Tag));
 // CUSTOM FIELD VIEW FOR EMBER TO ALLOW FOR INLINE PAGE EDITING
 // This field uses the property 'isEditing' as a signal to its
@@ -194,6 +200,7 @@ App.EditField = Ember.View.extend({
 // {{ editable blog_post_content textArea="true"}}
 Ember.Handlebars.registerHelper('editable', function(path, options) {
   options.hash.valueBinding = path;
+  console.log(options.hash);
   return Ember.Handlebars.helpers.view.call(this, App.EditField, options);
 });
 
@@ -297,10 +304,11 @@ $(function() {
         });
       });
     });
-    Ember.run.later(function() {
-      App.PostController.selectLatestPost();
-      console.log("i Ran");
-    }, 400);
+    $('body').bind("soapbox:blog_posts_loaded.soapbox",function() {
+      Ember.run.next(function() {
+        App.PostController.selectNextPost();
+      });
+    });
   });
 
 });
