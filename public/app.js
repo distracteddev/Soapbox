@@ -86,15 +86,23 @@ App.PostController = Ember.ArrayController.create({
     this.set('selectedIndex', 0)
   },
 
-  selectNextPost: function() {
+  selectPost: function(idx) {
     if (this.selectedPost === null || this.selectedPost === undefined) {
       this.selectLatestPost();
     }
     else {
-      this.set('selectedIndex', this.selectedIndex + 1);
+      this.set('selectedIndex', this.selectedIndex + idx);
       this.set('selectedPost', this.objectAt(this.selectedIndex));
     }
-  }
+  },
+
+  selectPreviousPost: function() {
+    selectPost(-1);
+  },
+
+  selectNextPost: function() {
+    selectPost(1);
+  },
 });
 
 App.TagController = Ember.ArrayProxy.create({
