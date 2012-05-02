@@ -98,12 +98,24 @@ App.PostController = Ember.ArrayController.create({
   },
 
   selectPreviousPost: function() {
-    selectPost(-1);
+    this.selectPost(-1);
   },
 
   selectNextPost: function() {
-    selectPost(1);
+    this.selectPost(1);
   },
+
+  selectNewPost: function() {
+    var newPost = App.store.createRecord(App.BlogPost,
+     {
+       tags: "Enter a Comma Seperated List of Tags",
+       title: "Blog Title",
+       sub_title: "Enter Witty Sub-Title Here"
+    });
+
+    this.set("selectedPost", newPost);
+  }
+
 });
 
 App.TagController = Ember.ArrayProxy.create({
