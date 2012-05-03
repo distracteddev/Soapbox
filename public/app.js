@@ -190,7 +190,7 @@ App.EditField = Ember.View.extend({
   templateName: 'edit-field',
 
   doubleClick: function() {
-    if (!Author.getObject().isLoggedIn()) {
+    if (Author.getObject().isLoggedIn()) {
       this.set('isEditing', true);
       Ember.run.next(function() {
         $("textarea[class*=expand]").TextAreaExpander();
@@ -238,10 +238,18 @@ App.EditField = Ember.View.extend({
 // {{ editable blog_post_content textArea="true"}}
 Ember.Handlebars.registerHelper('editable', function(path, options) {
   options.hash.valueBinding = path;
-  if (path === "bindingContext.body")
+  if (path === "body") {
     options.hash.rawBinding = path + "_raw";
-  console.log(options.hash);
+    console.log(options.hash);
+  }
+  else { console.log(path); }
   return Ember.Handlebars.helpers.view.call(this, App.EditField, options);
+});
+
+// Set up a handlebar helper to output raw HTML without escaping it
+Ember.Handlebars.registerHelper('raw', function(path) {
+  var value = Ember.getPath(this, path);
+  return new Handlebars.SafeString(value);
 });
 
 /*
@@ -287,7 +295,9 @@ ExposedAuthor = function() {
         var auth = String(data)
         if (auth === 'true') {
           $("#login-sucess").fadeIn().delay(3000).fadeOut();
+          App.PostController.propertyWillChange('authorized');
           authorized = true;
+          App.PostController.propertyDidChange('authorized');
           $("#reveal-Login").trigger("reveal:close");
         }
         else {

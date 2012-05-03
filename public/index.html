@@ -11,7 +11,8 @@
 	<!-- Set the viewport width to device width for mobile -->
 	<meta name="viewport" content="width=device-width" >
 	<meta name="description" content="">
-  	<meta name="author" content="">
+  <meta name="author" content="">
+
 	<title>Zeus</title>
   
 	<!-- Included CSS Files -->
@@ -60,7 +61,7 @@
 					<h2>{{editable title}}</h2>
 					<h5>{{editable sub_title}}</h5>
           <p>{{editable tags}}</p>
-					<p class="post-body">{{editable body textArea="true"}}</p>
+					<div class="post-body">{{editable body textArea="true"}}</div>
 				</section>
       </section>
       {{/with}}
@@ -95,15 +96,6 @@
     </div> <!-- End of six columns -->
 	</script>
 
-	<script type="text/x-handlebars" data-template-name="create-post">
-			<div class="row">
-				<div class="six columns centered">
-					<h2>Create A Post</h2>
-
-				</div>
-			</div>
-	</script>	
-
 
   <script type="text/x-handlebars" data-template-name="main-layout">
       <header class="row" id="headerRow">
@@ -134,7 +126,7 @@
         </form>
       {{else}}
         {{#if value}}
-          {{value}}
+          {{raw value}}
         {{else}}
           <span class="no-name">Double Click to Start Editing</span>
         {{/if}}

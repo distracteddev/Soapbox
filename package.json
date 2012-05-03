@@ -8,7 +8,9 @@
     "connect": "git://github.com/senchalabs/connect.git",
     "winston": "*",
     "passport": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "marked": "*",
+    "highlight": "*"
   },
   "devDependencies": {
     "api-easy": "0.3.4",

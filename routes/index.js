@@ -1,17 +1,27 @@
 var Resourceful = require('resourceful'),
 	winston = require('winston'),
+  marked = require('marked'),
+  highlighter = require('highlight').Highlight,
 	BlogSettings = require('../models').BlogSettings(),
 	BlogPost = require('../models').BlogPost();
 
+// Complete set-up for modules
 winston.cli();
+marked.setOptions({
+  gfm: true,
+  pedantic: false,
+  sanitize: true,
+  // callback for code highlighter
+  highlight: function(code, lang) {
+    debugger;
+    code = highlighter(code);   
+    return code;
+  }
+});
+console.log(marked("i am using __markdown__.\n```marked.setOptions({adad});```"));
 
-var throwError = function (err) {
-	if (err) {
-		winston.error(err);
-		throw err;
-	}
-};
 
+// Get all blog posts, or a single blog post when an ID is provided.
 exports.getBP = function(id) {
 	var self = this;
 	if (arguments.length < 2) {
@@ -36,7 +46,13 @@ exports.getBP = function(id) {
 exports.postBP = function (id) {
 	console.log(this.req.body.blog_post);
 	var self = this;
-	if (!id) {
+
+  // Parse the raw markdown body of the Blog Post and save the HTML
+  // result
+  if (this.req.body.blog_post.body_raw.length > 0) {
+    this.req.body.blog_post.body = marked(this.req.body.blog_post.body_raw);
+  }
+	if (typeof id !== "string") {
 		BlogPost.create(self.req.body.blog_post, function (err, doc) {
 			if (err) { 
 				winston.log(err);
