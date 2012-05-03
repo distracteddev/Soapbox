@@ -40,7 +40,12 @@ App.BlogSetting = DS.Model.extend({
 App.BlogPost = DS.Model.extend({	
 	title: DS.attr('string'),
 	sub_title: DS.attr('string'),
+  // body holds the HTML String of the post content
 	body: DS.attr('string'),
+  // body_raw holds the Raw Markdown of the post content
+  body_raw: DS.attr('string'),
+  // Custom Data Type gets presented to the front end as a comma seperated string of values
+  // e.g "First Tag, Second Tag, Another Tag"
 	tags: DS.attr('array'),
 	_id: DS.attr('string'),
 	_rev: DS.attr('string'),
@@ -78,7 +83,6 @@ App.HeaderController = Ember.ArrayProxy.create({
 
 App.PostController = Ember.ArrayController.create({
 	content: [],
-  backupContent:[],
   selectedPost: null,
   selectedIndex: null,
 
@@ -106,15 +110,28 @@ App.PostController = Ember.ArrayController.create({
   },
 
   selectNewPost: function() {
+    // Create a new BlogPost record from our Ember-Data store
     var newPost = App.store.createRecord(App.BlogPost,
      {
        tags: "Enter a Comma Seperated List of Tags",
        title: "Blog Title",
        sub_title: "Enter Witty Sub-Title Here"
     });
-
+    // Set it as the selected post
     this.set("selectedPost", newPost);
-  }
+  },
+
+  noPreviousPost: function() {
+    return (this.get("selectedIndex") <= 0);
+  }.property("selectedIndex", "selectedPost", "content"),
+
+  noNextPost: function() {
+    return (this.get("selectedIndex") >= (this.get("length") - 1));
+  }.property("selectedIndex", "selctedPost", "content"),
+
+  authorized: function() {
+    return Author.getObject().isLoggedIn();
+  }.property()
 
 });
 
@@ -131,7 +148,8 @@ App.TagController = Ember.ArrayProxy.create({
  *START OF EMBER-VIEWS
  */
 App.layout = Ember.View.create({
-  templateName: 'main-layout'
+  templateName: 'main-layout',
+  classNames: ["container"],
 });
 
 App.headerView = Em.View.create({
@@ -150,6 +168,11 @@ App.selectedPostView = Em.View.create({
   selectedPostBinding: "App.PostController.selectedPost"
 });
 
+App.PostButton = Em.Button.extend({
+  classNames: ["small", "radius", "black", "button"],
+  target: "App.PostController"
+});
+
 /*
  *END OF EMBER-VIEWS
  */
@@ -158,7 +181,6 @@ App.selectedPostView = Em.View.create({
 // controllers
 App.HeaderController.set('content', App.store.find(App.BlogSetting));
 App.PostController.set('content', App.store.find(App.BlogPost));
-App.PostController.set('backupConent', App.store.find(App.BlogPost));
 App.TagController.set('content', App.store.find(App.Tag));
 // CUSTOM FIELD VIEW FOR EMBER TO ALLOW FOR INLINE PAGE EDITING
 // This field uses the property 'isEditing' as a signal to its
@@ -216,6 +238,8 @@ App.EditField = Ember.View.extend({
 // {{ editable blog_post_content textArea="true"}}
 Ember.Handlebars.registerHelper('editable', function(path, options) {
   options.hash.valueBinding = path;
+  if (path === "bindingContext.body")
+    options.hash.rawBinding = path + "_raw";
   console.log(options.hash);
   return Ember.Handlebars.helpers.view.call(this, App.EditField, options);
 });
