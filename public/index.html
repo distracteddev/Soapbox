@@ -106,21 +106,28 @@
 
 
   <script type="text/x-handlebars" data-template-name="main-layout">
-    <div class="container">
       <header class="row" id="headerRow">
         {{dynamicView header}}
       </header>
-      <section id="content">
+      <section id="content" class="row">
         {{dynamicView}}
+      <div class="ctr-ctn">
+        <div class="ctr-block">
+        {{#view App.PostButton action="selectPreviousPost" disabledBinding="App.PostController.noPreviousPost"}}Previous{{/view}}
+        {{#view App.PostButton action="selectNextPost" disabledBinding="App.PostController.noNextPost"}}Next{{/view}}
+        {{#if App.PostController.authorized}}
+          {{#view App.PostButton action="selectNewPost"}}New{{/view}}
+        {{/if}}
+        </div>
+      </div>
       </section>
-    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="edit-field">
     {{#if isEditing}}
     <form class="nice" onLoad="window.Expander">
           {{#if textArea}}
-            {{view Ember.TextArea valueBinding="value" classNames="input-text expand"}}
+            {{view Ember.TextArea valueBinding="raw" classNames="input-text expand"}}
           {{else}}
             {{view Ember.TextField valueBinding="value" classNames="input-text expand"}}
           {{/if}}
