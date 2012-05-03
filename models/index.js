@@ -26,7 +26,10 @@ var BlogPost = Resourceful.define('blogpost', function () {
 
 	this.string('title');
 	this.string('subTitle');
+  // the body property holds the HTML version of the body text
 	this.string('body');
+  // the body_raw property holds the Raw Markdown version of the body text.
+  this.string('body_raw');
 	this.array('tags');
 	this.timestamps();
 	debugger;
