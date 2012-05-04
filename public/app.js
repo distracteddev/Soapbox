@@ -85,6 +85,20 @@ App.PostController = Ember.ArrayController.create({
 	content: [],
   selectedPost: null,
   selectedIndex: null,
+  hasEdited: false,
+
+  save: function () {
+    App.store.commit();
+    console.log("Store was committed");
+  },
+
+  revert: function() {
+    this.get("selectedPost").get("transaction").rollback();
+    App.layout.set('content', '');
+    App.layout.set('content', App.selectedPostView);
+    //this.objectAt(this.selectedIndex).get("transaction").rollback();
+    console.log("Rollback " + this.selectedIndex);
+  },
 
   selectLatestPost: function() {
     this.set('selectedPost', this.get('firstObject'));
@@ -190,8 +204,9 @@ App.EditField = Ember.View.extend({
   templateName: 'edit-field',
 
   doubleClick: function() {
-    if (Author.getObject().isLoggedIn()) {
+    if (!Author.getObject().isLoggedIn()) {
       this.set('isEditing', true);
+      App.PostController.set('hasEdited', true);
       Ember.run.next(function() {
         $("textarea[class*=expand]").TextAreaExpander();
       });
@@ -217,6 +232,8 @@ App.EditField = Ember.View.extend({
   focusOut: function() {
     App.s
     this.set('isEditing', false);
+    App.PostController.set('isEditing', true);
+
   },
 
   keyUp: function(evt) {

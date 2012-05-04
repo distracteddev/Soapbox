@@ -17,7 +17,8 @@
   
 	<!-- Included CSS Files -->
 	<link rel="stylesheet" href="stylesheets/foundation.css">
-	<link rel="stylesheet" href="stylesheets/app.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+  <link rel="stylesheet" href="stylesheets/code_styles/ir_black.css">
 	<!-- Includ Web Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
@@ -61,8 +62,14 @@
 					<h2>{{editable title}}</h2>
 					<h5>{{editable sub_title}}</h5>
           <p>{{editable tags}}</p>
-					<div class="post-body">{{editable body textArea="true"}}</div>
-				</section>
+					{{editable body textArea="true" tagName="div"}}
+          </section>
+          {{#if isDirty}}
+            </br>
+            </br>
+            {{#view App.PostButton action="save"}}Save{{/view}}
+            {{#view App.PostButton action="revert"}}Cancel{{/view}}
+          {{/if}}
       </section>
       {{/with}}
 		</div>
@@ -149,7 +156,8 @@
 	<script src="javascripts/lib/ember-layout.js"></script>
 	<script src="javascripts/lib/move.js"></script>
 	<script src="javascripts/app.js"></script>
-	<script src="app.js"></script>
+  <script src="app.js"></script>
+  
 
   <div class="reveal-modal" id="reveal-Login">
     <div class="alert-box error five centered columns" id="login-fail">

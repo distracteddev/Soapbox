@@ -10,10 +10,11 @@ winston.cli();
 marked.setOptions({
   gfm: true,
   pedantic: false,
-  sanitize: true,
+  sanitize: false,
   // callback for code highlighter
   highlight: function(code, lang) {
     debugger;
+    console.log("HIGHLIGHTER CALLBACK RAN");
     code = highlighter(code);   
     return code;
   }
@@ -49,8 +50,11 @@ exports.postBP = function (id) {
 
   // Parse the raw markdown body of the Blog Post and save the HTML
   // result
-  if (this.req.body.blog_post.body_raw.length > 0) {
-    this.req.body.blog_post.body = marked(this.req.body.blog_post.body_raw);
+  if (self.req.body.blog_post.body_raw.length > 0) {
+    self.req.body.blog_post.body = highlighter(marked(this.req.body.blog_post.body_raw), false, true);
+    console.log(self.req.body.blog_post.body);
+    self.req.body.blog_post.body = self.req.body.blog_post.body.replace('<code>','<pre><code>').replace('</code>','</code></pre>');
+    console.log(self.req.body.blog_post.body);
   }
 	if (typeof id !== "string") {
 		BlogPost.create(self.req.body.blog_post, function (err, doc) {
