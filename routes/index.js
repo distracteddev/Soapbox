@@ -15,12 +15,16 @@ marked.setOptions({
   highlight: function(code, lang) {
     debugger;
     console.log("HIGHLIGHTER CALLBACK RAN");
-    code = highlighter(code);   
+    code = highlighter(code);
     return code;
   }
 });
-console.log(marked("i am using __markdown__.\n```marked.setOptions({adad});```"));
+console.log(marked("i am using __markdown__"));
 
+exports.parseMarkdown = function() {
+  var self = this;
+  self.res.end(marked(self.req.body.md));
+};
 
 // Get all blog posts, or a single blog post when an ID is provided.
 exports.getBP = function(id) {

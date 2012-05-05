@@ -113,11 +113,11 @@ app.router.path('/', function () {
 		});
 	});
 
-	this.get('jsonTest', function () {
-		console.log("I Started");
+	this.post('jsonTest', function () {
 		console.log(this.req.body);
 		var self = this;
-		self.res.end(JSON.stringify(this.req.isAuthenticated()) + '\n');
+    //self.res.end(JSON.stringify(this.req.isAuthenticated()) + '\n');
+		self.res.end(JSON.stringify(self.req.body) + '\n');
 	});
 
 	this.get('/tags',routes.getTags);
@@ -147,6 +147,11 @@ app.router.path('/', function () {
 	);
 	
 });
+
+app.router.path('/\/markdown', function() {
+	this.post(routes.parseMarkdown);
+});
+
 
 app.router.path('/\/blog_posts/', function() {
 	this.get(routes.getBP);

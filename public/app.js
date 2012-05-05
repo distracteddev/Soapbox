@@ -126,7 +126,7 @@ App.PostController = Ember.ArrayController.create({
   selectNewPost: function() {
     // Create a new BlogPost record from our Ember-Data store
     var newPost = App.store.createRecord(App.BlogPost,
-     {
+     { // Default values
        tags: "Enter a Comma Seperated List of Tags",
        title: "Blog Title",
        sub_title: "Enter Witty Sub-Title Here"
