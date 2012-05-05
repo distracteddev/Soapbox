@@ -54,8 +54,18 @@ App.BlogPost = DS.Model.extend({
 	primaryKey: "_id",
 
 	didLoad: function() {
-		console.log(this.get('tags'));
-	}
+		console.log(this.get('ctime'));
+	},
+
+  didUpdate: function() {
+    console.log(this.get("title") + " was updated");
+    // Refresh the view so that it updates with the latest content
+    // TODO: Refactor this so that Ember native observers work as intended
+    Ember.run.next(function() {
+      App.layout.set('content', '');
+      App.layout.set('content', App.selectedPostView);
+    });
+  }
 });
 
 App.Tag = DS.Model.extend({
@@ -94,6 +104,8 @@ App.PostController = Ember.ArrayController.create({
 
   revert: function() {
     this.get("selectedPost").get("transaction").rollback();
+    // Refresh the view so that it updates with the latest content
+    // TODO: Refactor this so that Ember native observers work as intended
     App.layout.set('content', '');
     App.layout.set('content', App.selectedPostView);
     //this.objectAt(this.selectedIndex).get("transaction").rollback();
@@ -141,7 +153,7 @@ App.PostController = Ember.ArrayController.create({
 
   noNextPost: function() {
     return (this.get("selectedIndex") >= (this.get("length") - 1));
-  }.property("selectedIndex", "selctedPost", "content"),
+  }.property("selectedIndex", "selectedPost", "content"),
 
   authorized: function() {
     return Author.getObject().isLoggedIn();
@@ -255,6 +267,7 @@ App.EditField = Ember.View.extend({
 // {{ editable blog_post_content textArea="true"}}
 Ember.Handlebars.registerHelper('editable', function(path, options) {
   options.hash.valueBinding = path;
+  console.log(path);
   if (path === "body") {
     options.hash.rawBinding = path + "_raw";
     console.log(options.hash);
@@ -267,6 +280,19 @@ Ember.Handlebars.registerHelper('editable', function(path, options) {
 Ember.Handlebars.registerHelper('raw', function(path) {
   var value = Ember.getPath(this, path);
   return new Handlebars.SafeString(value);
+});
+
+// Returns a nicely formatted and localized date from a javascript Date() object
+Ember.Handlebars.registerHelper('date', function(path, options) {
+ console.log(path);
+ date = options.contexts[0].get(path);
+ dateArray = date.toLocaleDateString().split(', ');
+ day = date.getDate() + '. ';
+ // Gets the name of the month form the locaized date string
+ // (A Nice trick to avoid using your own localized date maps)
+ month = dateArray.splice(1)[0].split(' ')[0] + ' ';
+ year = 1900 + date.getYear();
+ return month + day + year;
 });
 
 /*

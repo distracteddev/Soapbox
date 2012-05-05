@@ -1,8 +1,7 @@
 /* Artfully masterminded by ZURB  */
 // SASS VARIABLES //
-$text-color: #333;
+$text-color: #000;
 // $orange: rgba(255, 85, 0, 0.9);
-// $pale-green: rgba(100, 100, 0, 0.4);
 @import "settings";
 @import "compass";
 
@@ -11,8 +10,8 @@ $text-color: #333;
 body {
 	//background-image: url('../images/blu_stripes.png');
 	//background-image: url('../images/little_pluses.png');
-	background-image: url('../images/pinstripe.png');
-
+	//background-image: url('../images/pinstripe.png');
+  background: #fff;
   div.alert-box {
       display: none;
       .close {
@@ -30,20 +29,26 @@ body {
 	h1, h2, p {
 		text-align: center;
 		color: rgba($pale-green, 1.0);
-		font: 400 95px/1.6 'Pacifico', Georgia, serif;
+		font: 400 95px/1.6 'Cardo', Georgia, serif;
 		letter-spacing: 3px;
 
 	}
 
 	p {
 		margin-top: 40px;
-		font: 400 17px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
+		font: 400 17px/1.6 'Gueda', Verdana, Helvetica, sans-serif;
 		font-variant: small-caps;
-		letter-spacing: 7px;
+		letter-spacing: 2px;
 	}
 
 	h1 {		 
 		line-height: 62px;
+    background-image: url(../images/logo.png);
+    background-size: 50px 50px;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    font-size: 0px;
 		@include text-shadow( 
 			1px 4px 6px #eeeeee, 0 0 0 #555, 
 			1px 4px 6px #eeeeee, 0px 0px 1px rgba(0,0,0,.5));
@@ -52,14 +57,24 @@ body {
 		//color: rgba(255, 66, 0, 0.7);
 	}
 
+  a#login {
+    margin-left: 50%;
+  }
+
+  img {
+    margin-left: -45px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+
 	dl {
+    
+    display: none;
 
 		dd {
-			font: 400 21px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
-			font-family: 'Allan', Helvetica, Arial, sans-serif;
-			font: 400 21px/1.2 'Nixie One', Georgia, serif;
-			padding: 10px;
-			
+			font: 400 16px/1.6 'Gueda', Verdana, Helvetica, sans-serif;
+      padding: 10px;
+			font-variant: small-caps;
 			.active a {
 				background-color: none;
 			}
@@ -81,15 +96,16 @@ body {
 
 hr {
 	border-color: $pale-green;
-	border-width: 2px;
+	border-width: 1px;
 }
 
 .post {
 
 	h1, h2, h3, h4, h5, p {
-  		font: 400 42px/1.2 'Nixie One', Georgia, serif;
+  		font: 400 42px/1.2 'Gueda', Georgia, serif;
   		color: rgba($pale-green, 1.0);
   		letter-spacing: 4px;
+      text-align: center;
 	}
  
 	h5 {
@@ -105,6 +121,7 @@ hr {
 		font: 400 14px/1.6 'Arimo', Verdana, Helvetica, sans-serif;
 		letter-spacing: 1px;
 		color: darken(rgba($pale-green, 1.0), 5%);
+    text-align: left;
 	}
 
 	p.post-body:first-letter {

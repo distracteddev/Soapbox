@@ -52,9 +52,9 @@ exports.postBP = function (id) {
   // result
   if (self.req.body.blog_post.body_raw.length > 0) {
     self.req.body.blog_post.body = highlighter(marked(this.req.body.blog_post.body_raw), false, true);
-    console.log(self.req.body.blog_post.body);
+    //console.log(self.req.body.blog_post.body);
     self.req.body.blog_post.body = self.req.body.blog_post.body.replace('<code>','<pre><code>').replace('</code>','</code></pre>');
-    console.log(self.req.body.blog_post.body);
+    //console.log(self.req.body.blog_post.body);
   }
 	if (typeof id !== "string") {
 		BlogPost.create(self.req.body.blog_post, function (err, doc) {
@@ -77,9 +77,10 @@ exports.postBP = function (id) {
 	}
 	else {
 		BlogPost.get(id, function (err, post) {
-			post.update(self.req.body.blog_post, function() {
+			post.update(self.req.body.blog_post, function(err, post) {
 				if (err) throw err;
-				self.res.end('Post Updated\n');
+				self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
+        console.log(post);
 			});
 		});
 	}

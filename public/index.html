@@ -56,11 +56,12 @@
 
 	<script type="text/x-handlebars" data-template-name="single-post">
     <div class="row">
-      {{#with selectedPost}}
+      {{#with App.PostController.selectedPost}}
       <section class="post columns eight centered mock">
 				<section class="post-header">
-					<h2>{{editable title}}</h2>
-					<h5>{{editable sub_title}}</h5>
+          <h2>{{editable title}}</h2>
+          <hr/>
+          <h5>{{editable sub_title}} - {{date ctime }}</h5>
           <p>{{editable tags}}</p>
 					{{editable body textArea="true" tagName="div"}}
           </section>
@@ -78,26 +79,33 @@
 
 
   <script type="text/x-handlebars" data-template-name="header">
-    <div class="six columns centered clearfix">	
-      <div class="alert-box success" id="login-sucess">
-        Go Write Some Shit.
-        <a href="#" class="close">&times;</a>
+      <div class="six columns centered clearfix">	
+        <div class="alert-box success" id="login-sucess">
+          Go Write Some Shit.
+          <a href="#" class="close">&times;</a>
       </div>
-
+   
       {{#each content}}			
-      <h1>
-        <a href="#login">{{editable blog_title}}</a>
-      </h1>
-        <p>{{editable blog_sub_title}}</p>						
+        <a href="#login" id="login">
+          <img src="images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
+        </a>
       {{/each}}
-      <hr />
+   
       <div class="ctr-ctn">
         <dl class="sub-nav ctr-block">
-          {{#each tags}}
           <dd>
-            <a href="#">{{key}}</a>
+            <a href="#">Blog</a>
           </dd>
-          {{/each}}
+          <dd>
+            <a href="#">Identity</a>
+          </dd>
+          <dd>
+            <a href="#">Projects</a>
+          </dd>
+          <dd>
+            <a href="#">Lab</a>
+          </dd>
+
         </dl>					
       </div> <!-- End of ctr-ctn -->	
     </div> <!-- End of six columns -->
