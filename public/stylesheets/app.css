@@ -1,57 +1,76 @@
 /* Artfully masterminded by ZURB  */
-/* line 11, ../sass/app.scss */
+/* line 10, ../sass/app.scss */
 body {
-  background-image: url("../images/pinstripe.png");
+  background: #fff;
 }
-/* line 16, ../sass/app.scss */
+/* line 15, ../sass/app.scss */
 body div.alert-box {
   display: none;
 }
-/* line 18, ../sass/app.scss */
+/* line 17, ../sass/app.scss */
 body div.alert-box .close {
   margin-left: 10px;
 }
 
-/* line 26, ../sass/app.scss */
+/* line 25, ../sass/app.scss */
 #headerRow {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-/* line 30, ../sass/app.scss */
+/* line 29, ../sass/app.scss */
 #headerRow h1, #headerRow h2, #headerRow p {
   text-align: center;
-  color: #646400;
-  font: 400 95px/1.6 "Pacifico", Georgia, serif;
+  color: #323232;
+  font: 400 95px/1.6 "Cardo", Georgia, serif;
   letter-spacing: 3px;
 }
-/* line 38, ../sass/app.scss */
+/* line 37, ../sass/app.scss */
 #headerRow p {
   margin-top: 40px;
-  font: 400 17px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
+  font: 400 17px/1.6 "Gueda", Verdana, Helvetica, sans-serif;
   font-variant: small-caps;
-  letter-spacing: 7px;
+  letter-spacing: 2px;
 }
-/* line 45, ../sass/app.scss */
+/* line 44, ../sass/app.scss */
 #headerRow h1 {
   line-height: 62px;
+  background-image: url(../images/logo.png);
+  background-size: 50px 50px;
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  font-size: 0px;
   text-shadow: 1px 4px 6px #eeeeee, 0 0 0 #555555, 1px 4px 6px #eeeeee, 0px 0px 1px rgba(0, 0, 0, 0.5);
-  color: rgba(100, 100, 0, 0.8);
+  color: rgba(50, 50, 50, 0.8);
 }
-/* line 57, ../sass/app.scss */
+/* line 60, ../sass/app.scss */
+#headerRow a#login {
+  margin-left: 50%;
+}
+/* line 64, ../sass/app.scss */
+#headerRow img {
+  margin-left: -45px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+/* line 70, ../sass/app.scss */
+#headerRow dl {
+  display: none;
+}
+/* line 74, ../sass/app.scss */
 #headerRow dl dd {
-  font: 400 21px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
-  font-family: 'Allan', Helvetica, Arial, sans-serif;
-  font: 400 21px/1.2 "Nixie One", Georgia, serif;
+  font: 400 16px/1.6 "Gueda", Verdana, Helvetica, sans-serif;
   padding: 10px;
+  font-variant: small-caps;
 }
-/* line 63, ../sass/app.scss */
+/* line 78, ../sass/app.scss */
 #headerRow dl dd .active a {
   background-color: none;
 }
-/* line 68, ../sass/app.scss */
+/* line 83, ../sass/app.scss */
 #headerRow dl.sub-nav dd.active a {
   background-color: transparent;
-  color: #646400;
+  color: #323232;
   padding-bottom: 3px;
   padding: 10px 20px;
   -moz-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
@@ -60,34 +79,36 @@ body div.alert-box .close {
   box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
 }
 
-/* line 82, ../sass/app.scss */
+/* line 97, ../sass/app.scss */
 hr {
-  border-color: rgba(100, 100, 0, 0.4);
-  border-width: 2px;
+  border-color: rgba(50, 50, 50, 0.8);
+  border-width: 1px;
 }
 
-/* line 89, ../sass/app.scss */
+/* line 104, ../sass/app.scss */
 .post h1, .post h2, .post h3, .post h4, .post h5, .post p {
-  font: 400 42px/1.2 "Nixie One", Georgia, serif;
-  color: #646400;
+  font: 400 42px/1.2 "Gueda", Georgia, serif;
+  color: #323232;
   letter-spacing: 4px;
+  text-align: center;
 }
-/* line 95, ../sass/app.scss */
+/* line 111, ../sass/app.scss */
 .post h5 {
   font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 2px;
   margin: -4px 0px 20px 0px;
-  color: rgba(100, 100, 0, 0.6);
+  color: rgba(50, 50, 50, 0.6);
   font-variant: small-caps;
 }
-/* line 103, ../sass/app.scss */
+/* line 119, ../sass/app.scss */
 .post p, .post blockquote {
   font: 400 15px/1.6 "Gudea", Verdana, Helvetica, sans-serif;
   font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
-  color: #4a4b00;
+  color: #252525;
+  text-align: left;
 }
-/* line 110, ../sass/app.scss */
+/* line 127, ../sass/app.scss */
 .post p.post-body:first-letter {
   font-size: 64px;
   line-height: 10px;
@@ -96,20 +117,20 @@ hr {
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
 
-/* line 120, ../sass/app.scss */
+/* line 137, ../sass/app.scss */
 #reveal-Login {
   width: 300px;
   margin-left: -200px;
 }
 
-/* line 130, ../sass/app.scss */
+/* line 147, ../sass/app.scss */
 .ctr-ctn {
   float: left;
   position: relative;
   left: 50%;
 }
 
-/* line 136, ../sass/app.scss */
+/* line 153, ../sass/app.scss */
 .ctr-block {
   float: left;
   position: relative;
