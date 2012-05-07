@@ -18,12 +18,12 @@
 	<!-- Included CSS Files -->
 	<link rel="stylesheet" href="stylesheets/foundation.css">
   <link rel="stylesheet" href="stylesheets/app.css">
-  <link rel="stylesheet" href="stylesheets/code_styles/ir_black.css">
+  <link rel="stylesheet" href="stylesheets/code_styles/monokai.css">
 	<!-- Includ Web Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Ledger' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
@@ -33,7 +33,11 @@
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="stylesheets/ie.css">
 	<![endif]-->
-
+  <!--<script>-->
+    <!--document.write('<script src="http://' + (location.host ||-->
+      <!--'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></'-->
+      <!--+ 'script>');-->
+  <!--</script>-->
 	
 	<!-- IE Fix for HTML5 Tags -->
 	<!--[if lt IE 9]>
@@ -42,40 +46,61 @@
 	<script type="text/x-handlebars" data-template-name="posts">
 		{{#each content}}
     <div class="row">
+      {{#if isDirty}}
+        <section class="post columns one">
+          </br>
+          </br>
+          {{#view App.PostButton action="save"}}Save{{/view}}
+          {{#view App.PostButton action="revert"}}Cancel{{/view}}
+        </section>
+      {{/if}}
       <section class="post columns eight centered mock">
-				<section class="post-header">
+        <section class="post-header">
 					<h2>{{editable title}}</h2>
 					<h5>{{editable sub_title}}</h5>
 				  <p>{{editable tags}}</p>
-					<p class="post-body">{{editable body textArea="true"}}</p>
-				</section>
+					{{editable body textArea="true" tagName="div"}}
+        </section>
 			</section>
 		</div>
 		{{/each}}
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="single-post">
-    <div class="row">
       {{#with App.PostController.selectedPost}}
-      <section class="post columns eight centered mock">
-				<section class="post-header">
-          <h2>{{editable title}}</h2>
-          <hr/>
-          <h5>{{editable sub_title}} - {{date ctime }}</h5>
-          <p>{{editable tags}}</p>
-					{{editable body textArea="true" tagName="div"}}
-          </section>
-          {{#if isDirty}}
-            </br>
-            </br>
-            {{#view App.PostButton action="save"}}Save{{/view}}
-            {{#view App.PostButton action="revert"}}Cancel{{/view}}
-          {{/if}}
-      </section>
-      {{/with}}
-		</div>
-	</script>
+      <!--START OF POST-HEADER ROW-->
+      <div class="post row">
+        <section class="post-header columns eight centered">
 
+          <h2 class="post-title">{{editable title}}</h2>
+          <hr/>
+          <section class="post post-sidebar desktop-only">
+            <div class="post-date">
+             <span>{{date ctime}}</span>
+             {{editable tags classNames="clearfix"}}
+            </div> 
+          </section>
+
+          <h5 class="post-sub-title">{{editable sub_title}}</h5>
+        </section>
+      </div>
+      <!--START OF POST-BODY ROW-->
+      <div class="post-body post row">
+         <section class="post post-sidebar">
+          {{#if isDirty}}
+           {{#view App.PostButton action="save" classNames="button green"
+              tagName="button"}}Save{{/view}}
+            {{#view App.PostButton action="revert" tagName="button" classNames="button
+              red"}}Cancel{{/view}}
+          {{/if}}
+        </section>
+
+        <section class="columns eight centered">
+					{{editable body textArea="true" tagName="div"}}
+        </section>
+      </div>
+      {{/with}}
+	</script>
 
 
   <script type="text/x-handlebars" data-template-name="header">
@@ -113,20 +138,39 @@
 
 
   <script type="text/x-handlebars" data-template-name="main-layout">
+    <!--START OF HEADER-->
       <header class="row" id="headerRow">
         {{dynamicView header}}
       </header>
+      <!--START OF CONTENT ROW-->
       <section id="content" class="row">
         {{dynamicView}}
-      <div class="ctr-ctn">
-        <div class="ctr-block">
-        {{#view App.PostButton action="selectPreviousPost" disabledBinding="App.PostController.noPreviousPost"}}Previous{{/view}}
-        {{#view App.PostButton action="selectNextPost" disabledBinding="App.PostController.noNextPost"}}Next{{/view}}
-        {{#if App.PostController.authorized}}
-          {{#view App.PostButton action="selectNewPost"}}New{{/view}}
-        {{/if}}
+      </section>
+      <!--START OF THE BUTTON CONTROLS ROW-->
+      <section class="row" id="button-row">
+        <div class="clearfix ten columns centered">
+          {{#unless App.PostController.noPreviousPost}}
+            {{#view App.PostButton action="selectPreviousPost"
+                classNames="previous"
+                disabledBinding="App.PostController.noPreviousPost"}}&laquo; {{App.PostController.previousPostTitle}}
+            {{/view}}
+          {{/unless}}
+          {{#unless App.PostController.noNextPost}}
+            {{#view App.PostButton action="selectNextPost"
+                classNames="next"
+                disabledBinding="App.PostController.noNextPost"}}{{App.PostController.nextPostTitle}}
+            &raquo;{{/view}}
+          {{/unless}}
+          {{#if App.PostController.authorized}}
+            {{#view App.PostButton action="selectNewPost"
+                classNames="new-post button black" tagName="button"}}New
+            Post <span id="plus">&#43;</span>{{/view}}
+          {{/if}}
         </div>
-      </div>
+      </section>
+      <!--Start of Footetr-->
+      <section class="row">
+      
       </section>
   </script>
 
@@ -139,13 +183,23 @@
             {{view Ember.TextField valueBinding="value" classNames="input-text expand"}}
           {{/if}}
         </form>
+   {{else}}
+       {{#if tagsArray}}
+       <ul id="tag-list">
+       {{#each tagsArray}}
+        <li><span class="green label round tags">{{this}}</span></li>
+       {{/each}}
+       </ul>
       {{else}}
         {{#if value}}
           {{raw value}}
         {{else}}
-          <span class="no-name">Double Click to Start Editing</span>
+          {{#if App.PostController.authorized}}
+            <span class="no-name">Double Click to Start Editing</span>
+          {{/if}}
         {{/if}}
       {{/if}}
+   {{/if}}
    </script>
 </head>
 <body>
@@ -182,9 +236,6 @@
     </form>
     <a class="close-reveal-modal">&#215;</a>
   </div>
-
-
-
 
 
 

@@ -11,27 +11,49 @@ body div.alert-box {
 body div.alert-box .close {
   margin-left: 10px;
 }
+/* line 22, ../sass/app.scss */
+body div.post-body {
+  /*display: none;*/
+  margin-top: 20px;
+  min-height: 300px;
+}
+/* line 28, ../sass/app.scss */
+body #button-row {
+  margin-bottom: 70px;
+}
+/* line 31, ../sass/app.scss */
+body #button-row .button.new-post {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+/* line 39, ../sass/app.scss */
+body #plus {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-left: 4px;
+}
 
-/* line 25, ../sass/app.scss */
+/* line 49, ../sass/app.scss */
 #headerRow {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-/* line 29, ../sass/app.scss */
+/* line 53, ../sass/app.scss */
 #headerRow h1, #headerRow h2, #headerRow p {
   text-align: center;
   color: #323232;
   font: 400 95px/1.6 "Cardo", Georgia, serif;
   letter-spacing: 3px;
 }
-/* line 37, ../sass/app.scss */
+/* line 61, ../sass/app.scss */
 #headerRow p {
   margin-top: 40px;
   font: 400 17px/1.6 "Gueda", Verdana, Helvetica, sans-serif;
   font-variant: small-caps;
   letter-spacing: 2px;
 }
-/* line 44, ../sass/app.scss */
+/* line 68, ../sass/app.scss */
 #headerRow h1 {
   line-height: 62px;
   background-image: url(../images/logo.png);
@@ -43,31 +65,31 @@ body div.alert-box .close {
   text-shadow: 1px 4px 6px #eeeeee, 0 0 0 #555555, 1px 4px 6px #eeeeee, 0px 0px 1px rgba(0, 0, 0, 0.5);
   color: rgba(50, 50, 50, 0.8);
 }
-/* line 60, ../sass/app.scss */
+/* line 84, ../sass/app.scss */
 #headerRow a#login {
   margin-left: 50%;
 }
-/* line 64, ../sass/app.scss */
+/* line 88, ../sass/app.scss */
 #headerRow img {
   margin-left: -45px;
   height: 50px;
   margin-bottom: 20px;
 }
-/* line 70, ../sass/app.scss */
+/* line 94, ../sass/app.scss */
 #headerRow dl {
   display: none;
 }
-/* line 74, ../sass/app.scss */
+/* line 98, ../sass/app.scss */
 #headerRow dl dd {
   font: 400 16px/1.6 "Gueda", Verdana, Helvetica, sans-serif;
   padding: 10px;
   font-variant: small-caps;
 }
-/* line 78, ../sass/app.scss */
+/* line 102, ../sass/app.scss */
 #headerRow dl dd .active a {
   background-color: none;
 }
-/* line 83, ../sass/app.scss */
+/* line 107, ../sass/app.scss */
 #headerRow dl.sub-nav dd.active a {
   background-color: transparent;
   color: #323232;
@@ -79,36 +101,80 @@ body div.alert-box .close {
   box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
 }
 
-/* line 97, ../sass/app.scss */
+/* line 122, ../sass/app.scss */
 hr {
   border-color: rgba(50, 50, 50, 0.8);
-  border-width: 1px;
+  border-width: 0px;
+  height: 1px;
+  background-color: #000;
+  width: 110%;
+  position: relative;
+  left: -10%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  z-index: 0;
 }
 
-/* line 104, ../sass/app.scss */
+/* line 137, ../sass/app.scss */
 .post h1, .post h2, .post h3, .post h4, .post h5, .post p {
-  font: 400 42px/1.2 "Gueda", Georgia, serif;
+  font-family: 'Ubuntu', Georgia, serif;
   color: #323232;
-  letter-spacing: 4px;
-  text-align: center;
-}
-/* line 111, ../sass/app.scss */
-.post h5 {
-  font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
   letter-spacing: 2px;
-  margin: -4px 0px 20px 0px;
-  color: rgba(50, 50, 50, 0.6);
-  font-variant: small-caps;
+  text-align: left;
 }
-/* line 119, ../sass/app.scss */
+/* line 144, ../sass/app.scss */
+.post h5 {
+  font: 400 1.4em/1.6 "Oxygen", Verdana, Helvetica, sans-serif;
+  letter-spacing: 2px;
+  margin: -4px 0px -20px 0px;
+  color: rgba(50, 50, 50, 0.6);
+  font-variant: 0;
+}
+/* line 152, ../sass/app.scss */
+.post .post-title {
+  /*padding-left: 30px;*/
+  font-family: 'Ubuntu', Georgia, serif;
+  margin-bottom: 0px;
+  /*font-size: 2em;*/
+  text-transform: uppercase;
+}
+/* line 160, ../sass/app.scss */
+.post .post-sub-title {
+  margin-bottom: 5px;
+  font-size: 1.5rem;
+}
+/* line 165, ../sass/app.scss */
+.post .post-sidebar {
+  position: relative;
+  float: left;
+  position: absolute;
+}
+/* line 170, ../sass/app.scss */
+.post .post-sidebar button {
+  float: right;
+  clear: right;
+  top: 200px;
+  right: 20%;
+  color: white;
+  float: right;
+  margin-bottom: 10px;
+  position: fixed;
+  width: 75px;
+}
+/* line 182, ../sass/app.scss */
+.post .post-sidebar button.green {
+  top: 235px;
+}
+/* line 187, ../sass/app.scss */
 .post p, .post blockquote {
-  font: 400 15px/1.6 "Gudea", Verdana, Helvetica, sans-serif;
-  font: 400 14px/1.6 "Arimo", Verdana, Helvetica, sans-serif;
+  font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
   color: #252525;
   text-align: left;
+  font-size: 1.5rem;
+  line-height: 1.6;
 }
-/* line 127, ../sass/app.scss */
+/* line 197, ../sass/app.scss */
 .post p.post-body:first-letter {
   font-size: 64px;
   line-height: 10px;
@@ -116,23 +182,107 @@ hr {
   padding-right: 10px;
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
+/* line 206, ../sass/app.scss */
+.post .post-date {
+  background: #000;
+  padding: 7px 12px;
+  display: inline-block;
+  color: white;
+  position: relative;
+  top: -25px;
+  z-index: 1;
+  left: -130px;
+}
+/* line 216, ../sass/app.scss */
+.post .post-date .tags {
+  clear: both;
+  float: right;
+  margin-top: 5px;
+}
+/* line 222, ../sass/app.scss */
+.post .post-date #tag-list {
+  top: 40px;
+  position: absolute;
+  left: 25px;
+  -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+  opacity: .1;
+}
+/* line 229, ../sass/app.scss */
+.post .post-date #tag-list:hover {
+  opacity: 1.0;
+}
 
-/* line 137, ../sass/app.scss */
+/* line 236, ../sass/app.scss */
 #reveal-Login {
   width: 300px;
   margin-left: -200px;
 }
 
-/* line 147, ../sass/app.scss */
+/* line 241, ../sass/app.scss */
+.previous {
+  float: left !important;
+}
+
+/* line 246, ../sass/app.scss */
+.next, .previous {
+  float: right;
+  font: 400 1.2em/1.2 "Oxygen", Georgia, serif;
+  color: #bbb;
+  max-width: 300px;
+  overflow: hidden;
+  margin-top: 30px;
+  /*white-space: nowrap;*/
+  text-overflow: ellipsis;
+  position: relative;
+  border-bottom: 1px #bbb dotted;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+}
+/* line 259, ../sass/app.scss */
+.next:hover, .previous:hover {
+  color: #333;
+  border-color: #333;
+}
+
+/* line 271, ../sass/app.scss */
 .ctr-ctn {
   float: left;
   position: relative;
   left: 50%;
 }
 
-/* line 153, ../sass/app.scss */
+/* line 277, ../sass/app.scss */
 .ctr-block {
   float: left;
   position: relative;
   left: -50%;
+}
+
+/* line 283, ../sass/app.scss */
+code {
+  font-family: monospace, sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0px;
+  background-color: #000;
+  line-height: 1.3em;
+  padding: 20px !important;
+  overflow: hidden;
+  white-space: pre-wrap;
+  /* css-3 */
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
 }

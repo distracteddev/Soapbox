@@ -9,7 +9,7 @@
 //----------------------------------------------------------
 
 // $experimental-support-for-khtml: false
-// $experimental-support-for-microsoft: false
+ $experimental-support-for-microsoft: true;
 
 // Font stacks
 //----------------------------------------------------------
@@ -19,7 +19,7 @@
 // Default body tag variables
 //----------------------------------------------------------
 
-// $body-font-size: 13
+ $body-font-size: 16;
 // $body-font-family: $helvetica-font-stack
 // $body-background: #fff
 // $body-line-height: 18px

@@ -53,18 +53,23 @@ App.BlogPost = DS.Model.extend({
 	mtime: DS.attr('date'),
 	primaryKey: "_id",
 
+  tags_array: function() {
+    return this.get('tags').split(', ');
+  }.property('tags').cacheable(),
+
 	didLoad: function() {
 		console.log(this.get('ctime'));
 	},
 
   didUpdate: function() {
-    console.log(this.get("title") + " was updated");
+    console.log(this.get("body") + " was updated");
     // Refresh the view so that it updates with the latest content
     // TODO: Refactor this so that Ember native observers work as intended
-    Ember.run.next(function() {
+    Ember.run.later(function() {
       App.layout.set('content', '');
       App.layout.set('content', App.selectedPostView);
-    });
+      console.log("later");
+    }, 800);
   }
 });
 
@@ -93,7 +98,11 @@ App.HeaderController = Ember.ArrayProxy.create({
 
 App.PostController = Ember.ArrayController.create({
 	content: [],
-  selectedPost: null,
+  selectedPost: function() {
+    var ctn = this.get('content');
+    return ctn.objectAt(this.get('selectedIndex'));
+  }.property('selectedIndex','content.@each'),
+
   selectedIndex: null,
   hasEdited: false,
 
@@ -113,17 +122,15 @@ App.PostController = Ember.ArrayController.create({
   },
 
   selectLatestPost: function() {
-    this.set('selectedPost', this.get('firstObject'));
     this.set('selectedIndex', 0)
   },
 
   selectPost: function(idx) {
-    if (this.selectedPost === null || this.selectedPost === undefined) {
+    if (this.get('selectedPost') === null || this.get('selectedPost') === undefined) {
       this.selectLatestPost();
     }
     else {
       this.set('selectedIndex', this.selectedIndex + idx);
-      this.set('selectedPost', this.objectAt(this.selectedIndex));
     }
   },
 
@@ -139,12 +146,14 @@ App.PostController = Ember.ArrayController.create({
     // Create a new BlogPost record from our Ember-Data store
     var newPost = App.store.createRecord(App.BlogPost,
      { // Default values
-       tags: "Enter a Comma Seperated List of Tags",
+       tags: "Enter, a, Comma, Seperated, List, of, Tags",
        title: "Blog Title",
-       sub_title: "Enter Witty Sub-Title Here"
+       sub_title: "Enter Witty Sub-Title Here",
+       body: "Double Click to Start Editing"
     });
     // Set it as the selected post
-    this.set("selectedPost", newPost);
+    var lastIdx = this.get("content").get("length")
+    this.set("selectedIndex", lastIdx-1 );
   },
 
   noPreviousPost: function() {
@@ -157,7 +166,19 @@ App.PostController = Ember.ArrayController.create({
 
   authorized: function() {
     return Author.getObject().isLoggedIn();
-  }.property()
+  }.property(),
+
+  nextPostTitle: function() {
+    var idx = this.get('selectedIndex');
+    idx += 1;
+    return this.objectAt(idx).get('title');
+  }.property('selectedIndex', 'content.@each'),
+
+  previousPostTitle: function() {
+    var idx = this.get('selectedIndex');
+    idx -= 1;
+    return this.objectAt(idx).get('title');
+  }.property('selectedIndex', 'content.@each')
 
 });
 
@@ -195,8 +216,9 @@ App.selectedPostView = Em.View.create({
 });
 
 App.PostButton = Em.Button.extend({
-  classNames: ["small", "radius", "black", "button"],
-  target: "App.PostController"
+  classNames: ["small"],
+  target: "App.PostController",
+  tagName: "a"
 });
 
 /*
@@ -216,7 +238,7 @@ App.EditField = Ember.View.extend({
   templateName: 'edit-field',
 
   doubleClick: function() {
-    if (!Author.getObject().isLoggedIn()) {
+    if (Author.getObject().isLoggedIn()) {
       this.set('isEditing', true);
       App.PostController.set('hasEdited', true);
       Ember.run.next(function() {
@@ -272,6 +294,9 @@ Ember.Handlebars.registerHelper('editable', function(path, options) {
     options.hash.rawBinding = path + "_raw";
     console.log(options.hash);
   }
+  else if (path == "tags") {
+    options.hash.tagsArrayBinding = path + "_array";
+  }
   else { console.log(path); }
   return Ember.Handlebars.helpers.view.call(this, App.EditField, options);
 });
@@ -286,6 +311,7 @@ Ember.Handlebars.registerHelper('raw', function(path) {
 Ember.Handlebars.registerHelper('date', function(path, options) {
  console.log(path);
  date = options.contexts[0].get(path);
+ if (typeof date === "undefined") {date = new Date()}
  dateArray = date.toLocaleDateString().split(', ');
  day = date.getDate() + '. ';
  // Gets the name of the month form the locaized date string

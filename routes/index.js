@@ -12,12 +12,6 @@ marked.setOptions({
   pedantic: false,
   sanitize: false,
   // callback for code highlighter
-  highlight: function(code, lang) {
-    debugger;
-    console.log("HIGHLIGHTER CALLBACK RAN");
-    code = highlighter(code);
-    return code;
-  }
 });
 console.log(marked("i am using __markdown__"));
 
@@ -32,8 +26,10 @@ exports.getBP = function(id) {
 	if (arguments.length < 2) {
 		BlogPost.all(function(err, posts) {
 			if (err) throw err;
+      posts.sort(function(a, b) {
+        return b.ctime-a.ctime;
+      });
 			self.res.end('{"blog_posts":' + JSON.stringify(posts) + "}");
-			winston.debug(posts);
 			return posts;
 		});
 	}
@@ -49,16 +45,16 @@ exports.getBP = function(id) {
 };
 
 exports.postBP = function (id) {
-	console.log(this.req.body.blog_post);
 	var self = this;
 
   // Parse the raw markdown body of the Blog Post and save the HTML
   // result
   if (self.req.body.blog_post.body_raw.length > 0) {
-    self.req.body.blog_post.body = highlighter(marked(this.req.body.blog_post.body_raw), false, true);
-    //console.log(self.req.body.blog_post.body);
-    self.req.body.blog_post.body = self.req.body.blog_post.body.replace('<code>','<pre><code>').replace('</code>','</code></pre>');
-    //console.log(self.req.body.blog_post.body);
+    //self.req.body.blog_post.body = highlighter(marked(this.req.body.blog_post.body_raw), false, true);
+    self.req.body.blog_post.body = highlighter(marked(this.req.body.blog_post.body_raw).replace(/&#39;/g, "'"), false, true);
+    console.log(self.req.body.blog_post.body);
+    self.req.body.blog_post.body = self.req.body.blog_post.body.replace('<code>\n','<pre><code>').replace('</code>','</code></pre>');
+    console.log(self.req.body.blog_post.body);
   }
 	if (typeof id !== "string") {
 		BlogPost.create(self.req.body.blog_post, function (err, doc) {
@@ -84,7 +80,6 @@ exports.postBP = function (id) {
 			post.update(self.req.body.blog_post, function(err, post) {
 				if (err) throw err;
 				self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
-        console.log(post);
 			});
 		});
 	}
