@@ -4,13 +4,15 @@
   "private": true,
   "dependencies": {
     "union": "git://github.com/flatiron/union.git",
-    "flatiron": "0.1.16",
+    "flatiron": "*",
+    "director": "*",
     "connect": "git://github.com/senchalabs/connect.git",
     "winston": "*",
-    "passport": "*",
+    "passport": "git://github.com/distracteddev/passport.git",
     "passport-local": "*",
     "marked": "*",
-    "highlight": "*"
+    "highlight": "*",
+    "resourceful": "git://github.com/distracteddev/resourceful.git"
   },
   "devDependencies": {
     "api-easy": "0.3.4",
