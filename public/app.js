@@ -121,6 +121,10 @@ App.PostController = Ember.ArrayController.create({
     console.log("Rollback " + this.selectedIndex);
   },
 
+  deleteSelectedPost: function() {
+    this.get("selectedPost").deleteRecord();
+  },
+
   selectLatestPost: function() {
     this.set('selectedIndex', 0)
   },

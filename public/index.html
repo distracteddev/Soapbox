@@ -91,7 +91,9 @@
            {{#view App.PostButton action="save" classNames="button green"
               tagName="button"}}Save{{/view}}
             {{#view App.PostButton action="revert" tagName="button" classNames="button
-              red"}}Cancel{{/view}}
+              yellow"}}Cancel{{/view}}
+            {{#view App.PostButton action="deleteSelectedPost" tagName="button" classNames="button
+              red"}}Delete{{/view}}
           {{/if}}
         </section>
 
@@ -232,7 +234,7 @@
       <input type="text" class="input-text" name="username" />
       <label>password</label>
       <input type="password" class="input-text" name="password" />
-      <button id="submit-login" class="nice small radius blue button">Log In</button>
+      <button id="submit-login" class="small radius black button">Log In</button>
     </form>
     <a class="close-reveal-modal">&#215;</a>
   </div>

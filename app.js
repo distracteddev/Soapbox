@@ -162,6 +162,7 @@ app.router.path('/\/blog_posts/:id', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
 	this.put(routes.postBP);
+  this.delete(routes.deleteBP);
 });
 
 app.router.path('/\/blog_settings', function() {
@@ -179,7 +180,6 @@ app.router.path('/\/animals', function () {
 });
 
 
-//var port = process_env.C9_PORT;
-var port = 9000;
+var port = process.env.PORT || 9000;
 app.start(port);
 app.log.info("Started at http://localhost:" + port + "/");

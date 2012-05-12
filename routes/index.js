@@ -86,7 +86,16 @@ exports.postBP = function (id) {
 	
 };
 
+exports.deleteBP = function(id) {
+  var self = this;
 
+  if (typeof id === "string") {
+    BlogPost.destroy(id, function (err, post) {
+      if (err) throw err;
+				self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
+    });
+  }
+};
 
 exports.getTags = function () {
 	var self = this;
