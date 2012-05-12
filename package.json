@@ -24,7 +24,7 @@
   },
   "name": "soapbox",
   "engines": {
-    "node": "0.6.x",
-    "npm": "1.1.x",
+    "node": "0.6.17",
+    "npm": "1.1.9"
   }
 }
