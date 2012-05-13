@@ -276,7 +276,7 @@ App.PostController = Ember.ArrayController.create({
             editedPost.propertyWillChange('body');
             editedPost.set('body', data);
             editedPost.propertyDidChange('body');
-      });
+      }, 'text');
       }
       return this.get('postPreview');
   }.observes('selectedPost.body_raw')
