@@ -134,7 +134,7 @@
       
       modal.trigger('reveal:open');
 
-      closeButton = $('.' + options.dismissModalClass).bind('click.reveal', function () {
+      closeButton = $('.' + options.dismissModalClass + ', #reveal-delete button').bind('click.reveal', function () {
         modal.trigger('reveal:close');
       });
 

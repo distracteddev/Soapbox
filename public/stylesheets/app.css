@@ -154,7 +154,7 @@ hr {
   float: right;
   clear: right;
   top: 200px;
-  right: 20%;
+  right: 00%;
   color: white;
   float: right;
   margin-bottom: 10px;
@@ -165,7 +165,12 @@ hr {
 .post .post-sidebar button.green {
   top: 235px;
 }
-/* line 187, ../sass/app.scss */
+/* line 186, ../sass/app.scss */
+.post .post-sidebar button.yellow {
+  top: 270px;
+  background: #535;
+}
+/* line 192, ../sass/app.scss */
 .post p, .post blockquote {
   font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
@@ -174,7 +179,7 @@ hr {
   font-size: 1.5rem;
   line-height: 1.6;
 }
-/* line 197, ../sass/app.scss */
+/* line 202, ../sass/app.scss */
 .post p.post-body:first-letter {
   font-size: 64px;
   line-height: 10px;
@@ -182,7 +187,7 @@ hr {
   padding-right: 10px;
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
-/* line 206, ../sass/app.scss */
+/* line 211, ../sass/app.scss */
 .post .post-date {
   background: #000;
   padding: 7px 12px;
@@ -193,14 +198,15 @@ hr {
   z-index: 1;
   left: -130px;
 }
-/* line 216, ../sass/app.scss */
+/* line 221, ../sass/app.scss */
 .post .post-date .tags {
   clear: both;
   float: right;
   margin-top: 5px;
 }
-/* line 222, ../sass/app.scss */
+/* line 227, ../sass/app.scss */
 .post .post-date #tag-list {
+  display: none;
   top: 40px;
   position: absolute;
   left: 25px;
@@ -210,23 +216,46 @@ hr {
   transition-duration: 1s;
   opacity: .1;
 }
-/* line 229, ../sass/app.scss */
+/* line 235, ../sass/app.scss */
 .post .post-date #tag-list:hover {
   opacity: 1.0;
 }
 
-/* line 236, ../sass/app.scss */
+/* line 242, ../sass/app.scss */
 #reveal-Login {
   width: 300px;
   margin-left: -200px;
 }
 
-/* line 241, ../sass/app.scss */
+/* line 248, ../sass/app.scss */
+#reveal-delete button {
+  margin-right: 50px;
+  margin-top: 20px;
+}
+
+/* line 254, ../sass/app.scss */
 .previous {
   float: left !important;
 }
 
-/* line 246, ../sass/app.scss */
+/* line 259, ../sass/app.scss */
+#livePreview {
+  position: relative;
+  left: 50%;
+  width: 600px;
+  width: 100%;
+  padding-left: 20px;
+}
+
+/* line 267, ../sass/app.scss */
+#rawMarkdown {
+  position: absolute;
+  left: -50%;
+  width: 500px;
+  width: 100%;
+}
+
+/* line 274, ../sass/app.scss */
 .next, .previous {
   float: right;
   font: 400 1.2em/1.2 "Oxygen", Georgia, serif;
@@ -247,27 +276,27 @@ hr {
   -o-transition-duration: 1s;
   transition-duration: 1s;
 }
-/* line 259, ../sass/app.scss */
+/* line 287, ../sass/app.scss */
 .next:hover, .previous:hover {
   color: #333;
   border-color: #333;
 }
 
-/* line 271, ../sass/app.scss */
+/* line 299, ../sass/app.scss */
 .ctr-ctn {
   float: left;
   position: relative;
   left: 50%;
 }
 
-/* line 277, ../sass/app.scss */
+/* line 305, ../sass/app.scss */
 .ctr-block {
   float: left;
   position: relative;
   left: -50%;
 }
 
-/* line 283, ../sass/app.scss */
+/* line 311, ../sass/app.scss */
 code {
   font-family: monospace, sans-serif;
   font-size: 1.5rem;

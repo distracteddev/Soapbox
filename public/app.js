@@ -1,3 +1,72 @@
+// For reference: https://github.com/wagenet/ember.js/blob/ac66dcb8a1cbe91d736074441f853e0da474ee6e/packages/ember-handlebars/lib/views/bound_property_view.js
+var BoundHelperView = Ember.View.extend(Ember.Metamorph, {
+
+  context: null,
+  options: null,
+  property: null,
+  // paths of the property that are also observed
+  propertyPaths: [],
+  
+  value: Ember.K,
+  
+  valueForRender: function() {
+    var value = this.value(Ember.getPath(this.context, this.property), this.options);
+    if (this.options.escaped) { value = Handlebars.Utils.escapeExpression(value); }
+    return value;
+  },
+
+  render: function(buffer) {
+    buffer.push(this.valueForRender());
+  },
+
+  valueDidChange: function() {
+    if (this.morph.isRemoved()) { return; }
+    this.morph.html(this.valueForRender());
+  },
+
+  didInsertElement: function() {
+    this.valueDidChange();
+  },
+
+  init: function() {
+    this._super();
+    Ember.addObserver(this.context, this.property, this, 'valueDidChange');
+    this.get('propertyPaths').forEach(function(propName) {
+        Ember.addObserver(this.context, this.property + '.' + propName, this, 'valueDidChange');
+    }, this);
+  },
+  
+  destroy: function() {
+    Ember.removeObserver(this.context, this.property, this, 'valueDidChange');
+    this.get('propertyPaths').forEach(function(propName) {
+        this.context.removeObserver(this.property + '.' + propName, this, 'valueDidChange');
+    }, this);
+    this._super();
+  }
+
+});
+
+Ember.registerBoundHelper = function(name, func) {
+  var propertyPaths = Array.prototype.slice.call(arguments, 2);
+  Ember.Handlebars.registerHelper(name, function(property, options) {
+    var data = options.data,
+        view = data.view,
+        ctx  = this;
+    
+    var bindView = view.createChildView(BoundHelperView, {
+      property: property,
+      propertyPaths: propertyPaths,
+      context: ctx,
+      options: options.hash,
+      value: func
+    });
+
+    view.appendChild(bindView);
+  });
+};
+
+// END OF BOUND HANDLEBARS HELPER DEFINITION
+
 var App = Em.Application.create();
 
 // Custom Ember Data Structure to Store an Array of tags
@@ -105,6 +174,7 @@ App.PostController = Ember.ArrayController.create({
 
   selectedIndex: null,
   hasEdited: false,
+  postPreview: null,
 
   save: function () {
     App.store.commit();
@@ -121,8 +191,13 @@ App.PostController = Ember.ArrayController.create({
     console.log("Rollback " + this.selectedIndex);
   },
 
+  confirmDelete: function() {
+    $("#reveal-delete").reveal();
+  },
+
   deleteSelectedPost: function() {
     this.get("selectedPost").deleteRecord();
+    App.store.commit();
   },
 
   selectLatestPost: function() {
@@ -182,7 +257,30 @@ App.PostController = Ember.ArrayController.create({
     var idx = this.get('selectedIndex');
     idx -= 1;
     return this.objectAt(idx).get('title');
-  }.property('selectedIndex', 'content.@each')
+  }.property('selectedIndex', 'content.@each'),
+
+  getPostPreview: function() {
+      if (this.get('selectedPost')) {
+      var rawMarkdown = this.get('selectedPost').get('body_raw');
+      var obj = {};
+      obj.md = rawMarkdown;
+      var that = this;
+      $.post('/markdown', obj, function(data) {
+            window.d = data;
+            console.log('getPostPreview fired');
+            //return $(data).children();
+            that.propertyWillChange('postPreview');
+            that.set('postPreview',data);
+            that.propertyDidChange('postPreview');
+            var editedPost = that.get('selectedPost');
+            editedPost.propertyWillChange('body');
+            editedPost.set('body', data);
+            editedPost.propertyDidChange('body');
+      });
+      }
+      return this.get('postPreview');
+  }.observes('selectedPost.body_raw')
+
 
 });
 
@@ -223,6 +321,10 @@ App.PostButton = Em.Button.extend({
   classNames: ["small"],
   target: "App.PostController",
   tagName: "a"
+});
+
+App.PreviewView = Ember.View.extend({
+  valueBinding: "App.PostController.postPreview"
 });
 
 /*
@@ -307,9 +409,14 @@ Ember.Handlebars.registerHelper('editable', function(path, options) {
 
 // Set up a handlebar helper to output raw HTML without escaping it
 Ember.Handlebars.registerHelper('raw', function(path) {
-  var value = Ember.getPath(this, path);
-  return new Handlebars.SafeString(value);
+  var valueBinding = Ember.getPath(this, path);
+  return new Handlebars.SafeString(valueBinding);
 });
+
+Ember.registerBoundHelper('preview', function(path) {
+  return new Handlebars.SafeString(path);
+});
+
 
 // Returns a nicely formatted and localized date from a javascript Date() object
 Ember.Handlebars.registerHelper('date', function(path, options) {
@@ -427,11 +534,27 @@ $(function() {
         });
       });
     });
+
     $('body').bind("soapbox:blog_posts_loaded.soapbox",function() {
       Ember.run.next(function() {
         App.PostController.selectNextPost();
       });
     });
+    var hiddenText = $("#ce");
+    hiddenText.bind('focusout', function() {
+      var text = hiddenText.text();
+      console.log(text);
+      o = {};
+      o.md = text;
+      $.post('/markdown', o, function(data) {
+        setTimeout(function() {
+            window.d = data;
+            console.log($(data).children());
+            hiddenText.html($(data).children());
+        }, 0);
+      });
+    });
+
   });
 
 });

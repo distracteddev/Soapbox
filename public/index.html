@@ -87,12 +87,16 @@
       <!--START OF POST-BODY ROW-->
       <div class="post-body post row">
          <section class="post post-sidebar">
-          {{#if isDirty}}
-           {{#view App.PostButton action="save" classNames="button green"
-              tagName="button"}}Save{{/view}}
-            {{#view App.PostButton action="revert" tagName="button" classNames="button
-              yellow"}}Cancel{{/view}}
-            {{#view App.PostButton action="deleteSelectedPost" tagName="button" classNames="button
+          {{#if App.PostController.authorized}}
+            {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
+              Save
+            {{/view}}
+            {{#if isDirty}}
+               {{#view App.PostButton action="revert" tagName="button" classNames="button yellow"}}
+                 Cancel
+               {{/view}}
+            {{/if}}
+            {{#view App.PostButton action="confirmDelete" tagName="button" classNames="button
               red"}}Delete{{/view}}
           {{/if}}
         </section>
@@ -178,13 +182,20 @@
 
   <script type="text/x-handlebars" data-template-name="edit-field">
     {{#if isEditing}}
-    <form class="nice" onLoad="window.Expander">
-          {{#if textArea}}
+        {{#if textArea}}
+          <form class="nice" onLoad="window.Expander" id="rawMarkdown">
             {{view Ember.TextArea valueBinding="raw" classNames="input-text expand"}}
-          {{else}}
+          </form>
+        {{else}}
+          <form class="nice" onLoad="window.Expander">
             {{view Ember.TextField valueBinding="value" classNames="input-text expand"}}
-          {{/if}}
-        </form>
+          </form>
+        {{/if}}
+   {{#if textArea}}
+     <section id="livePreview" class="clearfix">
+       {{preview App.PostController.postPreview}}
+     </section>
+   {{/if}}
    {{else}}
        {{#if tagsArray}}
        <ul id="tag-list">
@@ -239,7 +250,23 @@
     <a class="close-reveal-modal">&#215;</a>
   </div>
 
-
+<script type="text/x-handlebars">
+  <div class="reveal-modal" id="reveal-delete">
+    <h4>Are you sure you want to DELETE this post?</h4>
+    <div class="ctr-ctn">
+      <div class="ctr-block">
+        {{#view App.PostButton action="deleteSelectedPost" classNames="button green" tagName="button"}}
+          Yes
+        {{/view}}
+        {{#view App.PostButton action="revert" tagName="button"
+            classNames="button red"}}
+          No
+        {{/view}}
+      </div>
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+</script>
 
 </body>
 </html>

@@ -15,9 +15,20 @@ marked.setOptions({
 });
 console.log(marked("i am using __markdown__"));
 
+
+// Parses a Markdown string into HTML
+var MarkdownToHTML = function(s) {
+  var html = marked(s);
+  html = html.replace(/&#39;/g, "'");
+  html = highlighter(html, false, true);
+  html = html.replace('<code>\n','<pre><code>').replace('</code>','</code></pre>');
+  return html;
+}
+
 exports.parseMarkdown = function() {
   var self = this;
-  self.res.end(marked(self.req.body.md));
+  var markdown = MarkdownToHTML(self.req.body.md)
+  self.res.end(markdown);
 };
 
 // Get all blog posts, or a single blog post when an ID is provided.
@@ -92,7 +103,7 @@ exports.deleteBP = function(id) {
   if (typeof id === "string") {
     BlogPost.destroy(id, function (err, post) {
       if (err) throw err;
-				self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
+				self.res.end('Deleted');
     });
   }
 };

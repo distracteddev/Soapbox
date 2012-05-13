@@ -171,7 +171,7 @@ hr {
       float: right;
       clear: right;
       top: 200px;
-      right: 20%;
+      right: 00%;
       color: white;
       float: right;
       margin-bottom: 10px;
@@ -181,6 +181,11 @@ hr {
 
      button.green {
       top: 235px;
+     }
+
+     button.yellow {
+      top: 270px;
+      background: #535;
      }
    }
 
@@ -220,6 +225,7 @@ hr {
      }
 
      & #tag-list {
+        display: none;
         top: 40px;
         position: absolute;
         left: 25px;
@@ -238,9 +244,31 @@ hr {
   margin-left: -200px;
 }
 
+#reveal-delete {
+  button {
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+}
+
 .previous {
   @extend .next;
   float: left !important;
+}
+
+#livePreview {
+  position: relative;
+  left: 50%;
+  width: 600px;
+  width: 100%;
+  padding-left: 20px;
+}
+
+#rawMarkdown {
+  position: absolute;
+  left: -50%;
+  width: 500px;
+  width: 100%;
 }
 
 .next {
