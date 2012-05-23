@@ -67,6 +67,27 @@ Ember.registerBoundHelper = function(name, func) {
 
 // END OF BOUND HANDLEBARS HELPER DEFINITION
 
+// START OF PATH REPLACEMENT
+	setTimeout(function() {
+		var path = window.location.pathname;
+
+		if (path !== "/") {
+			console.log("PATH:" + path);
+			//newState = window.location.origin 
+			//	+  "/#" + (window.location.pathname.slice(1
+			// Turns /pathName into pathName
+		    var newState = (window.location.pathname.slice(1));
+		    //App.routeManager.set('baseURI', window.location.origin);
+		    //window.history.pushState(null, null, window.location.origin);
+			console.log(newState);
+			App.routeManager.set('location', newState);
+			//window.location.pathname = "";
+			//window.location.hash = newState;
+
+		}		
+	}, 10);		
+// END OF PATH REPLACEMENT
+
 var App = Em.Application.create();
 
 // Custom Ember Data Structure to Store an Array of tags
@@ -83,8 +104,11 @@ DS.attr.transforms.array = {
 // Initialize the Data Store provided by Ember-Data. 
 App.store = DS.Store.create({
 	revision: 4,
-  // Use the default REST adapter. 
-	adapter: DS.RESTAdapter.create({bulkCommit: false})
+  	// Use the default REST adapter. 
+	adapter: DS.RESTAdapter.create({
+		bulkCommit: false,
+		namespace: 'services'
+	})	
 });
 
 /*
@@ -109,37 +133,38 @@ App.BlogSetting = DS.Model.extend({
 App.BlogPost = DS.Model.extend({	
 	title: DS.attr('string'),
 	sub_title: DS.attr('string'),
-  // body holds the HTML String of the post content
+	published: DS.attr('boolean'),
+    // body holds the HTML String of the post content
 	body: DS.attr('string'),
-  // body_raw holds the Raw Markdown of the post content
-  body_raw: DS.attr('string'),
-  // Custom Data Type gets presented to the front end as a comma seperated string of values
-  // e.g "First Tag, Second Tag, Another Tag"
+    // body_raw holds the Raw Markdown of the post content
+	body_raw: DS.attr('string'),
+	// Custom Data Type gets presented to the front end as a comma seperated string of values
+	// e.g "First Tag, Second Tag, Another Tag"
 	tags: DS.attr('array'),
 	_id: DS.attr('string'),
 	_rev: DS.attr('string'),
 	ctime: DS.attr('date'),
 	mtime: DS.attr('date'),
-	primaryKey: "_id",
+	primaryKey: "title",
 
-  tags_array: function() {
-    return this.get('tags').split(', ');
-  }.property('tags').cacheable(),
+	tags_array: function() {
+		return this.get('tags').split(', ');
+	}.property('tags').cacheable(),
 
 	didLoad: function() {
 		console.log(this.get('ctime'));
 	},
 
-  didUpdate: function() {
-    console.log(this.get("body") + " was updated");
-    // Refresh the view so that it updates with the latest content
-    // TODO: Refactor this so that Ember native observers work as intended
-    Ember.run.later(function() {
-      App.layout.set('content', '');
-      App.layout.set('content', App.selectedPostView);
-      console.log("later");
-    }, 800);
-  }
+  	didUpdate: function() {
+	    console.log(this.get("body") + " was updated");
+	    // Refresh the view so that it updates with the latest content
+	    // TODO: Refactor this so that Ember native observers work as intended
+	    Ember.run.later(function() {
+	      App.layout.set('content', '');
+	      App.layout.set('content', App.selectedPostView);
+	      console.log("later");
+	    }, 800);
+  	}
 });
 
 App.Tag = DS.Model.extend({
@@ -228,7 +253,8 @@ App.PostController = Ember.ArrayController.create({
        tags: "Enter, a, Comma, Seperated, List, of, Tags",
        title: "Blog Title",
        sub_title: "Enter Witty Sub-Title Here",
-       body: "Double Click to Start Editing"
+       body: "Double Click to Start Editing",
+       published: false
     });
     // Set it as the selected post
     var lastIdx = this.get("content").get("length")
@@ -261,25 +287,27 @@ App.PostController = Ember.ArrayController.create({
 
   getPostPreview: function() {
       if (this.get('selectedPost')) {
-      var rawMarkdown = this.get('selectedPost').get('body_raw');
-      var obj = {};
-      obj.md = rawMarkdown;
-      var that = this;
-      $.post('/markdown', obj, function(data) {
-            window.d = data;
-            console.log('getPostPreview fired');
-            //return $(data).children();
-            that.propertyWillChange('postPreview');
-            that.set('postPreview',data);
-            that.propertyDidChange('postPreview');
-            var editedPost = that.get('selectedPost');
-            editedPost.propertyWillChange('body');
-            editedPost.set('body', data);
-            editedPost.propertyDidChange('body');
-      }, 'text');
+	    var rawMarkdown = this.get('selectedPost').get('body_raw');
+	    var obj = {};
+	    obj.md = rawMarkdown;
+	    var that = this;
+	    $.post('/markdown', obj, function(data) {
+	        window.d = data;
+	        console.log('getPostPreview fired');
+	        //return $(data).children();
+	        that.propertyWillChange('postPreview');
+	        that.set('postPreview',data);
+	        that.propertyDidChange('postPreview');
+	        var editedPost = that.get('selectedPost');
+	        editedPost.propertyWillChange('body');
+	        editedPost.set('body', data);
+	        editedPost.propertyDidChange('body');
+	    }, 'text');
       }
       return this.get('postPreview');
   }.observes('selectedPost.body_raw')
+
+
 
 
 });
@@ -334,7 +362,14 @@ App.PreviewView = Ember.View.extend({
 // Fetch the data models from the server and pass them into our
 // controllers
 App.HeaderController.set('content', App.store.find(App.BlogSetting));
-App.PostController.set('content', App.store.find(App.BlogPost));
+// Load all Blog Posts
+var allPosts = App.store.find(App.BlogPost);
+// Filter out the unpublished posts and add the remaining objects
+// to the PostController's content attribute
+var publishedPosts = App.store.filter(App.BlogPost, function(post) {	
+	return post.get('published');
+});
+App.PostController.set('content', publishedPosts);
 App.TagController.set('content', App.store.find(App.Tag));
 // CUSTOM FIELD VIEW FOR EMBER TO ALLOW FOR INLINE PAGE EDITING
 // This field uses the property 'isEditing' as a signal to its
@@ -436,21 +471,32 @@ Ember.Handlebars.registerHelper('date', function(path, options) {
  *START OF EMBER ROUTE MANAGER
  */
 App.routeManager = Ember.RouteManager.create({
+
   enableLogging: true,
   rootView: App.layout,
-  home: Em.State.create({
-    //viewClass: App.postView
-  }),
+  
+  home: Em.State.create({}),
+
   login: Em.State.create({
     route: 'login',
-    //view:  App.layout,
     index: Em.State.create({
       enter: function(statemanager, transition) {
         this._super(statemanager, transition);
         $("#reveal-Login").reveal();
       }
     })
-  })
+  }),
+
+  show: Em.State.create({
+  	route: ':id',
+	enter: function(stateManager, transition) {
+		this._super(stateManager, transition);
+		var params = stateManager.get('params');
+		var postId = params.id;
+		console.log(postId);
+	}
+  })  
+
 });
     
 /*
@@ -478,6 +524,9 @@ ExposedAuthor = function() {
           App.PostController.propertyWillChange('authorized');
           authorized = true;
           App.PostController.propertyDidChange('authorized');
+          App.PostController.propertyWillChange('content');
+          App.PostController.set('content', allPosts);
+          App.PostController.propertyDidChange('content');
           $("#reveal-Login").trigger("reveal:close");
         }
         else {
@@ -508,6 +557,7 @@ var Author = new objectHider(ExposedAuthor);
 // function.
 $(function() {
   Ember.run(function() {
+
     // Start the Route Manager so that it listens for URL changes
     App.routeManager.start();
     // Initialize my layout and append it to the body
@@ -527,12 +577,18 @@ $(function() {
     });
     
     Ember.run.next(function() {
-      $(".alert-box").delegate("a.close", "click", function(event) {
-        event.preventDefault();
-        $(this).closest(".alert-box").fadeOut(function(event){
-          $(this).remove();
-        });
-      });
+	    $(".alert-box").delegate("a.close", "click", function(event) {
+	      event.preventDefault();
+	      $(this).closest(".alert-box").fadeOut(function(event){
+	        $(this).remove();
+	      });
+	    });
+
+	    $("#login").click(function() {
+	    	console.log(" I RAN ");
+	    	App.routeManager.set('location', 'login');
+	    	return false;
+	    });      
     });
 
     $('body').bind("soapbox:blog_posts_loaded.soapbox",function() {

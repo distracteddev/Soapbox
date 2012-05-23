@@ -43,11 +43,11 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<script type="text/x-handlebars" data-template-name="posts">
+	<!-- <script type="text/x-handlebars" data-template-name="posts">
 		{{#each content}}
     <div class="row">
       {{#if isDirty}}
-        <section class="post columns one">
+      <section class="post columns one">
           </br>
           </br>
           {{#view App.PostButton action="save"}}Save{{/view}}
@@ -64,7 +64,7 @@
 			</section>
 		</div>
 		{{/each}}
-	</script>
+	</script> -->
 
 	<script type="text/x-handlebars" data-template-name="single-post">
       {{#with App.PostController.selectedPost}}
@@ -88,6 +88,7 @@
       <div class="post-body post row">
          <section class="post post-sidebar">
           {{#if App.PostController.authorized}}
+          {{view Ember.Checkbox title="Published" valueBinding="published"}}
             {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
               Save
             {{/view}}
@@ -115,12 +116,10 @@
           Go Write Some Shit.
           <a href="#" class="close">&times;</a>
       </div>
-   
-      {{#each content}}			
-        <a href="#login" id="login">
-          <img src="images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
-        </a>
-      {{/each}}
+       
+        <a href="" id="login">
+          <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
+        </a>      
    
       <div class="ctr-ctn">
         <dl class="sub-nav ctr-block">
@@ -218,20 +217,20 @@
 <body>
 
   <!--Load Javascript within the body so it doesn't slow down page rendering-->
-	<script src="javascripts/jquery.min.js"></script>
-	<script src="javascripts/jquery.reveal.js"></script>
-	<script src="javascripts/jquery.orbit-1.4.0.js"></script>
-	<script src="javascripts/jquery.customforms.js"></script>
-	<script src="javascripts/jquery.placeholder.min.js"></script>
-	<script src="javascripts/jquery.tooltips.js"></script>
-	<script src="javascripts/jquery.text-expander.js"></script>
-	<script src="javascripts/lib/ember.js"></script>
-	<script src="javascripts/lib/ember-data.js"></script>
-	<script src="javascripts/lib/ember-routemanager.js"></script>
-	<script src="javascripts/lib/ember-layout.js"></script>
-	<script src="javascripts/lib/move.js"></script>
-	<script src="javascripts/app.js"></script>
-  <script src="app.js"></script>
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="/javascripts/jquery.reveal.js"></script>
+	<script src="/javascripts/jquery.orbit-1.4.0.js"></script>
+	<script src="/javascripts/jquery.customforms.js"></script>
+	<script src="/javascripts/jquery.placeholder.min.js"></script>
+	<script src="/javascripts/jquery.tooltips.js"></script>
+	<script src="/javascripts/jquery.text-expander.js"></script>
+	<script src="/javascripts/lib/ember.js"></script>
+	<script src="/javascripts/lib/ember-data.js"></script>
+	<script src="/javascripts/lib/ember-routemanager.js"></script>
+	<script src="/javascripts/lib/ember-layout.js"></script>
+	<script src="/javascripts/lib/move.js"></script>
+	<script src="/javascripts/app.js"></script>
+	<script src="/app.js"></script>
   
 
   <div class="reveal-modal" id="reveal-Login">

@@ -1,7 +1,7 @@
 var Resourceful = require('resourceful'),
 	winston = require('winston'),
-  marked = require('marked'),
-  highlighter = require('highlight').Highlight,
+    marked = require('marked'),
+    highlighter = require('highlight').Highlight,
 	BlogSettings = require('../models').BlogSettings(),
 	BlogPost = require('../models').BlogPost();
 
@@ -33,17 +33,24 @@ exports.parseMarkdown = function() {
 
 // Get all blog posts, or a single blog post when an ID is provided.
 exports.getBP = function(id) {
+	// Return all posts
 	var self = this;
 	if (arguments.length < 2) {
 		BlogPost.all(function(err, posts) {
-			if (err) throw err;
-      posts.sort(function(a, b) {
-        return b.ctime-a.ctime;
-      });
+			if (err) {
+				winston.error(err);
+				throw err;
+			}
+			// Sort the returned array of posts by their creation
+			// time
+      		posts.sort(function(a, b) {
+        		return b.ctime-a.ctime;
+    	    });			
 			self.res.end('{"blog_posts":' + JSON.stringify(posts) + "}");
 			return posts;
 		});
 	}
+	// Return a single post with a specific ID
 	else {
 		console.log('ID: ' + id);
 		BlogPost.find({_id:id}, function(err, post) {
@@ -70,7 +77,7 @@ exports.postBP = function (id) {
 	if (typeof id !== "string") {
 		BlogPost.create(self.req.body.blog_post, function (err, doc) {
 			if (err) { 
-				winston.log(err);
+				winston.error(JSON.stringify(err));
 				throw new(Error)(err);
 			}
 
@@ -120,7 +127,10 @@ exports.getTags = function () {
 exports.getSettings = function () {
 	var self = this;
 	var settings = BlogSettings.all(function (err, settings) {
-		if (err) throw err;
+		if (err) {
+			winston.error(JSON.stringify(err));
+			throw err;
+		}
 		// Check if the function has been called
 		// as a response handler.
 		if (self !== undefined) {

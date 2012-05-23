@@ -7,6 +7,7 @@ var get = Ember.get, set = Ember.set;
  */
 var supportsHistory = !!(window.history && window.history.pushState);
 
+//var supportsHistory = true;
 /**
  Whether the browser supports the hashchange event.
  */
@@ -47,7 +48,7 @@ Ember.RouteManager = Ember.StateManager.extend({
    @property
    @type {Boolean}
    */
-  wantsHistory: false,
+  wantsHistory: true,
 
   /**
    A read-only boolean indicating whether or not HTML5 history is used. Based
@@ -80,7 +81,7 @@ Ember.RouteManager = Ember.StateManager.extend({
    @property
    @type {String}
    */
-  baseURI: document.baseURI,
+  baseURI: window.location.origin,
 
   /** @private
    A boolean value indicating whether or not the ping method has been called
@@ -173,7 +174,7 @@ Ember.RouteManager = Ember.StateManager.extend({
         if(this.usesHistory) {
           if(encodedValue.length > 0) {
             encodedValue = '/' + encodedValue;
-          }
+          }          
           window.history.pushState(null, null, get(this, 'baseURI') + encodedValue);
         } else if(encodedValue.length > 0 || window.location.hash.length > 0) {
           window.location.hash = encodedValue;

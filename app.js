@@ -6,33 +6,35 @@ var flatiron = require('flatiron'),
     fs = require('fs'),
     //qs = require('querystring'),
     passport = require('passport'),
+    User = require('./models').User();
     LocalStrategy = require('passport-local').Strategy;
     app = flatiron.app;
 
 var routes = require('./routes');
+var animalRoutes = require('./routes/animals.js')
 
-var users = [
-    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
-];
+u = User.new(
+	{
+		"username": "zeus",
+		"password": "zeuszeus",
+		"email": "lalkaka.zeus@gmail.com"
+	}
+);
 
-function findById(id, fn) {
-  var idx = id - 1;
-  if (users[idx]) {
-    fn(null, users[idx]);
-  } else {
-    fn(new Error('User ' + id + ' does not exist'));
-  }
-}
+u.save();
 
-function findByUsername(username, fn) {
-  for (var i = 0, len = users.length; i < len; i++) {
-    var user = users[i];
-    if (user.username === username) {
-      return fn(null, user);
-    }
-  }
-  return fn(null, null);
+function findByUsername(username, done) {
+  User.find({"username":username}, function(err, user) {
+  	if (err) {
+  		return done(err, null);
+  	}
+  	else if (user) {
+  		return done(null, user[0]);
+  	}
+  	else {
+  		return done(null, null);
+  	}
+  });
 }
 
 passport.use(new LocalStrategy(
@@ -47,6 +49,9 @@ passport.use(new LocalStrategy(
       findByUsername(username, function(err, user) {
         if (err) { return done(err); }
         if (!user) { return done(null, false, { message: 'Unkown user ' + username }); }
+        debugger;
+        console.log(password);
+        console.log(user.password);
         if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
         return done(null, user);
       })
@@ -56,18 +61,17 @@ passport.use(new LocalStrategy(
 
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  done(null, user.username);
 });
 
-passport.deserializeUser(function(id, done) {
-  findById(id, function (err, user) {
+passport.deserializeUser(function(username, done) {
+  findByUsername(username, function (err, user) {
     done(err, user);
   });
 });
 
 app.use(flatiron.plugins.http, {
 	before: [
-		//connect.bodyParser(),
 		connect.favicon('./public/favicon.ico'),
 		connect.cookieParser('lolcats'),
 		connect.session({secret: "9ajk21mas8"}),
@@ -80,24 +84,6 @@ app.use(flatiron.plugins.http, {
 	after: []
 });
 
-var bark = function (color, text) {
-  if (!color) color = "";
-  if (!text) text = "";
-  var json = {};
-  var key = (color.length < 1) ? 'dogs' : color + " dogs";
-  var secondValue = (text.length < 1) ? '' : " " + text.toString();
-  json[key] = 'bark' + secondValue;
-  var response = JSON.stringify(json);
-  this.res.end(response);
-};
-
-var meow = function () {
-  this.res.json({ 'cats': 'meow' });
-};
-
-var hello = function () {
-  this.res.json({ 'hello': 'animal world' });
-};
 
 app.router.path('/', function () {
 	this.get(function () {
@@ -113,14 +99,26 @@ app.router.path('/', function () {
 		});
 	});
 
+	this.get('/:name', function(name) {
+		var self = this;
+		fs.readFile('public/index.html', function(err, data) {
+			if(err) {
+				self.res.writeHead(404, {'Content-Type': 'text/html'});
+				self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
+				return;
+			}
+			self.res.writeHead(200, {'Content-Type': 'text/html'});
+			self.res.end(data);
+		});
+	});
+
 	this.post('jsonTest', function () {
 		console.log(this.req.body);
-		var self = this;
-    //self.res.end(JSON.stringify(this.req.isAuthenticated()) + '\n');
+		var self = this;  
 		self.res.end(JSON.stringify(self.req.body) + '\n');
 	});
 
-	this.get('/tags',routes.getTags);
+	this.get('services/tags',routes.getTags);
 
 	this.post('/login',
 		function() {
@@ -153,29 +151,29 @@ app.router.path('/\/markdown', function() {
 });
 
 
-app.router.path('/\/blog_posts/', function() {
+app.router.path('/services/blog_posts/', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
 });
 
-app.router.path('/\/blog_posts/:id', function() {
+app.router.path('/services/blog_posts/:id', function() {
 	this.get(routes.getBP);
 	this.post(routes.postBP);
 	this.put(routes.postBP);
   this.delete(routes.deleteBP);
 });
 
-app.router.path('/\/blog_settings', function() {
+app.router.path('/services/blog_settings', function() {
 	this.get(routes.getSettings);
 	this.post(routes.postSettings);
 });
 
 app.router.path('/\/animals', function () {
-	this.get(hello);
-	this.get('/dog/', bark);
-	this.get('/dog/:color', bark);
-	this.get('/dog/:color/:text', bark);
-	this.get('/cat/', meow);
+	this.get(animalRoutes.hello);
+	this.get('/dog/', animalRoutes.bark);
+	this.get('/dog/:color', animalRoutes.bark);
+	this.get('/dog/:color/:text', animalRoutes.bark);
+	this.get('/cat/', animalRoutes.meow);
 
 });
 
