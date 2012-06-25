@@ -73,9 +73,13 @@ passport.deserializeUser(function(username, done) {
 app.use(flatiron.plugins.http, {
 	before: [
 	    function(req, res) {
-	    	if (req.headers['user-agent'].indexOf('Google') > -1)
+	    	if (req.headers['user-agent'].indexOf('Google') > -1) {
 	    		console.log(req.url, req.headers['user-agent']);
-	    	res.emit('next');
+	    		res.writeHead(200, {'Content-Type' : 'text/html'})
+	    		res.end("This is an SEO Test. If you see this within Google's Results, you know that my experiment worked.");
+	    	} else {
+	    		res.emit('next');
+	    	}
 	    },
 	    connect.static(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
