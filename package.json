@@ -12,7 +12,8 @@
     "passport-local": "*",
     "marked": "*",
     "highlight": "*",
-    "resourceful": "git://github.com/distracteddev/resourceful.git"
+    "resourceful": "git://github.com/distracteddev/resourceful.git",
+    "winston": "*"
   },
   "devDependencies": {
     "api-easy": "0.3.4",
