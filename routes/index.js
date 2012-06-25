@@ -28,7 +28,7 @@ var MarkdownToHTML = function(s) {
 exports.parseMarkdown = function() {
   var self = this;
   var markdown = MarkdownToHTML(self.req.body.md)
-  self.res.end(markdown);
+  if (self.res) self.res.end(markdown);
 };
 
 // Get all blog posts, or a single blog post when an ID is provided.
@@ -46,7 +46,7 @@ exports.getBP = function(id) {
       		posts.sort(function(a, b) {
         		return b.ctime-a.ctime;
     	    });			
-			self.res.end('{"blog_posts":' + JSON.stringify(posts) + "}");
+			if (self.res) self.res.end('{"blog_posts":' + JSON.stringify(posts) + "}");
 			return posts;
 		});
 	}
@@ -56,7 +56,7 @@ exports.getBP = function(id) {
 		BlogPost.find({_id:id}, function(err, post) {
 			if (err) throw err;
 			if (Array.isArray(post) && post.length > 0) {
-				self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
+				if (self.res) self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
 				winston.debug(post);
 				return post;
 			}
@@ -102,7 +102,7 @@ exports.postBP = function (id) {
 			doc.save(function() {
 				if (!err) {
 					winston.log('Saved');
-					self.res.end('Saved');				
+					if (self.res) self.res.end('Saved');				
 				}
 				else {				
 					throw err;
@@ -119,7 +119,7 @@ exports.postBP = function (id) {
 				self.req.body.blog_post._id = titleToId(self.req.body.blog_post.title)
 				post.update(self.req.body.blog_post, function(err, post) {
 					if (err) throw err;
-					self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
+					if (self.res) self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
 				});
 			}
 			else {
@@ -136,7 +136,7 @@ exports.deleteBP = function(id) {
   if (typeof id === "string") {
     BlogPost.destroy(id, function (err, post) {
       if (err) throw err;
-				self.res.end('Deleted');
+				if (self.res) self.res.end('Deleted');
     });
   }
 };
@@ -146,7 +146,7 @@ exports.getTags = function () {
 	BlogPost.tagFilter(function(err, tags) {
 		if (err) throw err;
 		// console.log(tags);
-		self.res.end('{"tags":' + JSON.stringify(tags) + "}");
+		if (self.res) self.res.end('{"tags":' + JSON.stringify(tags) + "}");
 	});
 };
 
@@ -160,7 +160,7 @@ exports.getSettings = function () {
 		// Check if the function has been called
 		// as a response handler.
 		if (self !== undefined) {
-		self.res.end('{"blog_settings": ' + JSON.stringify(settings) + " }");
+		if (self.res) self.res.end('{"blog_settings": ' + JSON.stringify(settings) + " }");
 		}
 		// winston.debug(settings);
 		return settings;
@@ -181,7 +181,7 @@ exports.postSettings = function () {
 					winston.error(err);
 					throw new(Error)(err);
 				}
-				self.res.end(JSON.stringify(settings));
+				if (self.res) self.res.end(JSON.stringify(settings));
 				winston.debug(settings);
 			});
 		}
@@ -192,7 +192,7 @@ exports.postSettings = function () {
 					winston.error(err);
 					throw err;				
 				}
-				self.res.end("Settings Updated\n");
+				if (self.res) self.res.end("Settings Updated\n");
 			});
 		}
 	});

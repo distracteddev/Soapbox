@@ -526,7 +526,7 @@ body.portfolio .post-body .post {
 
   /* line 554, ../sass/app.scss */
   body.portfolio .portfolio-content {
-    margin-top: 80px;
+    margin-top: 0px;
   }
 }
 @media only screen and (min-width: 860px) {
