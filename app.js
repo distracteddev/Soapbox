@@ -72,10 +72,15 @@ passport.deserializeUser(function(username, done) {
 
 app.use(flatiron.plugins.http, {
 	before: [
+	    function(req, res) {
+	    	if (req.headers['user-agent'].indexOf('Google') > -1)
+	    		console.log(req.url, req.headers['user-agent']);
+	    	res.emit('next');
+	    },
+	    connect.static(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
-		 connect.cookieParser('lolcats'),
+		connect.cookieParser('lolcats'),
 		connect.session({secret: "9ajk21mas8"}),
-		connect.static(__dirname + '/public'),
 		connect.methodOverride(),
 		passport.initialize(),
 		passport.session()
