@@ -50,8 +50,8 @@ passport.use(new LocalStrategy(
         if (err) { return done(err); }
         if (!user) { return done(null, false, { message: 'Unkown user ' + username }); }
         debugger;
-        console.log(password);
-        console.log(user.password);
+        // console.log(password);
+        // console.log(user.password);
         if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
         return done(null, user);
       })
@@ -73,7 +73,7 @@ passport.deserializeUser(function(username, done) {
 app.use(flatiron.plugins.http, {
 	before: [
 		connect.favicon('./public/favicon.ico'),
-		connect.cookieParser('lolcats'),
+		 connect.cookieParser('lolcats'),
 		connect.session({secret: "9ajk21mas8"}),
 		connect.static(__dirname + '/public'),
 		connect.methodOverride(),
@@ -150,11 +150,11 @@ app.router.path('/', function () {
 		function() {
 			self = this;
 			function next() {
-				console.log('next wrap');
+				// console.log('next wrap');
 				self.res.emit('next');
 			}
 			passport.authenticate('local', function(err, user) {
-				console.log(user);
+				// console.log(user);
 				if (err) { self.res.end("SERVER ERROR\n") }
 		        if (!user) { self.res.end("false") }
 		        else {

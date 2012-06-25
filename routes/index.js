@@ -55,7 +55,6 @@ exports.getBP = function(id) {
 		console.log('ID: ' + id);
 		BlogPost.find({_id:id}, function(err, post) {
 			if (err) throw err;
-			debugger;
 			if (Array.isArray(post) && post.length > 0) {
 				self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
 				winston.debug(post);
@@ -146,7 +145,7 @@ exports.getTags = function () {
 	var self = this;
 	BlogPost.tagFilter(function(err, tags) {
 		if (err) throw err;
-		console.log(tags);
+		// console.log(tags);
 		self.res.end('{"tags":' + JSON.stringify(tags) + "}");
 	});
 };
@@ -163,7 +162,7 @@ exports.getSettings = function () {
 		if (self !== undefined) {
 		self.res.end('{"blog_settings": ' + JSON.stringify(settings) + " }");
 		}
-		winston.debug(settings);
+		// winston.debug(settings);
 		return settings;
 	});
 	return settings;
