@@ -6,7 +6,7 @@
     "union": "git://github.com/flatiron/union.git",
     "flatiron": "*",
     "director": "*",
-    "connect": "git://github.com/senchalabs/connect.git",
+    "connect": "2.2.2",
     "winston": "*",
     "passport": "git://github.com/distracteddev/passport.git",
     "passport-local": "*",
