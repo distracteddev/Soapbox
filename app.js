@@ -16,7 +16,7 @@ var animalRoutes = require('./routes/animals.js')
 u = User.new(
 	{
 		"username": "zeus",
-		"password": "zeuszeus",
+		"password": "zeus",
 		"email": "lalkaka.zeus@gmail.com"
 	}
 );
@@ -111,6 +111,32 @@ app.router.path('/', function () {
 			self.res.end(data);
 		});
 	});
+
+	this.get('blog/:name', function(name) {
+		var self = this;
+		fs.readFile('public/index.html', function(err, data) {
+			if(err) {
+				self.res.writeHead(404, {'Content-Type': 'text/html'});
+				self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
+				return;
+			}
+			self.res.writeHead(200, {'Content-Type': 'text/html'});
+			self.res.end(data);
+		});
+	});
+
+	this.get('portfolio/:name', function(name) {
+		var self = this;
+		fs.readFile('public/index.html', function(err, data) {
+			if(err) {
+				self.res.writeHead(404, {'Content-Type': 'text/html'});
+				self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
+				return;
+			}
+			self.res.writeHead(200, {'Content-Type': 'text/html'});
+			self.res.end(data);
+		});
+	});		
 
 	this.post('jsonTest', function () {
 		console.log(this.req.body);

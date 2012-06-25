@@ -9,7 +9,7 @@
 //----------------------------------------------------------
 
 // $experimental-support-for-khtml: false
- $experimental-support-for-microsoft: true;
+// $experimental-support-for-microsoft: true;
 
 // Font stacks
 //----------------------------------------------------------
@@ -46,5 +46,6 @@
 // Default Color
 //---------------------------------------------------------
 $orange: rgba(255, 22, 0, 0.7) !default;
+$teal: rgba(157,248,219,1) !default;
 $pale-green: rgba(50, 50, 50, .8) !default;
 $default-color: rgba($pale-green, .7) !default;

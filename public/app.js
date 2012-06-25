@@ -68,7 +68,7 @@ Ember.registerBoundHelper = function(name, func) {
 // END OF BOUND HANDLEBARS HELPER DEFINITION
 
 // START OF PATH REPLACEMENT
-	setTimeout(function() {
+	var replacePath = function() {
 		var path = window.location.pathname;
 
 		if (path !== "/") {
@@ -85,7 +85,7 @@ Ember.registerBoundHelper = function(name, func) {
 			//window.location.hash = newState;
 
 		}		
-	}, 10);		
+	};		
 // END OF PATH REPLACEMENT
 
 var App = Em.Application.create();
@@ -145,7 +145,7 @@ App.BlogPost = DS.Model.extend({
 	_rev: DS.attr('string'),
 	ctime: DS.attr('date'),
 	mtime: DS.attr('date'),
-	primaryKey: "title",
+	primaryKey: "_id",
 
 	tags_array: function() {
 		return this.get('tags').split(', ');
@@ -217,7 +217,7 @@ App.PostController = Ember.ArrayController.create({
   },
 
   confirmDelete: function() {
-    $("#reveal-delete").reveal();
+    $("#reveal-delete").show().reveal();
   },
 
   deleteSelectedPost: function() {
@@ -326,7 +326,16 @@ App.TagController = Ember.ArrayProxy.create({
  */
 App.layout = Ember.View.create({
   templateName: 'main-layout',
-  classNames: ["container"],
+  classNames: ['container']
+});
+
+App.portfolioHeaderView = Ember.View.create({
+  templateName: 'portfolio-header'
+});
+
+App.faceView = Ember.View.create({
+  templateName: 'portfolio-content',
+  classNames: ['portfolio-content']
 });
 
 App.headerView = Em.View.create({
@@ -458,7 +467,7 @@ Ember.Handlebars.registerHelper('date', function(path, options) {
  console.log(path);
  date = options.contexts[0].get(path);
  if (typeof date === "undefined") {date = new Date()}
- dateArray = date.toLocaleDateString().split(', ');
+ dateArray = date.toDateString().split(' ');
  day = date.getDate() + '. ';
  // Gets the name of the month form the locaized date string
  // (A Nice trick to avoid using your own localized date maps)
@@ -470,12 +479,93 @@ Ember.Handlebars.registerHelper('date', function(path, options) {
 /*
  *START OF EMBER ROUTE MANAGER
  */
+
+var bindLinks = function() {
+    // Bind all HashMark Links to 
+  Ember.run.next(function() {
+    console.log(" BINDING LINKS ")
+    $('a').click(function() {
+      var el = $(this);
+      var target = el.attr('href').replace('#', '');
+      if (target.indexOf('/') === 0) target = target.slice(1);
+      console.log(target);
+      if (App.routeManager.hasOwnProperty(target) && target.length > 1) {
+        console.log("Found a internal route");
+        App.routeManager.set('location', target);
+        return false;
+      }
+    });
+  });
+}
+
+var updateNav = function(loc) {
+  Ember.run.next(function() {
+    $('.sub-nav a').show().removeClass('current');
+    var selector = "a[href=#" + loc + "]"
+    console.log(selector);
+    $(selector).addClass('current');
+  });
+}
+
 App.routeManager = Ember.RouteManager.create({
 
   enableLogging: true,
   rootView: App.layout,
   
-  home: Em.State.create({}),
+  home: Em.State.create({
+    enter: function(stateManager, transition) {
+      this._super(stateManager, transition);
+      App.routeManager.set('location', 'portfolio')
+    }
+  }),
+
+  portfolio: Em.State.create({
+    route: 'portfolio',
+
+    index: Em.State.create({
+      enter: function(stateManager, transition) {
+        this._super(stateManager, transition);
+        console.log("Entering Portfolio");
+        $('body').removeClass('blog').addClass('portfolio');
+        App.layout.set('header', App.portfolioHeaderView);
+        updateNav('portfolio');
+        App.layout.set('content', App.faceView);
+        // App.layout.set('content', App.selectedPostView);
+        bindLinks();
+      },
+    }),
+
+    show: Em.State.create({
+      route: ':id',
+      enter: function(stateManager, transition) {
+        this._super(stateManager, transition);
+        var params = stateManager.get('params');
+        var postId = params.id;
+        console.log(postId);
+        $('body').removeClass('blog').addClass('portfolio');
+        App.layout.set('header', App.portfolioHeaderView);
+        App.layout.set('content', App.faceView);
+      }
+    })    
+  }),
+
+  blog: Em.State.create({
+    route: 'blog',
+    enter: function(stateManager, transition) {
+      this._super(stateManager, transition);
+      console.log("Entering Blog");
+      // $('body').removeClass('portfolio').addClass('blog');
+      // App.layout.set('header', App.headerView);
+      // App.layout.set('content', App.selectedPostView);
+      // bindLinks();  
+      $('body').removeClass('blog').addClass('portfolio');
+      App.layout.set('header', App.portfolioHeaderView);
+      updateNav(this.route);
+      App.layout.set('content', App.selectedPostView);
+      bindLinks();
+    }
+  }),
+
 
   login: Em.State.create({
     route: 'login',
@@ -488,14 +578,19 @@ App.routeManager = Ember.RouteManager.create({
   }),
 
   show: Em.State.create({
-  	route: ':id',
-	enter: function(stateManager, transition) {
-		this._super(stateManager, transition);
-		var params = stateManager.get('params');
-		var postId = params.id;
-		console.log(postId);
-	}
-  })  
+  	route: 'blog/:id',
+  	enter: function(stateManager, transition) {
+  		this._super(stateManager, transition);
+  		var params = stateManager.get('params');
+  		var postId = params.id;
+  		console.log(postId);
+      $('body').removeClass('portfolio').addClass('blog');
+      App.layout.set('header', App.headerView);
+      App.layout.set('content', App.selectedPostView);   
+  	}
+  })
+
+
 
 });
     
@@ -561,14 +656,17 @@ $(function() {
     // Start the Route Manager so that it listens for URL changes
     App.routeManager.start();
     // Initialize my layout and append it to the body
-    App.layout.set('header', App.headerView);
-    App.layout.set('content', App.selectedPostView);
     App.layout.append();
     // Bind the reveal:close event so that it replaces the route-managers
     // state with its previous one.
     $('body').bind('reveal:close', function () {
       console.log("reveal was closed");
-      App.routeManager.set('location',''); 
+      App.routeManager.set('location','blog'); 
+    });
+
+    $(document).bind('keydown', function(evt) {
+      if (evt.ctrlKey && evt.which === 76)
+        App.routeManager.set('location', 'login');
     });
 
     $("#submit-login").click(function() {
@@ -577,18 +675,18 @@ $(function() {
     });
     
     Ember.run.next(function() {
-	    $(".alert-box").delegate("a.close", "click", function(event) {
-	      event.preventDefault();
-	      $(this).closest(".alert-box").fadeOut(function(event){
-	        $(this).remove();
-	      });
-	    });
+      $(".alert-box").delegate("a.close", "click", function(event) {
+        event.preventDefault();
+        $(this).closest(".alert-box").fadeOut(function(event){
+          $(this).remove();
+        });
+      });
 
-	    $("#login").click(function() {
-	    	console.log(" I RAN ");
-	    	App.routeManager.set('location', 'login');
-	    	return false;
-	    });      
+      $("#login").click(function() {
+        console.log(" I RAN ");
+        App.routeManager.set('location', 'login');
+        return false;
+      });     
     });
 
     $('body').bind("soapbox:blog_posts_loaded.soapbox",function() {

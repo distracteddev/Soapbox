@@ -9,16 +9,16 @@
 	<meta charset="utf-8" />
 	
 	<!-- Set the viewport width to device width for mobile -->
-	<meta name="viewport" content="width=device-width" >
+	<meta name="viewport" content="width=device-width", minimum-scale=1.0, maximum-scale=1.0>
 	<meta name="description" content="">
   <meta name="author" content="">
 
 	<title>Zeus</title>
   
 	<!-- Included CSS Files -->
-	<link rel="stylesheet" href="stylesheets/foundation.css">
-  <link rel="stylesheet" href="stylesheets/app.css">
-  <link rel="stylesheet" href="stylesheets/code_styles/monokai.css">
+	<link rel="stylesheet" href="/stylesheets/foundation.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <link rel="stylesheet" href="/stylesheets/code_styles/monokai.css">
 	<!-- Includ Web Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
@@ -27,8 +27,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
+
+  <link href='http://fonts.googleapis.com/css?family=Iceland|Quantico:400,700italic,700,400italic|Electrolize|Orbitron:400,500,900,700' rel='stylesheet' type='text/css'>
+
 	<!-- Load Modernizr before all other scripts -->
-	<script src="javascripts/modernizr.foundation.js"></script>
+	<script src="/javascripts/modernizr.foundation.js"></script>
 
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="stylesheets/ie.css">
@@ -80,7 +83,6 @@
              {{editable tags classNames="clearfix"}}
             </div> 
           </section>
-
           <h5 class="post-sub-title">{{editable sub_title}}</h5>
         </section>
       </div>
@@ -88,7 +90,7 @@
       <div class="post-body post row">
          <section class="post post-sidebar">
           {{#if App.PostController.authorized}}
-          {{view Ember.Checkbox title="Published" valueBinding="published"}}
+          {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
             {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
               Save
             {{/view}}
@@ -104,53 +106,9 @@
 
         <section class="columns eight centered">
 					{{editable body textArea="true" tagName="div"}}
-        </section>
-      </div>
+        </section>        
+      </div>      
       {{/with}}
-	</script>
-
-
-  <script type="text/x-handlebars" data-template-name="header">
-      <div class="six columns centered clearfix">	
-        <div class="alert-box success" id="login-sucess">
-          Go Write Some Shit.
-          <a href="#" class="close">&times;</a>
-      </div>
-       
-        <a href="" id="login">
-          <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
-        </a>      
-   
-      <div class="ctr-ctn">
-        <dl class="sub-nav ctr-block">
-          <dd>
-            <a href="#">Blog</a>
-          </dd>
-          <dd>
-            <a href="#">Identity</a>
-          </dd>
-          <dd>
-            <a href="#">Projects</a>
-          </dd>
-          <dd>
-            <a href="#">Lab</a>
-          </dd>
-
-        </dl>					
-      </div> <!-- End of ctr-ctn -->	
-    </div> <!-- End of six columns -->
-	</script>
-
-
-  <script type="text/x-handlebars" data-template-name="main-layout">
-    <!--START OF HEADER-->
-      <header class="row" id="headerRow">
-        {{dynamicView header}}
-      </header>
-      <!--START OF CONTENT ROW-->
-      <section id="content" class="row">
-        {{dynamicView}}
-      </section>
       <!--START OF THE BUTTON CONTROLS ROW-->
       <section class="row" id="button-row">
         <div class="clearfix ten columns centered">
@@ -172,7 +130,86 @@
             Post <span id="plus">&#43;</span>{{/view}}
           {{/if}}
         </div>
+      </section>      
+	</script>
+
+
+  <script type="text/x-handlebars" data-template-name="header">
+      <div class="six columns centered clearfix">	
+        <div class="alert-box success" id="login-sucess">
+          Go Write Some Shit.
+          <a href="#" class="close">&times;</a>
+      </div>
+       
+        <a href="/portfolio" id="blog-logo">
+          <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
+        </a>      
+   
+      <div class="ctr-ctn">
+        <dl class="sub-nav ctr-block">
+          <dd>
+            <a href="#blog">Blog</a>
+          </dd>
+          <dd>
+            <a href="">Identity</a>
+          </dd>
+          <dd>
+            <a href="">Projects</a>
+          </dd>
+          <dd>
+            <a href="">Lab</a>
+          </dd>
+        </dl>					
+      </div> <!-- End of ctr-ctn -->	
+    </div> <!-- End of six columns -->
+	</script>
+
+  <script type="text/x-handlebars" data-template-name="portfolio-header">
+    <div class="six columns centered clearfix">
+      <img src="/images/home/Zeus_Logo.png" alt="Zeus Lalkaka's Logo" id="portfolio-logo"/>
+      <div class="ctr-ctn">
+        <dl class="sub-nav ctr-block">
+          <dd>
+            <a href="#portfolio">Home</a>
+          </dd>
+          <dd>
+            <a href="#blog">Blog</a>
+          </dd>
+          <dd>
+            <a href="#">Contact</a>
+          </dd>
+          <dd>
+            <a href="#">Lab</a>
+          </dd>
+        </dl>         
+      </div> <!-- End of ctr-ctn -->       
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="portfolio-content">
+    <div class="twelve columns centered" id="face-ctn">
+      <img src="/images/home/Zeus_Face.png" alt="Zeus Lalkaka's Logo" id="face"  width="281" height="291"/>
+      <div id="nav-ring">
+        <img src="/images/home/Zeus_Name.png" alt="Zeus Lalkaka" id="zeus-name"/>
+        <a class="rect-link" href="" id="featured-project">Featured Project</a><br/>
+        <a class="rect-link" href="" id="about">Identity</a><br/>
+        <a class="rect-link" href="" id="skills">Skills / Tools</a><br/>
+        <a class="rect-link" href="" id="dl-resume">Download Resume</a><br/>
+      </div>
+    </div>
+  </script>
+
+
+  <script type="text/x-handlebars" data-template-name="main-layout">
+    <!--START OF HEADER-->
+      <header class="row" id="headerRow">
+        {{dynamicView header}}
+      </header>
+      <!--START OF CONTENT ROW-->
+      <section id="content" class="row">
+        {{dynamicView}}
       </section>
+
       <!--Start of Footetr-->
       <section class="row">
       
@@ -192,7 +229,9 @@
         {{/if}}
    {{#if textArea}}
      <section id="livePreview" class="clearfix">
-       {{preview App.PostController.postPreview}}
+      {{#with App.PostControler}}
+       {{preview postPreview}}
+      {{/with}}
      </section>
    {{/if}}
    {{else}}
@@ -217,23 +256,24 @@
 <body>
 
   <!--Load Javascript within the body so it doesn't slow down page rendering-->
-	<script src="/javascripts/jquery.min.js"></script>
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+  <script src="/javascripts/jquery.min.js"></script>
 	<script src="/javascripts/jquery.reveal.js"></script>
 	<script src="/javascripts/jquery.orbit-1.4.0.js"></script>
 	<script src="/javascripts/jquery.customforms.js"></script>
 	<script src="/javascripts/jquery.placeholder.min.js"></script>
 	<script src="/javascripts/jquery.tooltips.js"></script>
 	<script src="/javascripts/jquery.text-expander.js"></script>
-	<script src="/javascripts/lib/ember.js"></script>
-	<script src="/javascripts/lib/ember-data.js"></script>
-	<script src="/javascripts/lib/ember-routemanager.js"></script>
-	<script src="/javascripts/lib/ember-layout.js"></script>
-	<script src="/javascripts/lib/move.js"></script>
-	<script src="/javascripts/app.js"></script>
+  <script src="/javascripts/lib/ember.js"></script>
+  <script src="/javascripts/lib/ember-data.js"></script>
+  <script src="/javascripts/lib/ember-routemanager.js"></script>
+  <script src="/javascripts/lib/ember-layout.js"></script>
+  <script src="/javascripts/lib/move.js"></script>
+  <script src="/javascripts/app.js"></script>
 	<script src="/app.js"></script>
   
 
-  <div class="reveal-modal" id="reveal-Login">
+ <div class="reveal-modal" id="reveal-Login">
     <div class="alert-box error five centered columns" id="login-fail">
       Wow, what an asshole. Can't even remember your own password.
       <a href="#" class="close">&times;</a>
@@ -250,7 +290,7 @@
   </div>
 
 <script type="text/x-handlebars">
-  <div class="reveal-modal" id="reveal-delete">
+  <div class="reveal-modal" id="reveal-delete" style="display: none">
     <h4>Are you sure you want to DELETE this post?</h4>
     <div class="ctr-ctn">
       <div class="ctr-block">

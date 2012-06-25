@@ -19,8 +19,8 @@ var options = {
 var BlogPost = Resourceful.define('blogpost', function () {
     
 	this.use('couchdb', {
-		uri: 'couchdb://127.0.0.1:5984/blogposts'
-		//uri: 'couchdb://127.0.0.1:5984/blogposts'
+		uri: 'couchdb://zeus.iriscouch.com/blogposts'
+		//uri: 'couchdb://zeus.iriscouch.com/blogposts'
 	});
 
 	this.string('title');
@@ -44,7 +44,7 @@ exports.BlogPost = function() {
 
 var BlogSettings = Resourceful.define('settings', function () {
 	this.use('couchdb', {
-		uri: 'couchdb://127.0.0.1:5984/settings'
+		uri: 'couchdb://zeus.iriscouch.com/settings'
 	});
 	
 	this.string('blog_itle');

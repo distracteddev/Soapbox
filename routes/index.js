@@ -55,12 +55,27 @@ exports.getBP = function(id) {
 		console.log('ID: ' + id);
 		BlogPost.find({_id:id}, function(err, post) {
 			if (err) throw err;
-			self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
-			winston.debug(post);
-			return post;
+			debugger;
+			if (Array.isArray(post) && post.length > 0) {
+				self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
+				winston.debug(post);
+				return post;
+			}
+			else {
+				winston.debug("The following blog_post id was not found: " + id);
+				self.res.writeHead(204);
+			}
 		});
 	}
 };
+
+// Function to serialize a blog post's title into a URL friendly id.
+var titleToId = function(title) { 
+	if (typeof title !== 'string') {
+		throw new Error('titleToId requires a string as its first and only parameter');
+	}
+	return title.toLowerCase().split(" ").join("-");
+}
 
 exports.postBP = function (id) {
 	var self = this;
@@ -74,14 +89,17 @@ exports.postBP = function (id) {
     self.req.body.blog_post.body = self.req.body.blog_post.body.replace('<code>\n','<pre><code>').replace('</code>','</code></pre>');
     console.log(self.req.body.blog_post.body);
   }
+  	// if no id is passed as a URL param, then we create a new blog_post and persist it.
 	if (typeof id !== "string") {
+		// Set the _id of the blog_post
+		self.req.body.blog_post._id = titleToId(self.req.body.blog_post.title)
+		console.log(self.req.body.blog_post._id);
 		BlogPost.create(self.req.body.blog_post, function (err, doc) {
 			if (err) { 
 				winston.error(JSON.stringify(err));
 				throw new(Error)(err);
 			}
 
-			console.log(doc);
 			doc.save(function() {
 				if (!err) {
 					winston.log('Saved');
@@ -94,11 +112,20 @@ exports.postBP = function (id) {
 		});
 	}
 	else {
+	// If an id is passed as a URL param, then we need to update that particular post
 		BlogPost.get(id, function (err, post) {
-			post.update(self.req.body.blog_post, function(err, post) {
-				if (err) throw err;
-				self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
-			});
+			if (err) throw err;
+			if (post) {
+				// Set the _id of the blog_post incase it has changed
+				self.req.body.blog_post._id = titleToId(self.req.body.blog_post.title)
+				post.update(self.req.body.blog_post, function(err, post) {
+					if (err) throw err;
+					self.res.end('{"blog_post":' + JSON.stringify(post) + "}");
+				});
+			}
+			else {
+				self.res.writeHead(404);
+			}
 		});
 	}
 	

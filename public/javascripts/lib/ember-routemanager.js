@@ -1,4 +1,3 @@
-
 (function(exports) {
 var get = Ember.get, set = Ember.set;
 
@@ -12,6 +11,9 @@ var supportsHistory = !!(window.history && window.history.pushState);
  Whether the browser supports the hashchange event.
  */
 var supportsHashChange = ('onhashchange' in window) && (document.documentMode === undefined || document.documentMode > 7);
+
+
+var baseURI = window.location.origin || document.location.href.split('/').slice(0,3).join('/');
 
 /**
  @class
@@ -81,7 +83,7 @@ Ember.RouteManager = Ember.StateManager.extend({
    @property
    @type {String}
    */
-  baseURI: window.location.origin,
+  baseURI: baseURI,
 
   /** @private
    A boolean value indicating whether or not the ping method has been called
@@ -174,7 +176,7 @@ Ember.RouteManager = Ember.StateManager.extend({
         if(this.usesHistory) {
           if(encodedValue.length > 0) {
             encodedValue = '/' + encodedValue;
-          }          
+          }  
           window.history.pushState(null, null, get(this, 'baseURI') + encodedValue);
         } else if(encodedValue.length > 0 || window.location.hash.length > 0) {
           window.location.hash = encodedValue;
@@ -189,6 +191,7 @@ Ember.RouteManager = Ember.StateManager.extend({
 
   updateLocation: function(loc) {
     this._skipRoute = true;
+    alert(loc);
     return this._extractLocation('location', loc);
   },
 
@@ -545,6 +548,7 @@ Ember.RouteManager = Ember.StateManager.extend({
 
   popState: function(event) {
     var routes = this;
+    console.log("Routes:", routes)
     var base = get(routes, 'baseURI'), loc = (base.charAt(0) === '/') ? document.location.pathname : document.location.href;
 
     if(loc.slice(0, base.length) === base) {

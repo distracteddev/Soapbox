@@ -125,7 +125,6 @@ table {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   margin: 0 0 18px;
   border: solid 1px #dddddd;
@@ -831,7 +830,6 @@ button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="but
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 51%, rgba(0, 0, 0, 0) 100%);
   background-image: -moz-linear-gradient(rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 51%, rgba(0, 0, 0, 0) 100%);
   background-image: -o-linear-gradient(rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 51%, rgba(0, 0, 0, 0) 100%);
-  background-image: -ms-linear-gradient(rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 51%, rgba(0, 0, 0, 0) 100%);
   background-image: linear-gradient(rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 51%, rgba(0, 0, 0, 0) 100%);
   -moz-box-shadow: inset rgba(255, 255, 255, 0.5) 0 1px 0;
   -webkit-box-shadow: inset rgba(255, 255, 255, 0.5) 0 1px 0;
@@ -857,7 +855,6 @@ button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="but
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
 }
 /* line 42, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_buttons.sass */
@@ -865,7 +862,6 @@ button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="but
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
 }
 /* line 44, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_buttons.sass */
@@ -1029,7 +1025,6 @@ div.alert-box {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   text-shadow: 0 1px rgba(255, 255, 255, 0.9);
   position: relative;
@@ -1091,7 +1086,6 @@ div.alert-box a.close:hover, div.alert-box a.close:focus {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
 }
 /* line 71, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_ui.sass */
@@ -1100,7 +1094,6 @@ div.alert-box a.close:hover, div.alert-box a.close:focus {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   -o-border-radius: 8px;
-  -ms-border-radius: 8px;
   border-radius: 8px;
 }
 /* line 75, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_ui.sass */
@@ -1374,7 +1367,6 @@ ul.breadcrums {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
   overflow: hidden;
 }
@@ -1455,7 +1447,6 @@ div.panel {
   background-image: -webkit-linear-gradient(#ffffff 0%, #f4f4f4 100%);
   background-image: -moz-linear-gradient(#ffffff 0%, #f4f4f4 100%);
   background-image: -o-linear-gradient(#ffffff 0%, #f4f4f4 100%);
-  background-image: -ms-linear-gradient(#ffffff 0%, #f4f4f4 100%);
   background-image: linear-gradient(#ffffff 0%, #f4f4f4 100%);
   -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
@@ -1586,7 +1577,6 @@ dl.sub-nav dd a {
   -moz-border-radius: 12px;
   -webkit-border-radius: 12px;
   -o-border-radius: 12px;
-  -ms-border-radius: 12px;
   border-radius: 12px;
 }
 /* line 424, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_ui.sass */
@@ -1683,7 +1673,6 @@ p.vevent abbr {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
-  -ms-border-radius: 4px;
   border-radius: 4px;
   line-height: normal;
 }
@@ -1735,7 +1724,6 @@ p.vevent abbr {
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   -o-border-radius: 0px;
-  -ms-border-radius: 0px;
   border-radius: 0px;
 }
 
@@ -1823,7 +1811,6 @@ input.input-text, textarea {
   width: 254px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -1880,7 +1867,6 @@ form fieldset {
   width: 254px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -1930,7 +1916,6 @@ form.nice div.form-field input, form.nice input.input-text, form.nice textarea {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
   font-size: 13px;
   font-size: 1.3rem;
@@ -1947,7 +1932,6 @@ form.nice div.form-field input fieldset, form.nice input.input-text fieldset, fo
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
 }
 /* line 130, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_forms.sass */
@@ -1974,12 +1958,10 @@ form.nice div.form-field.error small, form.nice small.error {
   -moz-border-radius-bottomleft: 2px;
   -webkit-border-bottom-left-radius: 2px;
   -o-border-bottom-left-radius: 2px;
-  -ms-border-bottom-left-radius: 2px;
   border-bottom-left-radius: 2px;
   -moz-border-radius-bottomright: 2px;
   -webkit-border-bottom-right-radius: 2px;
   -o-border-bottom-right-radius: 2px;
-  -ms-border-bottom-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
 /* line 149, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_forms.sass */
@@ -2022,7 +2004,6 @@ form.custom span.custom.radio {
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
   -o-border-radius: 7px;
-  -ms-border-radius: 7px;
   border-radius: 7px;
 }
 /* line 178, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_forms.sass */
@@ -2120,7 +2101,6 @@ form.custom.nice span.custom.checkbox {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
 }
 /* line 252, ../../../../../../Library/Ruby/Gems/1.8/gems/ZURB-foundation-2.2.0.1/stylesheets/zurb/_forms.sass */
@@ -2128,7 +2108,6 @@ form.custom.nice div.custom.dropdown a.current {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
-  -ms-border-radius: 2px;
   border-radius: 2px;
   background-image: url('/images/misc/input-bg-outset.png?1333284755');
   background-position: bottom right;
@@ -2143,12 +2122,10 @@ form.custom.nice div.custom.dropdown ul {
   -moz-border-radius-bottomleft: 2px;
   -webkit-border-bottom-left-radius: 2px;
   -o-border-bottom-left-radius: 2px;
-  -ms-border-bottom-left-radius: 2px;
   border-bottom-left-radius: 2px;
   -moz-border-radius-bottomright: 2px;
   -webkit-border-bottom-right-radius: 2px;
   -o-border-bottom-right-radius: 2px;
-  -ms-border-bottom-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
 
@@ -2423,7 +2400,6 @@ ul.orbit-bullets li.active.has-thumb {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
-  -ms-border-radius: 5px;
   border-radius: 5px;
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
@@ -2835,7 +2811,6 @@ table.hide-on-tablets {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     -o-border-radius: 2px;
-    -ms-border-radius: 2px;
     border-radius: 2px;
   }
 
