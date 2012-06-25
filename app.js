@@ -138,10 +138,10 @@ app.router.path('/', function () {
 		});
 	});		
 
-	this.post('jsonTest', function () {
+	this.get('/services/jsonTest', function () {
 		console.log(this.req.body);
 		var self = this;  
-		self.res.end(JSON.stringify(self.req.body) + '\n');
+		self.res.end(JSON.stringify(Object.keys(self.req)) + '\n');
 	});
 
 	this.get('services/tags',routes.getTags);
