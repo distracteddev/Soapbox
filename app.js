@@ -13,6 +13,8 @@ var flatiron = require('flatiron'),
 var routes = require('./routes');
 var animalRoutes = require('./routes/animals.js')
 
+console.log('CLOUDANT_URL ', process.env.CLOUDANT_URL);
+
 u = User.new(
 	{
 		"username": "zeus",
