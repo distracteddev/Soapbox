@@ -141,14 +141,14 @@ exports.deleteBP = function(id) {
   }
 };
 
-exports.getTags = function () {
-	var self = this;
-	BlogPost.tagFilter(function(err, tags) {
-		if (err) throw err;
-		// console.log(tags);
-		if (self.res) self.res.end('{"tags":' + JSON.stringify(tags) + "}");
-	});
-};
+//exports.getTags = function () {
+	//var self = this;
+	//BlogPost.tagFilter(function(err, tags) {
+		//if (err) throw err;
+		//// console.log(tags);
+		//if (self.res) self.res.end('{"tags":' + JSON.stringify(tags) + "}");
+	//});
+//};
 
 exports.getSettings = function () {
 	var self = this;

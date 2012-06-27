@@ -93,7 +93,10 @@ var App = Em.Application.create();
 // Custom Ember Data Structure to Store an Array of tags
 DS.attr.transforms.array = {
     from: function(serialized) {
+      if (serialized.length)  
         return serialized.join(', ');
+      else
+        return serialized;
     },
 
     to: function(deserialized) {
@@ -167,15 +170,7 @@ App.BlogPost = DS.Model.extend({
   	}
 });
 
-App.Tag = DS.Model.extend({
-	key: DS.attr('string'),
-	value: DS.attr('number'),
-	primaryKey: "key",
 
-	didLoad: function() {
-		console.log(this.get('key'));		
-	}
-});
 
 /*
  *END OF EMBER-DATA MODELS
@@ -312,9 +307,7 @@ App.PostController = Ember.ArrayController.create({
 
 });
 
-App.TagController = Ember.ArrayProxy.create({
-	content: []
-});
+
 /*
  *END OF CONTROLLERS
  */
@@ -379,7 +372,6 @@ var publishedPosts = App.store.filter(App.BlogPost, function(post) {
 	return post.get('published');
 });
 App.PostController.set('content', publishedPosts);
-App.TagController.set('content', App.store.find(App.Tag));
 // CUSTOM FIELD VIEW FOR EMBER TO ALLOW FOR INLINE PAGE EDITING
 // This field uses the property 'isEditing' as a signal to its
 // associated template to display an input box when double clicked.

@@ -14,7 +14,8 @@
     "highlight": "*",
     "resourceful": "git://github.com/distracteddev/resourceful.git",
     "winston": "*",
-    "nodetime": "*"
+    "nodetime": "*",
+    "resourceful-redis": "*"
   },
   "devDependencies": {
     "api-easy": "0.3.4",

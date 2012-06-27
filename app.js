@@ -18,7 +18,7 @@ var flatiron = require('flatiron'),
 var routes = require('./routes');
 var animalRoutes = require('./routes/animals.js')
 
-console.log('CLOUDANT_URL ', process.env.CLOUDANT_URL);
+console.log('REDIS URL:', process.env.REDISTOGO_URL);
 
 u = User.new(
 	{
@@ -160,7 +160,7 @@ app.router.path('/', function () {
 		self.res.end(JSON.stringify(Object.keys(self.req)) + '\n');
 	});
 
-	this.get('services/tags',routes.getTags);
+	//this.get('services/tags',routes.getTags);
 
 	this.post('/login',
 		function() {
