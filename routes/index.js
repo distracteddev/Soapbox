@@ -38,8 +38,8 @@ exports.getBP = function(id) {
 	if (arguments.length < 2) {
 		BlogPost.all(function(err, posts) {
 			if (err) {
-				winston.error(err);
-				throw err;
+				winston.error(JSON.stringify(err));
+				throw new Error(err);
 			}
 			// Sort the returned array of posts by their creation
 			// time

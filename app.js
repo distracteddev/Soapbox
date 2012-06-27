@@ -1,4 +1,8 @@
-require('nodetime').profile();
+require('nodetime').profile({
+    accountKey: '364eb6a1359d9f0a3e866a329e2ba6fab7292cdb', 
+    appName: 'Soapbox'
+});
+
 var flatiron = require('flatiron'),
 	connect = require('connect'),
 	resourceful = require('resourceful'),
