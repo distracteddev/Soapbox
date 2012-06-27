@@ -13,7 +13,8 @@
     "marked": "*",
     "highlight": "*",
     "resourceful": "git://github.com/distracteddev/resourceful.git",
-    "winston": "*"
+    "winston": "*",
+    "nodetime": "*"
   },
   "devDependencies": {
     "api-easy": "0.3.4",

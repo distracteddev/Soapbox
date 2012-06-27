@@ -1,3 +1,4 @@
+require('nodetime').profile();
 var flatiron = require('flatiron'),
 	connect = require('connect'),
 	resourceful = require('resourceful'),
