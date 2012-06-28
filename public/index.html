@@ -229,9 +229,7 @@
         {{/if}}
    {{#if textArea}}
      <section id="livePreview" class="clearfix">
-      {{#with App.PostControler}}
-       {{preview postPreview}}
-      {{/with}}
+       {{preview App.PostController.postPreview}}
      </section>
    {{/if}}
    {{else}}
