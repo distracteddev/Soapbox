@@ -15,6 +15,7 @@
     "resourceful": "git://github.com/distracteddev/resourceful.git",
     "winston": "*",
     "nodetime": "*",
+    "redis": "*",
     "resourceful-redis": "*"
   },
   "devDependencies": {
