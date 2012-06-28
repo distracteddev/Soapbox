@@ -93,8 +93,11 @@ var App = Em.Application.create();
 // Custom Ember Data Structure to Store an Array of tags
 DS.attr.transforms.array = {
     from: function(serialized) {
-      if (serialized.length) return serialized.join(', ');
-      return serialized;
+      if (typeof serialized !== 'string') {
+        return serialized.join(', ');
+      } else {
+        return serialized;
+      }
     },
 
     to: function(deserialized) {
