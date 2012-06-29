@@ -2911,7 +2911,10 @@ DS.attr.transforms = {
   date: {
     from: function(serialized) {
       var type = typeof serialized;
-
+      // If we are passed a number as a string, then parse the integer.
+      if (type === "string" && parseInt(serialized).toString() === serialized) {
+        serialized = parseInt(serialized);
+      }
       if (type === "string" || type === "number") {
         return new Date(serialized);
       } else if (serialized === null || serialized === undefined) {

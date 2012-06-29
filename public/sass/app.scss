@@ -14,6 +14,14 @@ div.alert-box {
     }
  }
 
+footer.row {
+  margin-top: 40px;
+}
+
+.container {
+  overflow: hidden;
+}
+
 
 // body styles
 body.blog {
@@ -199,7 +207,7 @@ hr {
 		letter-spacing: 1px;
 		color: darken(rgba($pale-green, 1.0), 5%);
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     line-height: 1.6;
 
 	}
@@ -219,7 +227,7 @@ hr {
      display: inline-block;
      color: #fff;
      position: relative;
-     top: -25px;
+     top: -62px;
      z-index: 1;
      left: -130px;
 
@@ -587,7 +595,7 @@ body.portfolio .post-body .post {
 
   body.portfolio #content {
     margin-top: 80px;
-  }  
+  }
 }
 
 

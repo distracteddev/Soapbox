@@ -525,6 +525,7 @@ App.routeManager = Ember.RouteManager.create({
         App.layout.set('content', App.faceView);
         // App.layout.set('content', App.selectedPostView);
         bindLinks();
+        bindPortfolioAnimation();
       },
     }),
 
@@ -705,3 +706,51 @@ $(function() {
   });
 
 });
+
+function getOffsetToTarget(el) {
+  el = $(el);
+  var x = el.position().left + el.width()/2;
+  var y = el.position().top;
+  var pos = getTargetPosition();
+  x = pos.x - x;
+  y = pos.y - y;
+  return {x:x, y:y};
+};
+
+function getTargetPosition() {
+  // Return the coordinates of the center of the container
+  // offset by some vertical distance from the top.
+  var x = $("#content").width()/2;
+  x -= 10;
+  var y = -45;
+  return {x:x, y:y};
+};
+
+function bindPortfolioAnimation() {
+  Ember.run.next(function() {
+    console.log("Bind Portfolio Animations");
+    $('.rect-link').click(function() {
+      var x = getOffsetToTarget(this).x
+      var y = getOffsetToTarget(this).y
+      console.log(x, y);
+      var x2 = 2000;
+      var y2 = 0;
+      // Move the Nav Item to the center
+        $("#face-ctn").css('background', 'none');
+      move(this).to(x, y).duration('1s').scale(1.5).end(function() {
+      });
+      // Push the Rest off the screen
+      //move('#face-ctn').to(x2, y2).end(function() {
+      //});
+      $("#nav-ring").children().not(this).add("#face").each(function(i) {
+        console.log(i, ":", this);
+        if (Math.random() > 0.5) {
+          move(this).to(x2, y2).duration((Math.random()+1)*1200).end();
+        } else {
+          move(this).to(-x2, -y2).duration((Math.random()+1)*1200).end();
+        }
+      });
+      return false;
+    });
+  });
+}
