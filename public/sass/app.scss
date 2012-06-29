@@ -202,7 +202,7 @@ hr {
      }
    }
 
-	p, blockquote {	  
+	p, blockquote {
 		font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
 		letter-spacing: 1px;
 		color: darken(rgba($pale-green, 1.0), 5%);
@@ -352,7 +352,7 @@ body.portfolio {
       // color: $pale-green;
     }
 
-    .post {
+    .post, .portfolio-detail {
       h1,h2,h3,h4,h5,h6,p, a {
         color: rgba(157,248,219,1);
         margin: 0px 0 10px;
@@ -454,6 +454,7 @@ body.portfolio {
 
   #face {
     position: relative;
+    // top: 20px;
     left: 50%;
     margin-left: -140px;  
   }
@@ -466,11 +467,30 @@ body.portfolio {
     background-position: 50% 0px;
   }
 
+  .portfolio-detail {
+    position: absolute;
+    top: 10%;
+    left: -100%;
+
+    p {
+      font-size: 1.0em;
+      line-height: 1.6em;
+      font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
+      letter-spacing: 1px;
+    }
+
+  }
+
   #headerRow {
     padding-top: 2.5%;
   }
 
   #nav-ring {
+
+    #featured-project {
+        min-width: 200px !important;
+    }  
+
     .rect-link {
       position: relative;
       z-index: 10;
@@ -577,8 +597,7 @@ body.portfolio .post-body .post {
     // bottom: 556px;
   }
 
-  #featured-project {
-    // bottom: 475px;
+  #featured-project {    
     left: 0%;
   }
 
@@ -594,13 +613,18 @@ body.portfolio .post-body .post {
   }
 
   body.portfolio #content {
-    margin-top: 80px;
+    margin-top: 40px;
   }
 }
 
 
 // Mobile Phone styles
 @media only screen and (max-width: 767px) {
+  
+  // br {
+  //   display: none;
+  // }
+
   #dl-resume {
     
   }
@@ -629,8 +653,13 @@ body.portfolio .post-body .post {
 
   #nav-ring .rect-link {
     position: relative !important;
-    // display: block !important;
+    display: inline-block !important;
        
+  }
+
+  #nav-ring {
+    margin-top: 20px;
+    padding-bottom: -25%;
   }
 
   // Center Body Fix for iPHone
@@ -640,6 +669,13 @@ body.portfolio .post-body .post {
     .container {
       padding: 0;
     }
+  }
+
+  body.portfolio .portfolio-detail {
+    position: relative;
+    margin-top: 20px;
+    left: -200%;
+    display: none;
   }
 
 }

@@ -518,11 +518,11 @@ App.routeManager = Ember.RouteManager.create({
     index: Em.State.create({
       enter: function(stateManager, transition) {
         this._super(stateManager, transition);
-        console.log("Entering Portfolio");
-        $('body').removeClass('blog').addClass('portfolio');
-        App.layout.set('header', App.portfolioHeaderView);
-        updateNav('portfolio');
         App.layout.set('content', App.faceView);
+        App.layout.set('header', App.portfolioHeaderView);
+        console.log("Entering Portfolio");        
+        updateNav('portfolio');
+        $('body').removeClass('blog').addClass('portfolio');
         // App.layout.set('content', App.selectedPostView);
         bindLinks();
         bindPortfolioAnimation();
@@ -709,11 +709,14 @@ $(function() {
 
 function getOffsetToTarget(el) {
   el = $(el);
-  var x = el.position().left + el.width()/2;
+  var x = el.position().left + 30;
+  // x = 0;
   var y = el.position().top;
   var pos = getTargetPosition();
+  // x = 0;
   x = pos.x - x;
   y = pos.y - y;
+  console.log(x, y);
   return {x:x, y:y};
 };
 
@@ -722,34 +725,101 @@ function getTargetPosition() {
   // offset by some vertical distance from the top.
   var x = $("#content").width()/2;
   x -= 10;
+  x = 0;
   var y = -45;
+  if ($('html').hasClass('touch')) {
+    y = 0;
+  }
   return {x:x, y:y};
 };
 
 function bindPortfolioAnimation() {
   Ember.run.next(function() {
     console.log("Bind Portfolio Animations");
-    $('.rect-link').click(function() {
+    // Face Animation
+    var rotations = 1;
+    var locked = false;
+    $("#face").click(function() {
+      move(this).rotate(360*rotations++).duration('.7s').ease('cubic-bezier(1,1,1,1)').end();
+      // move("#face-ctn").scale(0.5).end();
+      console.log(rotations);
+    });
+    $('.rect-link').hoverIntent(function(el) {
+      // Hover In
+      var deg = 0;
+      switch ($(this).attr('id')) {
+        case 'featured-project':
+          deg = -30;
+          break;
+        case 'about':
+          deg = 20;
+          break;
+        case 'skills':
+          deg = 100;
+          break;
+        case 'dl-resume':
+          deg = -170;
+          break;
+      }
+      
+      if (!locked && Modernizr.mq('(min-width: 768px)')) move("#face").rotate(deg).duration('1s').end();
+    }, function() {
+      // Hover Out
+      if (!locked && Modernizr.mq('(min-width: 768px)')) move("#face").rotate(0).end();
+    });
+    // Link Animations
+    $('.rect-link').not("#dl-resume").click(function() {
+      locked = true;
+      var targetID = $(this).attr('id') + "-detail";
+      $("#" + targetID).show();
       var x = getOffsetToTarget(this).x
       var y = getOffsetToTarget(this).y
       console.log(x, y);
       var x2 = 2000;
       var y2 = 0;
       // Move the Nav Item to the center
-        $("#face-ctn").css('background', 'none');
-      move(this).to(x, y).duration('1s').scale(1.5).end(function() {
-      });
+      var left = '0%'
+      // $("#face").css('z-index', '-1');
+      $("#face-ctn").css('background', 'none');
+
+      if (Modernizr.mq('(min-width: 768px)')) {
+        move(this).set('left', '-26.5%').to(0,y).duration('1s').set('width', '150%').end(function() {
+        // Placeholder
+        });
+
+        $("#nav-ring").children().not(this).add("#face").each(function(i) {
+          console.log(i, ":", this);
+          if (Math.random() > 0.5) {
+            move(this).to(x2, y2).duration((Math.random()+1)*1200).end();
+          } else {
+            move(this).to(-x2, -y2).duration((Math.random()+1)*1200).end();
+          }
+        });
+
+        left = '22.5%';     
+      } else {
+        var self = this;
+        move(this).set('width', '95%').end(function() {
+          // move("#nav-ring").set('margin-bottom', '-25%').end();
+          $(".rect-link").not(self).each(function(i) {
+            if (Math.random() > 0.5) {
+              move(this).to(x2, y2).duration((Math.random()+1)*1200).end();
+            } else {
+              move(this).to(-x2, -y2).duration((Math.random()+1)*1200).end();
+            }
+          });
+
+          
+        });
+      }
+
+      move("#" + targetID).set('left', left).end();
       // Push the Rest off the screen
       //move('#face-ctn').to(x2, y2).end(function() {
       //});
-      $("#nav-ring").children().not(this).add("#face").each(function(i) {
-        console.log(i, ":", this);
-        if (Math.random() > 0.5) {
-          move(this).to(x2, y2).duration((Math.random()+1)*1200).end();
-        } else {
-          move(this).to(-x2, -y2).duration((Math.random()+1)*1200).end();
-        }
-      });
+  
+      // Prevent default click action
+      // locked = false;
       return false;
     });
   });

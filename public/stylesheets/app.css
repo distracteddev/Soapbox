@@ -94,8 +94,9 @@ body.blog #headerRow dl.sub-nav dd.active a {
   color: #323232;
   padding-bottom: 3px;
   padding: 10px 20px;
-  -webkit-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
   -moz-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
+  -webkit-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
+  -o-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
   box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
 }
 
@@ -208,8 +209,8 @@ hr {
   top: 40px;
   position: absolute;
   left: 25px;
-  -webkit-transition-duration: 1s;
   -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
   -o-transition-duration: 1s;
   transition-duration: 1s;
   opacity: .1;
@@ -270,12 +271,12 @@ hr {
   text-overflow: ellipsis;
   position: relative;
   border-bottom: 1px #bbb dotted;
-  -webkit-transition-property: all;
   -moz-transition-property: all;
+  -webkit-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -webkit-transition-duration: 1s;
   -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
   -o-transition-duration: 1s;
   transition-duration: 1s;
 }
@@ -329,33 +330,33 @@ body.portfolio h1, body.portfolio h2, body.portfolio h3, body.portfolio h4, body
   color: #9df8db;
 }
 /* line 356, ../sass/app.scss */
-body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .post p, body.portfolio .post a {
+body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .post p, body.portfolio .post a, body.portfolio .portfolio-detail h1, body.portfolio .portfolio-detail h2, body.portfolio .portfolio-detail h3, body.portfolio .portfolio-detail h4, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6, body.portfolio .portfolio-detail p, body.portfolio .portfolio-detail a {
   color: #9df8db;
   margin: 0px 0 10px;
 }
 /* line 361, ../sass/app.scss */
-body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6 {
+body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .portfolio-detail h1, body.portfolio .portfolio-detail h2, body.portfolio .portfolio-detail h3, body.portfolio .portfolio-detail h4, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6 {
   font-family: Quantico;
 }
 /* line 366, ../sass/app.scss */
-body.portfolio .post h5, body.portfolio .post h6 {
+body.portfolio .post h5, body.portfolio .post h6, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6 {
   margin-bottom: -9px;
   opacity: 0.6;
 }
 /* line 371, ../sass/app.scss */
-body.portfolio .post h5.post-sub-title {
+body.portfolio .post h5.post-sub-title, body.portfolio .portfolio-detail h5.post-sub-title {
   margin-bottom: 20px;
   font-size: .6em;
   opacity: 1.0;
   text-transform: uppercase;
 }
 /* line 378, ../sass/app.scss */
-body.portfolio .post .post-date {
+body.portfolio .post .post-date, body.portfolio .portfolio-detail .post-date {
   background-color: #9df8db;
   color: black;
 }
 /* line 383, ../sass/app.scss */
-body.portfolio .post hr {
+body.portfolio .post hr, body.portfolio .portfolio-detail hr {
   border-color: #000;
   border-width: 0px;
   opacity: 0.5;
@@ -375,12 +376,12 @@ body.portfolio #portfolio-logo {
   margin-left: -55px;
   opacity: 1.0;
   display: block;
-  -webkit-transition-property: opacity;
   -moz-transition-property: opacity;
+  -webkit-transition-property: opacity;
   -o-transition-property: opacity;
   transition-property: opacity;
-  -webkit-transition-duration: 0.5s;
   -moz-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
@@ -407,12 +408,12 @@ body.portfolio .sub-nav dd a {
   margin-right: 10px;
   padding: 10px 0;
   position: relative;
-  -webkit-transition-property: all;
   -moz-transition-property: all;
+  -webkit-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
@@ -433,7 +434,7 @@ body.portfolio #face {
   left: 50%;
   margin-left: -140px;
 }
-/* line 461, ../sass/app.scss */
+/* line 462, ../sass/app.scss */
 body.portfolio #face-ctn {
   position: relatve;
   padding-top: 40px;
@@ -441,11 +442,28 @@ body.portfolio #face-ctn {
   background: url("/images/home/Pentagon_Ring.png") no-repeat center;
   background-position: 50% 0px;
 }
-/* line 469, ../sass/app.scss */
+/* line 470, ../sass/app.scss */
+body.portfolio .portfolio-detail {
+  position: absolute;
+  top: 10%;
+  left: -100%;
+}
+/* line 475, ../sass/app.scss */
+body.portfolio .portfolio-detail p {
+  font-size: 1.0em;
+  line-height: 1.6em;
+  font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+/* line 484, ../sass/app.scss */
 body.portfolio #headerRow {
   padding-top: 2.5%;
 }
-/* line 474, ../sass/app.scss */
+/* line 490, ../sass/app.scss */
+body.portfolio #nav-ring #featured-project {
+  min-width: 200px !important;
+}
+/* line 494, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link {
   position: relative;
   z-index: 10;
@@ -459,22 +477,23 @@ body.portfolio #nav-ring .rect-link {
   text-align: center;
   display: inline-block;
   min-width: 160px;
-  -webkit-transition-property: all;
   -moz-transition-property: all;
+  -webkit-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-/* line 494, ../sass/app.scss */
+/* line 514, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:hover {
-  -webkit-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   -moz-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
+  -webkit-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
+  -o-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
 }
-/* line 502, ../sass/app.scss */
+/* line 522, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:before {
   content: "";
   display: block;
@@ -487,113 +506,128 @@ body.portfolio #nav-ring .rect-link:before {
   border: 2px solid #000;
 }
 
-/* line 520, ../sass/app.scss */
+/* line 540, ../sass/app.scss */
 .button.new-post {
   position: fixed;
   top: 0px;
   right: 0px;
 }
 
-/* line 527, ../sass/app.scss */
+/* line 547, ../sass/app.scss */
 body.portfolio .post-body .post {
   color: white !important;
   margin-top: 20px;
 }
 
 @media only screen and (min-width: 768px) {
-  /* line 534, ../sass/app.scss */
+  /* line 554, ../sass/app.scss */
   #dl-resume {
     left: 23%;
     bottom: 90px;
   }
 
-  /* line 541, ../sass/app.scss */
+  /* line 561, ../sass/app.scss */
   #about {
     left: 60%;
     bottom: 556px;
   }
 
-  /* line 546, ../sass/app.scss */
+  /* line 566, ../sass/app.scss */
   #featured-project {
     bottom: 475px;
     left: -15%;
   }
 
-  /* line 551, ../sass/app.scss */
+  /* line 571, ../sass/app.scss */
   #skills {
     bottom: 260px;
     left: 75%;
   }
 
-  /* line 556, ../sass/app.scss */
+  /* line 576, ../sass/app.scss */
   #zeus-name {
     position: relative;
     bottom: 190px;
     left: 6%;
   }
 
-  /* line 562, ../sass/app.scss */
+  /* line 582, ../sass/app.scss */
   body.portfolio .portfolio-content {
     margin-top: 0px;
   }
 }
 @media only screen and (min-width: 860px) {
-  /* line 568, ../sass/app.scss */
+  /* line 588, ../sass/app.scss */
   #dl-resume {
     left: 30%;
     bottom: 90px;
   }
 
-  /* line 575, ../sass/app.scss */
+  /* line 595, ../sass/app.scss */
   #about {
     left: 60%;
   }
 
-  /* line 580, ../sass/app.scss */
+  /* line 600, ../sass/app.scss */
   #featured-project {
     left: 0%;
   }
 
-  /* line 585, ../sass/app.scss */
+  /* line 604, ../sass/app.scss */
   #skills {
     left: 70%;
   }
 
-  /* line 590, ../sass/app.scss */
+  /* line 609, ../sass/app.scss */
   #zeus-name {
     position: relative;
     bottom: 190px;
     left: 6%;
   }
 
-  /* line 596, ../sass/app.scss */
+  /* line 615, ../sass/app.scss */
   body.portfolio #content {
-    margin-top: 80px;
+    margin-top: 40px;
   }
 }
 @media only screen and (max-width: 767px) {
-  /* line 620, ../sass/app.scss */
+  /* line 644, ../sass/app.scss */
   #zeus-name {
     margin-bottom: 20px;
     display: block;
   }
 
-  /* line 625, ../sass/app.scss */
+  /* line 649, ../sass/app.scss */
   #face-ctn {
     background: none !important;
   }
 
-  /* line 630, ../sass/app.scss */
+  /* line 654, ../sass/app.scss */
   #nav-ring .rect-link {
     position: relative !important;
+    display: inline-block !important;
   }
 
-  /* line 637, ../sass/app.scss */
+  /* line 660, ../sass/app.scss */
+  #nav-ring {
+    margin-top: 20px;
+    padding-bottom: -25%;
+  }
+
+  /* line 666, ../sass/app.scss */
   .touch body.portfolio {
     padding: 0 20px;
   }
-  /* line 640, ../sass/app.scss */
+  /* line 669, ../sass/app.scss */
   .touch body.portfolio .container {
     padding: 0;
+  }
+
+  /* line 674, ../sass/app.scss */
+  body.portfolio .portfolio-detail {
+    position: relative;
+    margin-top: 20px;
+    left: -200%;
+    display: none;
   }
 }
