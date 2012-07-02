@@ -346,7 +346,7 @@ code {
 
 body.portfolio {
   background: #000 url('/images/home/Galaxy_BG.jpg') no-repeat center top;
-  
+    
     h1,h2,h3,h4,h5,h6,p, a {
       color: rgba(157,248,219,1);
       // color: $pale-green;
@@ -479,6 +479,11 @@ body.portfolio {
       letter-spacing: 1px;
     }
 
+  }
+
+  .portfolio-back {
+    font-family: Quantico;  
+    font-weight: 700;
   }
 
   #headerRow {

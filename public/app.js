@@ -486,8 +486,23 @@ var bindLinks = function() {
         console.log("Found a internal route");
         App.routeManager.set('location', target);
         return false;
+      } else {
+        return true
       }
     });
+
+    $('.portfolio-back').click(function() {
+      App.layout.set('content', '');
+      Ember.run.next(function() {
+        App.layout.set('content', App.faceView);
+        $("#content").hide();
+        App.routeManager.portfolio.index.enter();
+        $("#content").fadeIn();
+      });
+      console.log("Going Back");
+      return false;
+    });
+
   });
 }
 
@@ -716,7 +731,7 @@ function getOffsetToTarget(el) {
   // x = 0;
   x = pos.x - x;
   y = pos.y - y;
-  console.log(x, y);
+  // console.log(x, y);
   return {x:x, y:y};
 };
 
@@ -740,9 +755,11 @@ function bindPortfolioAnimation() {
     var rotations = 1;
     var locked = false;
     $("#face").click(function() {
-      move(this).rotate(360*rotations++).duration('.7s').ease('cubic-bezier(1,1,1,1)').end();
+      var degs;
+      degs = (rotations++ % 2 === 0) ? 0 : 360;      
+      move(this).rotate(degs).duration('.7s').ease('cubic-bezier(1,1,1,1)').end();
       // move("#face-ctn").scale(0.5).end();
-      console.log(rotations);
+      console.log(rotations, degs);
     });
     $('.rect-link').hoverIntent(function(el) {
       // Hover In
@@ -769,7 +786,7 @@ function bindPortfolioAnimation() {
     });
     // Link Animations
     $('.rect-link').not("#dl-resume").click(function() {
-      locked = true;
+      
       var targetID = $(this).attr('id') + "-detail";
       $("#" + targetID).show();
       var x = getOffsetToTarget(this).x
@@ -779,16 +796,16 @@ function bindPortfolioAnimation() {
       var y2 = 0;
       // Move the Nav Item to the center
       var left = '0%'
+      var self = this;
       // $("#face").css('z-index', '-1');
       $("#face-ctn").css('background', 'none');
 
-      if (Modernizr.mq('(min-width: 768px)')) {
+      if (Modernizr.mq('(min-width: 768px)') && !locked) {
         move(this).set('left', '-26.5%').to(0,y).duration('1s').set('width', '150%').end(function() {
         // Placeholder
         });
 
-        $("#nav-ring").children().not(this).add("#face").each(function(i) {
-          console.log(i, ":", this);
+        $("#nav-ring").children().not(this).add("#face").each(function(i) {          
           if (Math.random() > 0.5) {
             move(this).to(x2, y2).duration((Math.random()+1)*1200).end();
           } else {
@@ -796,24 +813,42 @@ function bindPortfolioAnimation() {
           }
         });
 
-        left = '22.5%';     
-      } else {
-        var self = this;
+        left = '22.5%';
+        if (!locked) move("#" + targetID).set('left', left).end();
+        locked = true;
+      } else if (!locked) {        
         move(this).set('width', '95%').end(function() {
           // move("#nav-ring").set('margin-bottom', '-25%').end();
           $(".rect-link").not(self).each(function(i) {
+            var self = this;            
             if (Math.random() > 0.5) {
-              move(this).to(x2, y2).duration((Math.random()+1)*1200).end();
+              move(this).to(x2, y2).duration((Math.random()+1)*1200).end(function() {
+                
+              });
             } else {
-              move(this).to(-x2, -y2).duration((Math.random()+1)*1200).end();
+              move(this).to(-x2, -y2).duration((Math.random()+1)*1200).end(function() {
+
+              });
             }
           });
-
-          
+          // $("#nav-ring").height(120);
+          // var top_of_detail = $("#" + targetID).position().top;
+          // var top_of_link = $(self).position().top;
+          // var distance = top_of_detail - top_of_link - 50;
+          // console.log("Top of Detail: ", top_of_detail, "Top Of Link: ", top_of_link);
+          // move(self).to(0, distance).end();  
+          var top_of_detail = $("#" + targetID).position().top;
+          var top_of_link = $(self).position().top;
+          var distance = top_of_detail - top_of_link - 50;
+          console.log("Top of Detail: ", top_of_detail, "Top Of Link: ", top_of_link);
+          if (!locked) move("#" + targetID).set('left', left).to(0, -distance).end();
+          locked = true
         });
+        // Unbind the animations
+        // $('.rect-link').unbind('click');
       }
 
-      move("#" + targetID).set('left', left).end();
+      ;
       // Push the Rest off the screen
       //move('#face-ctn').to(x2, y2).end(function() {
       //});
