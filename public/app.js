@@ -565,7 +565,7 @@ App.routeManager = Ember.RouteManager.create({
   }),
 
   blog: Em.State.create({
-    route: 'blog',
+    route: 'blog-light',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
@@ -581,17 +581,20 @@ App.routeManager = Ember.RouteManager.create({
       //setTimeout(function() {
         //$("#content").fadeIn();
       //}, 500);
+        $('body').hide();
       Ember.run.next(function() {
-        $("#content").hide();
+        //$("#content").hide();
         setTimeout(function() {
-          $("#content").fadeIn();
+          $('body').fadeIn();
+          $('#content').fadeIn();
+          //$("#content").fadeIn();
         }, 200);
       });
     }
   }),
 
   blog_black: Em.State.create({
-    route: 'blog-black',
+    route: 'blog',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
