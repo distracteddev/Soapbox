@@ -494,10 +494,10 @@ var bindLinks = function() {
     $('.portfolio-back').click(function() {
       App.layout.set('content', '');
       Ember.run.next(function() {
-        App.layout.set('content', App.faceView);
-        $("#content").hide();
+        //App.layout.set('content', App.faceView);
+        //$("#content").hide();
         App.routeManager.portfolio.index.enter();
-        $("#content").fadeIn();
+        //$("#content").fadeIn();
       });
       console.log("Going Back");
       return false;
@@ -541,6 +541,12 @@ App.routeManager = Ember.RouteManager.create({
         // App.layout.set('content', App.selectedPostView);
         bindLinks();
         bindPortfolioAnimation();
+        Ember.run.next(function() {
+          $("#content").hide();
+          setTimeout(function() {
+            $("#content").fadeIn();
+          }, 200);
+        });
       },
     }),
 
@@ -563,17 +569,50 @@ App.routeManager = Ember.RouteManager.create({
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
-      // $('body').removeClass('portfolio').addClass('blog');
-      // App.layout.set('header', App.headerView);
-      // App.layout.set('content', App.selectedPostView);
-      // bindLinks();  
+      $('body').removeClass('portfolio').addClass('blog');
+      App.layout.set('header', App.headerView);
+      App.layout.set('content', App.selectedPostView);
+      //bindLinks();  
+      //$('body').removeClass('blog').addClass('portfolio');
+      //App.layout.set('header', App.portfolioHeaderView);
+      updateNav(this.route);
+      //App.layout.set('content', App.selectedPostView);
+      bindLinks();
+      //setTimeout(function() {
+        //$("#content").fadeIn();
+      //}, 500);
+      Ember.run.next(function() {
+        $("#content").hide();
+        setTimeout(function() {
+          $("#content").fadeIn();
+        }, 200);
+      });
+    }
+  }),
+
+  blog_black: Em.State.create({
+    route: 'blog-black',
+    enter: function(stateManager, transition) {
+      this._super(stateManager, transition);
+      console.log("Entering Blog");
+      //$('body').removeClass('portfolio').addClass('blog');
+      //App.layout.set('header', App.headerView);
+      //App.layout.set('content', App.selectedPostView);
+      //bindLinks();  
       $('body').removeClass('blog').addClass('portfolio');
       App.layout.set('header', App.portfolioHeaderView);
       updateNav(this.route);
       App.layout.set('content', App.selectedPostView);
       bindLinks();
+      Ember.run.next(function() {
+        $("#content").hide();
+        setTimeout(function() {
+          $("#content").fadeIn();
+        }, 200);
+      });
     }
   }),
+
 
 
   login: Em.State.create({
@@ -724,8 +763,9 @@ $(function() {
 
 function getOffsetToTarget(el) {
   el = $(el);
-  var x = el.position().left + 30;
-  // x = 0;
+  //var x = el.position().left + 30;
+  var x = el.position().left + el.width()/2;
+  //x = 0;
   var y = el.position().top;
   var pos = getTargetPosition();
   // x = 0;
@@ -739,8 +779,8 @@ function getTargetPosition() {
   // Return the coordinates of the center of the container
   // offset by some vertical distance from the top.
   var x = $("#content").width()/2;
-  x -= 10;
-  x = 0;
+  //x -= 10;
+  //x = 0;
   var y = -45;
   if ($('html').hasClass('touch')) {
     y = 0;
@@ -801,8 +841,12 @@ function bindPortfolioAnimation() {
       $("#face-ctn").css('background', 'none');
 
       if (Modernizr.mq('(min-width: 768px)') && !locked) {
-        move(this).set('left', '-26.5%').to(0,y).duration('1s').set('width', '150%').end(function() {
-        // Placeholder
+        //move(this).set('left', '-26.5%').to(0,y).duration('1s').set('width', '150%').end(function() {
+        //// Placeholder
+        //});
+
+        move(this).to(x-15,y).duration(1000).end(function() {
+          //move(self).set('left', '-13.25%').to(0,y).duration('1s').set('width', '125%').end();
         });
 
         $("#nav-ring").children().not(this).add("#face").each(function(i) {          
@@ -813,7 +857,7 @@ function bindPortfolioAnimation() {
           }
         });
 
-        left = '22.5%';
+        left = '19.5%';
         if (!locked) move("#" + targetID).set('left', left).end();
         locked = true;
       } else if (!locked) {        
