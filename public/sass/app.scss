@@ -5,6 +5,9 @@ $text-color: #000;
 @import "settings";
 @import "compass";
 
+/////////////////////////////
+///// GLOBAL STYLES ////////
+////////////////////////////
 
 // Hide all Alert Boxes at first
 div.alert-box {
@@ -12,7 +15,63 @@ div.alert-box {
     .close {
       margin-left: 10px;
     }
- }
+}
+
+#switch {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: black;
+  padding: 5px;
+  a {
+    font-family: Ubuntu, Arial, sans-serif;
+  }
+}
+
+body.blog #switch {
+  background: #fff;
+}
+
+#top-banner {
+  position: relative;
+  width: 100%;
+  background:  rgba(157,248,219,.7);
+  padding: 5px;
+  width: 110%;
+  left: -5%;
+  padding-bottom: -10px;
+  p,a {
+    position: relative;
+    margin-bottom: -2px;
+    top: -5px;
+    font-size: 1.0em;
+    line-height: 1.2em;
+    font-family: Quantico, Arial, sans-serif;
+    color: black;
+    text-align: center;
+  }
+
+  a {
+    font-size: 1.2em;
+    position: relative;
+    left: 20px;
+    top: 0px;
+  }
+
+  a:hover {
+    font-weight: bold;
+  }
+}
+
+
+
+.reveal-modal {
+  background: #222;
+
+  label {
+    color: #ccc;
+  }
+}
 
 footer.row {
   margin-top: 40px;
@@ -23,11 +82,10 @@ footer.row {
 }
 
 
-// body styles
+//////////////////////////
+/// Light Blog Styles ///
+/////////////////////////
 body.blog {
-	//background-image: url('../images/blu_stripes.png');
-	//background-image: url('../images/little_pluses.png');
-	//background-image: url('../images/pinstripe.png');
   background: #fff;
 
   div.post-body {
@@ -55,8 +113,9 @@ body.blog {
 
 
 }
-
-// header styles
+////////////////////////////////
+/// LIGH_BLOG HEADER STYLES ///
+////////////////////////////////
 body.blog {
   #headerRow {
     padding-top: 20px;
@@ -72,10 +131,14 @@ body.blog {
 
   	p {
   		margin-top: 40px;
-  		font: 400 17px/1.6 'Gueda', Verdana, Helvetica, sans-serif;
+  		font: 400 17px/1.6 'Quantico', Verdana, Helvetica, sans-serif;
   		font-variant: small-caps;
   		letter-spacing: 2px;
   	}
+
+    #blog-logo {
+      display: block;
+    }
 
   	// h1 {		 
   	// 	line-height: 62px;
@@ -105,12 +168,12 @@ body.blog {
 
   	dl {
       
-      display: none;
+      /*display: none;*/
 
   		dd {
-  			font: 400 16px/1.6 'Gueda', Verdana, Helvetica, sans-serif;
+  			font: 400 16px/1.6 'Quantico', Verdana, Helvetica, sans-serif;
         padding: 10px;
-  			font-variant: small-caps;
+  			text-transform: uppercase;
   			.active a {
   				background-color: none;
   			}
@@ -130,7 +193,9 @@ body.blog {
 }
 
 
-
+/////////////////////////////////
+/// General Blog Post Styles ///
+/////////////////////////////////
 
 hr {
 	border-color: $pale-green;
@@ -157,7 +222,7 @@ hr {
 	h5 {
 	  font: 400 1.4em/1.6 'Oxygen', Verdana, Helvetica, sans-serif;
 	  letter-spacing: 2px;
-	  margin: -4px 0px -20px 0px;
+	  margin: -4px 0px -5px 0px;
 	  color: rgba($pale-green, 0.6);
 	  font-variant: 0;
 	}
@@ -252,11 +317,18 @@ hr {
    }
 }
 
+// Quick Fix for Date Position under the Light Theme //
+body.blog .post .post-date {
+  top: -52px;
+}
+
+// Make Login Box Smaller than usual
 #reveal-Login {
   width: 300px;
   margin-left: -200px;
 }
 
+// Delete Blog Post Button Style
 #reveal-delete {
   button {
     margin-right: 50px;
@@ -310,9 +382,6 @@ hr {
 }
 
 // CSS Helper Classes
-.mock {
-	//background-color: #eee;
-}
 
 .ctr-ctn {
 	float: right;
@@ -341,8 +410,9 @@ code {
   word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
-
-/* PORTFOLIO HOME STYLES */
+////////////////////////////////////
+/// PORTFOLIO & DARK BLOG THEME ///
+///////////////////////////////////
 
 body.portfolio {
   background: #000 url('/images/home/Galaxy_BG.jpg') no-repeat center top;
@@ -354,9 +424,17 @@ body.portfolio {
 
     .post, .portfolio-detail {
       h1,h2,h3,h4,h5,h6,p, a {
-        color: rgba(157,248,219,1);
+        color: rgba(157,248,219,.9);
         margin: 0px 0 10px;
       }
+
+      a {
+        color: #fff;
+      }
+      a:hover {
+        border-bottom: 1px #bbb dotted;
+      }
+
 
       h1,h2,h3,h4,h5,h6 {
         font-family: Quantico;
@@ -622,8 +700,9 @@ body.portfolio .post-body .post {
   }
 }
 
-
-// Mobile Phone styles
+/////////////////////
+/// MOBILE STYLES ///
+/////////////////////
 @media only screen and (max-width: 767px) {
   
   // br {

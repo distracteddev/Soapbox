@@ -90,7 +90,7 @@
       <div class="post-body post row">
          <section class="post post-sidebar">
           {{#if App.PostController.authorized}}
-          {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
+            {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
             {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
               Save
             {{/view}}
@@ -135,26 +135,31 @@
 
 
   <script type="text/x-handlebars" data-template-name="header">
-      <div class="six columns centered clearfix">	
+    <div id="switch">
+      <a href="#blog">[ Lights Off ]</a>
+    </div>
+
+    <div class="six columns centered clearfix">	
         <div class="alert-box success" id="login-sucess">
           Go Write Some Shit.
           <a href="#" class="close">&times;</a>
       </div>
-       
-        <a href="/portfolio" id="blog-logo">
-          <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
-        </a>      
+      
+
+      <a href="/portfolio" id="blog-logo">
+        <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
+      </a>      
    
       <div class="ctr-ctn">
         <dl class="sub-nav ctr-block">
           <dd>
+            <a href="#portfolio">Home</a>
+          </dd>
+          <dd>
             <a href="#blog">Blog</a>
           </dd>
           <dd>
-            <a href="">Identity</a>
-          </dd>
-          <dd>
-            <a href="">Projects</a>
+            <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
           </dd>
         </dl>					
       </div> <!-- End of ctr-ctn -->	
@@ -162,6 +167,10 @@
 	</script>
 
   <script type="text/x-handlebars" data-template-name="portfolio-header">
+    <div id="switch">
+      <a href="#blog_light">[ Lights On ]</a>
+    </div>
+
     <div class="six columns centered clearfix">
       <img src="/images/home/Zeus_Logo.png" alt="Zeus Lalkaka's Logo" id="portfolio-logo"/>
       <div class="ctr-ctn">
@@ -173,7 +182,7 @@
             <a href="#blog">Blog</a>
           </dd>
           <dd>
-            <a href="#">Contact</a>
+            <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
           </dd>
         </dl>         
       </div> <!-- End of ctr-ctn -->       
@@ -221,6 +230,7 @@
 
 
   <script type="text/x-handlebars" data-template-name="main-layout">
+    {{dynamicView banner}}
     <!--START OF HEADER-->
       <header class="row" id="headerRow">
         {{dynamicView header}}
@@ -232,8 +242,16 @@
 
       <!--Start of Footetr-->
       <footer class="row">
-      
       </footer>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="top-banner">
+  <section id="top-banner">
+    <p>
+      This page is still under construction. Feel free to click around, but just don't expect any content.
+      <a href="">&#215;</a>
+    </p>
+  </section>
   </script>
 
   <script type="text/x-handlebars" data-template-name="edit-field">
@@ -277,8 +295,8 @@
 	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
   <script src="/javascripts/jquery.min.js"></script>
 	<script src="/javascripts/jquery.reveal.js"></script>
-	<script src="/javascripts/jquery.orbit-1.4.0.js"></script>
-	<script src="/javascripts/jquery.customforms.js"></script>
+	<!--<script src="/javascripts/jquery.orbit-1.4.0.js"></script>-->
+	<!--<script src="/javascripts/jquery.customforms.js"></script>-->
 	<script src="/javascripts/jquery.placeholder.min.js"></script>
 	<script src="/javascripts/jquery.tooltips.js"></script>
 	<script src="/javascripts/jquery.text-expander.js"></script>
@@ -290,7 +308,7 @@
   <script src="/javascripts/lib/move.js"></script>
   <script src="/javascripts/app.js"></script>
 	<script src="/app.js"></script>
-  
+
 
  <div class="reveal-modal" id="reveal-Login">
     <div class="alert-box error five centered columns" id="login-fail">

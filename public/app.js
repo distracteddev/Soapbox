@@ -354,8 +354,8 @@ App.PostButton = Em.Button.extend({
   tagName: "a"
 });
 
-App.PreviewView = Ember.View.extend({
-  valueBinding: "App.PostController.postPreview"
+App.bannerView = Ember.View.create({
+  templateName: 'top-banner'
 });
 
 /*
@@ -503,6 +503,11 @@ var bindLinks = function() {
       return false;
     });
 
+    $('#top-banner a').click(function() {
+      $("#top-banner").slideUp();
+      return false;
+    });
+
   });
 }
 
@@ -533,6 +538,7 @@ App.routeManager = Ember.RouteManager.create({
     index: Em.State.create({
       enter: function(stateManager, transition) {
         this._super(stateManager, transition);
+        App.layout.set('banner', App.bannerView);
         App.layout.set('content', App.faceView);
         App.layout.set('header', App.portfolioHeaderView);
         console.log("Entering Portfolio");        
@@ -542,6 +548,7 @@ App.routeManager = Ember.RouteManager.create({
         bindLinks();
         bindPortfolioAnimation();
         Ember.run.next(function() {
+          $("#switch").hide();
           $("#content").hide();
           setTimeout(function() {
             $("#content").fadeIn();
@@ -564,12 +571,13 @@ App.routeManager = Ember.RouteManager.create({
     })    
   }),
 
-  blog: Em.State.create({
-    route: 'blog-light',
+  blog_light: Em.State.create({
+    route: 'blog_light',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
       $('body').removeClass('portfolio').addClass('blog');
+      App.layout.set('banner', '');
       App.layout.set('header', App.headerView);
       App.layout.set('content', App.selectedPostView);
       //bindLinks();  
@@ -583,6 +591,7 @@ App.routeManager = Ember.RouteManager.create({
       //}, 500);
         $('body').hide();
       Ember.run.next(function() {
+        $("#switch").show();
         //$("#content").hide();
         setTimeout(function() {
           $('body').fadeIn();
@@ -593,7 +602,7 @@ App.routeManager = Ember.RouteManager.create({
     }
   }),
 
-  blog_black: Em.State.create({
+  blog: Em.State.create({
     route: 'blog',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
@@ -603,11 +612,13 @@ App.routeManager = Ember.RouteManager.create({
       //App.layout.set('content', App.selectedPostView);
       //bindLinks();  
       $('body').removeClass('blog').addClass('portfolio');
+      App.layout.set('banner', '');
       App.layout.set('header', App.portfolioHeaderView);
       updateNav(this.route);
       App.layout.set('content', App.selectedPostView);
       bindLinks();
       Ember.run.next(function() {
+        $("#switch").show();
         $("#content").hide();
         setTimeout(function() {
           $("#content").fadeIn();
