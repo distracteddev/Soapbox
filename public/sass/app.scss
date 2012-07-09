@@ -17,7 +17,7 @@ div.alert-box {
     }
 }
 
-a {
+body.blog a {
   color: rgba(0,100,250,0.7);
   &:hover {
     color: rgba(0,100,250,1);
@@ -387,7 +387,7 @@ body.blog .post .post-date {
   color: #999;
   max-width: 300px;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 20px;
   /*white-space: nowrap;*/
   text-overflow: ellipsis;
   position: relative;

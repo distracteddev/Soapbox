@@ -9,11 +9,11 @@ div.alert-box .close {
 }
 
 /* line 20, ../sass/app.scss */
-a {
+body.blog a {
   color: rgba(0, 100, 250, 0.7);
 }
 /* line 22, ../sass/app.scss */
-a:hover {
+body.blog a:hover {
   color: #0064fa;
   border-bottom: 1px #bbb dotted;
 }
@@ -359,7 +359,7 @@ body.blog .post .post-date {
   color: #999;
   max-width: 300px;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 20px;
   /*white-space: nowrap;*/
   text-overflow: ellipsis;
   position: relative;
