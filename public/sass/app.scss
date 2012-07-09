@@ -17,6 +17,14 @@ div.alert-box {
     }
 }
 
+a {
+  color: rgba(0,100,250,0.7);
+  &:hover {
+    color: rgba(0,100,250,1);
+    border-bottom: 1px #bbb dotted;
+  }
+}
+
 #switch {
   position: absolute;
   top: 0px;
@@ -136,8 +144,21 @@ body.blog {
   		letter-spacing: 2px;
   	}
 
+    a {
+      color: #333;
+    }
+
+    a:hover {
+      border-radius: 0px;
+      border-bottom: 1px #bbb dotted;
+    }
+
     #blog-logo {
       display: block;
+
+      &:hover {
+        border: none;
+      }
     }
 
   	// h1 {		 
@@ -163,13 +184,12 @@ body.blog {
     img {
       margin-left: -45px;
       height: 50px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
   	dl {
-      
-      /*display: none;*/
-
+      display: none;
+      height: 40px;
   		dd {
   			font: 400 16px/1.6 'Quantico', Verdana, Helvetica, sans-serif;
         padding: 10px;
@@ -364,10 +384,10 @@ body.blog .post .post-date {
 .next {
   float: right;
   font: 400 1.2em/1.2 'Oxygen', Georgia, serif;
-  color: #bbb;
+  color: #999;
   max-width: 300px;
   overflow: hidden;
-  margin-top: 30px;
+  margin-top: 10px;
   /*white-space: nowrap;*/
   text-overflow: ellipsis;
   position: relative;

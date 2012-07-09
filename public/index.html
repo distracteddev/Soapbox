@@ -136,7 +136,7 @@
 
   <script type="text/x-handlebars" data-template-name="header">
     <div id="switch">
-      <a href="#blog">[ Lights Off ]</a>
+      <a href="#blog_dark">[ Lights Off ]</a>
     </div>
 
     <div class="six columns centered clearfix">	
@@ -145,13 +145,13 @@
           <a href="#" class="close">&times;</a>
       </div>
       
-
+      <section id="nav-ctn">
       <a href="/portfolio" id="blog-logo">
         <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
       </a>      
    
-      <div class="ctr-ctn">
-        <dl class="sub-nav ctr-block">
+      <div class="" style="position: absolute; left: 50%">
+        <dl class="sub-nav" id="blog-nav" style="position: relative; margin-left: -128px">
           <dd>
             <a href="#portfolio">Home</a>
           </dd>
@@ -162,13 +162,14 @@
             <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
           </dd>
         </dl>					
-      </div> <!-- End of ctr-ctn -->	
+      </div> <!-- End of ctr-ctn -->
+      </section>
     </div> <!-- End of six columns -->
 	</script>
 
   <script type="text/x-handlebars" data-template-name="portfolio-header">
     <div id="switch">
-      <a href="#blog_light">[ Lights On ]</a>
+      <a href="#blog">[ Lights On ]</a>
     </div>
 
     <div class="six columns centered clearfix">

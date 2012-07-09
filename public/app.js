@@ -508,6 +508,14 @@ var bindLinks = function() {
       return false;
     });
 
+    $('#nav-ctn').hoverIntent(function() {
+      // Hover in
+      $("#blog-nav").slideDown();
+    },
+    function() {
+      $("#blog-nav").slideUp();
+    });
+
   });
 }
 
@@ -571,8 +579,8 @@ App.routeManager = Ember.RouteManager.create({
     })    
   }),
 
-  blog_light: Em.State.create({
-    route: 'blog_light',
+  blog: Em.State.create({
+    route: 'blog',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
@@ -602,8 +610,8 @@ App.routeManager = Ember.RouteManager.create({
     }
   }),
 
-  blog: Em.State.create({
-    route: 'blog',
+  blog_dark: Em.State.create({
+    route: 'blog_dark',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
