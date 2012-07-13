@@ -90,7 +90,7 @@
       <div class="post-body post row">
          <section class="post post-sidebar">
           {{#if App.PostController.authorized}}
-          {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
+            {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
             {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
               Save
             {{/view}}
@@ -135,36 +135,43 @@
 
 
   <script type="text/x-handlebars" data-template-name="header">
-      <div class="six columns centered clearfix">	
+    <div id="switch">
+      <a href="#blog_dark">[ Lights Off ]</a>
+    </div>
+
+    <div class="six columns centered clearfix">	
         <div class="alert-box success" id="login-sucess">
           Go Write Some Shit.
           <a href="#" class="close">&times;</a>
       </div>
-       
-        <a href="/portfolio" id="blog-logo">
-          <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
-        </a>      
+      
+      <section id="nav-ctn">
+      <a href="/portfolio" id="blog-logo">
+        <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
+      </a>      
    
-      <div class="ctr-ctn">
-        <dl class="sub-nav ctr-block">
+      <div class="" style="position: absolute; left: 50%">
+        <dl class="sub-nav" id="blog-nav" style="position: relative; margin-left: -128px">
+          <dd>
+            <a href="#portfolio">Home</a>
+          </dd>
           <dd>
             <a href="#blog">Blog</a>
           </dd>
           <dd>
-            <a href="">Identity</a>
-          </dd>
-          <dd>
-            <a href="">Projects</a>
-          </dd>
-          <dd>
-            <a href="">Lab</a>
+            <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
           </dd>
         </dl>					
-      </div> <!-- End of ctr-ctn -->	
+      </div> <!-- End of ctr-ctn -->
+      </section>
     </div> <!-- End of six columns -->
 	</script>
 
   <script type="text/x-handlebars" data-template-name="portfolio-header">
+    <div id="switch">
+      <a href="#blog">[ Lights On ]</a>
+    </div>
+
     <div class="six columns centered clearfix">
       <img src="/images/home/Zeus_Logo.png" alt="Zeus Lalkaka's Logo" id="portfolio-logo"/>
       <div class="ctr-ctn">
@@ -176,10 +183,7 @@
             <a href="#blog">Blog</a>
           </dd>
           <dd>
-            <a href="#">Contact</a>
-          </dd>
-          <dd>
-            <a href="#">Lab</a>
+            <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
           </dd>
         </dl>         
       </div> <!-- End of ctr-ctn -->       
@@ -200,14 +204,16 @@
         <h1> Hello </h1>
         <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>        
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>              
+        <a href="#back" class="portfolio-back">&laquo; Back</a> 
       </section>
 
       <section id="about-detail" class="portfolio-detail eight columns centered">
         <h1> Hello </h1>
         <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>         
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>                 
+        <a href="#back" class="portfolio-back">&laquo; Back</a>
       </section>
 
       <section id="skills-detail" class="portfolio-detail eight columns centered">
@@ -215,6 +221,7 @@
         <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.</p>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>         
+        <a href="#back" class="portfolio-back">&laquo; Back</a>
       </section>
 
       <section class="portfolio-detail seven columns centered">
@@ -224,19 +231,28 @@
 
 
   <script type="text/x-handlebars" data-template-name="main-layout">
+    {{dynamicView banner}}
     <!--START OF HEADER-->
       <header class="row" id="headerRow">
         {{dynamicView header}}
       </header>
       <!--START OF CONTENT ROW-->
-      <section id="content" class="row">
+      <section id="content" class="row" style="display: none">
         {{dynamicView}}
       </section>
 
       <!--Start of Footetr-->
       <footer class="row">
-      
       </footer>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="top-banner">
+  <section id="top-banner">
+    <p>
+      This page is still under construction. Feel free to click around, but just don't expect any content.
+      <a href="">&#215;</a>
+    </p>
+  </section>
   </script>
 
   <script type="text/x-handlebars" data-template-name="edit-field">
@@ -280,8 +296,8 @@
 	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
   <script src="/javascripts/jquery.min.js"></script>
 	<script src="/javascripts/jquery.reveal.js"></script>
-	<script src="/javascripts/jquery.orbit-1.4.0.js"></script>
-	<script src="/javascripts/jquery.customforms.js"></script>
+	<!--<script src="/javascripts/jquery.orbit-1.4.0.js"></script>-->
+	<!--<script src="/javascripts/jquery.customforms.js"></script>-->
 	<script src="/javascripts/jquery.placeholder.min.js"></script>
 	<script src="/javascripts/jquery.tooltips.js"></script>
 	<script src="/javascripts/jquery.text-expander.js"></script>
@@ -293,7 +309,7 @@
   <script src="/javascripts/lib/move.js"></script>
   <script src="/javascripts/app.js"></script>
 	<script src="/app.js"></script>
-  
+
 
  <div class="reveal-modal" id="reveal-Login">
     <div class="alert-box error five centered columns" id="login-fail">
