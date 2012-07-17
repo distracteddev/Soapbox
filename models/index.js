@@ -1,4 +1,4 @@
-var REDIS_URL = process.env.REDISTOGO_URL || 'redis://redistogo:383783fce58c9040a77ffafc6f1b3000@cod.redistogo.com:10016/';
+var REDIS_URL = process.env.REDISTOGO_URL || 'redis://nodejitsu:04bb058fdb87894ab8d710a44e1d2d2f@drum.redistogo.com:9157/';
 
 var Resourceful = require('resourceful-redis')
   , url = require('url');
