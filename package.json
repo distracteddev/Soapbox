@@ -1,6 +1,6 @@
 {
   "description": "A Single-Page Personal Blogging Experiment",
-  "version": "0.0.0-6",
+  "version": "0.0.0-9",
   "private": true,
   "dependencies": {
     "union": "git://github.com/flatiron/union.git",
