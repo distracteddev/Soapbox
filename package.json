@@ -1,6 +1,6 @@
 {
   "description": "A Single-Page Personal Blogging Experiment",
-  "version": "0.0.0",
+  "version": "0.0.0-6",
   "private": true,
   "dependencies": {
     "union": "git://github.com/flatiron/union.git",
@@ -13,7 +13,6 @@
     "marked": "*",
     "highlight": "*",
     "resourceful": "git://github.com/distracteddev/resourceful.git",
-    "winston": "*",
     "nodetime": "*",
     "redis": "*",
     "resourceful-redis": "*"
@@ -28,7 +27,8 @@
   },
   "name": "soapbox",
   "engines": {
-    "node": "0.6.17",
+    "node": "0.6.19",
     "npm": "1.1.9"
-  }
+  },
+  "subdomain": "zeus"
 }
