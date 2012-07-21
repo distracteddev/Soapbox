@@ -13,7 +13,8 @@ var flatiron = require('flatiron'),
     //qs = require('querystring'),
     passport = require('passport'),
     User = require('./models').User();
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    render = require('./no_script'),
     app = flatiron.app;
 
 var routes = require('./routes');
@@ -69,10 +70,14 @@ passport.deserializeUser(function(username, done) {
 app.use(flatiron.plugins.http, {
 	before: [
 	    function(req, res) {
-	    	if (req.headers['user-agent'].indexOf('Google') > -1) {
-	    		console.log(req.url, req.headers['user-agent']);
+	    	if (req.headers['user-agent'].indexOf('Google') > -1 || req.query.no_script === 'true') {
+	    		console.log(req.url, req.query, req.headers['user-agent']);
 	    		res.writeHead(200, {'Content-Type' : 'text/html'})
-	    		res.end("This is an SEO Test. If you see this within Google's Results, you know that my experiment worked.");
+	    		var parsed_url = req.url.split('?')[0];
+	    		render('http://localhost:9000' + parsed_url, function(html) {
+	    			res.end(html);	
+	    		});	    		
+	    		
 	    	} else {
 	    		res.emit('next');
 	    	}

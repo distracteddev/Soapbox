@@ -36,38 +36,12 @@
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="stylesheets/ie.css">
 	<![endif]-->
-  <!--<script>-->
-    <!--document.write('<script src="http://' + (location.host ||-->
-      <!--'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></'-->
-      <!--+ 'script>');-->
-  <!--</script>-->
-	
+
 	<!-- IE Fix for HTML5 Tags -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<!-- <script type="text/x-handlebars" data-template-name="posts">
-		{{#each content}}
-    <div class="row">
-      {{#if isDirty}}
-      <section class="post columns one">
-          </br>
-          </br>
-          {{#view App.PostButton action="save"}}Save{{/view}}
-          {{#view App.PostButton action="revert"}}Cancel{{/view}}
-        </section>
-      {{/if}}
-      <section class="post columns eight centered mock">
-        <section class="post-header">
-					<h2>{{editable title}}</h2>
-					<h5>{{editable sub_title}}</h5>
-				  <p>{{editable tags}}</p>
-					{{editable body textArea="true" tagName="div"}}
-        </section>
-			</section>
-		</div>
-		{{/each}}
-	</script> -->
+
 
 	<script type="text/x-handlebars" data-template-name="single-post">
       {{#with App.PostController.selectedPost}}
@@ -113,16 +87,14 @@
       <section class="row" id="button-row">
         <div class="clearfix ten columns centered">
           {{#unless App.PostController.noPreviousPost}}
-            {{#view App.PostButton action="selectPreviousPost"
-                classNames="previous"
-                disabledBinding="App.PostController.noPreviousPost"}}&laquo; {{App.PostController.previousPostTitle}}
-            {{/view}}
+            <a class="ember-view ember-button small previous" href="/blog/{{unbound App.PostController.previousPostURL}}">
+              &laquo; {{App.PostController.previousPostTitle}}
+            </a>
           {{/unless}}
           {{#unless App.PostController.noNextPost}}
-            {{#view App.PostButton action="selectNextPost"
-                classNames="next"
-                disabledBinding="App.PostController.noNextPost"}}{{App.PostController.nextPostTitle}}
-            &raquo;{{/view}}
+            <a class="ember-view ember-button small next" href="/blog/{{unbound App.PostController.nextPostURL}}">
+              {{App.PostController.nextPostTitle}} &raquo;
+            </a>
           {{/unless}}
           {{#if App.PostController.authorized}}
             {{#view App.PostButton action="selectNewPost"
@@ -296,8 +268,6 @@
 	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
   <script src="/javascripts/jquery.min.js"></script>
 	<script src="/javascripts/jquery.reveal.js"></script>
-	<!--<script src="/javascripts/jquery.orbit-1.4.0.js"></script>-->
-	<!--<script src="/javascripts/jquery.customforms.js"></script>-->
 	<script src="/javascripts/jquery.placeholder.min.js"></script>
 	<script src="/javascripts/jquery.tooltips.js"></script>
 	<script src="/javascripts/jquery.text-expander.js"></script>

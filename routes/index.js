@@ -62,7 +62,8 @@ exports.getBP = function(id) {
 			}
 			else {
 				winston.debug("The following blog_post id was not found: " + id);
-				self.res.writeHead(204);
+				self.res.writeHead(200);
+				if (self.res) self.res.end('{"blog_posts":' + JSON.stringify(post) + "}");
 			}
 		});
 	}
@@ -124,6 +125,7 @@ exports.postBP = function (id) {
 			}
 			else {
 				self.res.writeHead(404);
+				self.res.end();
 			}
 		});
 	}

@@ -1,6 +1,6 @@
 {
   "description": "A Single-Page Personal Blogging Experiment",
-  "version": "0.0.0-10",
+  "version": "0.0.0-12",
   "private": true,
   "dependencies": {
     "union": "git://github.com/flatiron/union.git",
@@ -13,12 +13,10 @@
     "marked": "*",
     "highlight": "*",
     "resourceful": "git://github.com/distracteddev/resourceful.git",
-    "nodetime": "*"
+    "nodetime": "*",
+    "redis": "*",
+    "resourceful-redis": "*"
   },
-  "bundleDependencies": [
-    "redis",
-    "resourceful-redis"
-  ],
   "devDependencies": {
     "api-easy": "0.3.4",
     "vows": "0.6.2"
@@ -32,5 +30,11 @@
     "node": "0.6.19",
     "npm": "1.1.9"
   },
-  "subdomain": "zeus"
+  "subdomain": "zeus",
+  "domains": [
+    "distracteddeveloper.com",
+    "www.distracteddeveloper.com",
+    "distracteddev.com",
+    "www.distracteddev.com"
+  ]
 }

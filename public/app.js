@@ -225,6 +225,17 @@ App.PostController = Ember.ArrayController.create({
     this.set('selectedIndex', 0)
   },
 
+  setSelectedPost: function(title) {    
+    var clientId = App.store.find(App.BlogPost, title).clientId;     
+    var targetIndex = this.get('content').get('content').indexOf(clientId);
+    console.log("clientId: ", clientId, "targetIndex", targetIndex);
+    if (targetIndex !== -1 ) {
+      this.set('selectedIndex', targetIndex);
+    } else {
+      this.set('selectedIndex', 0);
+    }
+  },
+
   selectPost: function(idx) {
     if (this.get('selectedPost') === null || this.get('selectedPost') === undefined) {
       this.selectLatestPost();
@@ -280,6 +291,18 @@ App.PostController = Ember.ArrayController.create({
     idx -= 1;
     return this.objectAt(idx).get('title');
   }.property('selectedIndex', 'content.@each'),
+
+  nextPostURL: function() {
+    var idx = this.get('selectedIndex');
+    idx += 1;
+    return this.objectAt(idx).get('id');
+  }.property('selectedIndex', 'content.@each'),
+
+  previousPostURL: function() {
+    var idx = this.get('selectedIndex');
+    idx -= 1;
+    return this.objectAt(idx).get('id');
+  }.property('selectedIndex', 'content.@each'),  
 
   getPostPreview: function() {
       if (this.get('selectedPost')) {
@@ -487,7 +510,9 @@ var bindLinks = function() {
         App.routeManager.set('location', target);
         return false;
       } else {
-        return true
+        console.log("DID NOT FIND a internal route");
+        App.routeManager.set('location', target);
+        return false;
       }
     });
 
@@ -599,9 +624,10 @@ App.routeManager = Ember.RouteManager.create({
       //}, 500);
         $('body').hide();
       Ember.run.next(function() {
-        $("#switch").show();
+        $("#switch").hide();
         //$("#content").hide();
         setTimeout(function() {
+          bindLinks();
           $('body').fadeIn();
           $('#content').fadeIn();
           //$("#content").fadeIn();
@@ -649,18 +675,27 @@ App.routeManager = Ember.RouteManager.create({
 
   show: Em.State.create({
   	route: 'blog/:id',
-  	enter: function(stateManager, transition) {
-  		this._super(stateManager, transition);
-  		var params = stateManager.get('params');
-  		var postId = params.id;
-  		console.log(postId);
+    enter: function(stateManager, transition) {
+      this._super(stateManager, transition);
+      var postID = stateManager.get('params').id           
+      console.log("Showing Blog Post: " + postID);
       $('body').removeClass('portfolio').addClass('blog');
+      App.layout.set('banner', '');
       App.layout.set('header', App.headerView);
       App.layout.set('content', App.selectedPostView);   
-  	}
-  })
-
-
+      bindLinks();
+        $('body').hide();
+      Ember.run.next(function() {
+        $("#switch").hide();
+        setTimeout(function() {
+          App.PostController.setSelectedPost(postID);
+          bindLinks();
+          $('body').fadeIn();
+          $('#content').fadeIn();
+        }, 200);
+      });
+    }
+  }),
 
 });
     
