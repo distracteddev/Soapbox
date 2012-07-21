@@ -505,14 +505,13 @@ var bindLinks = function() {
       var target = el.attr('href').replace('#', '');
       if (target.indexOf('/') === 0) target = target.slice(1);
       console.log(target);
-      if (App.routeManager.hasOwnProperty(target) && target.length > 1) {
+      if ((App.routeManager.hasOwnProperty(target) && target.length > 1) || target.indexOf('blog') !== -1) {
         console.log("Found a internal route");
         App.routeManager.set('location', target);
         return false;
       } else {
-        console.log("DID NOT FIND a internal route");
-        App.routeManager.set('location', target);
-        return false;
+        console.log("DID NOT FIND a internal route");        
+        return true;
       }
     });
 
