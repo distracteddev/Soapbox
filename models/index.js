@@ -1,13 +1,12 @@
-var REDIS_URL = process.env.REDISTOGO_URL || 'redis://nodejitsu:04bb058fdb87894ab8d710a44e1d2d2f@drum.redistogo.com:9157/';
 
 var Resourceful = require('resourceful-redis')
   , url = require('url');
 // A function helper to connect to redis using Heroku's redis url
 var connect = function(redis_url) {
   var password, database;
-  var parsed_url  = url.parse(redis_url || process.env.REDISTOGO_URL || REDIS_URL || 'redis://localhost:6379');
+  var parsed_url  = url.parse(redis_url || process.env.REDISTOGO_URL || 'redis://localhost:6379');
   var parsed_auth = (parsed_url.auth || '').split(':');
-
+  
   var redis = require('redis').createClient(parsed_url.port, parsed_url.hostname);
 
   if (password = parsed_auth[1]) {
@@ -29,7 +28,7 @@ var connect = function(redis_url) {
 };
 
 // Get a new redis connection
-var redisConnection = exports.redisConnection =  connect(REDIS_URL);
+var redisConnection = exports.redisConnection =  connect();
 
 var tagFilter = {
 	map: function (post) {
@@ -50,12 +49,12 @@ var options = {
 var BlogPost = Resourceful.define('blogpost', function () {
 
 	this.use('redis', {
-    connection: redisConnection,
-    namespace: 'blogposts'
+    	connection: redisConnection,
+   	 	namespace: 'blogposts'
 	});
 
 	this.string('title');
-	this.string('subTitle');
+	this.string('sub_title');
 	this.bool('published');
     // the body property holds the HTML version of the body text
 	this.string('body');
@@ -74,12 +73,13 @@ exports.BlogPost = function() {
 
 
 var BlogSettings = Resourceful.define('settings', function () {
+	
 	this.use('redis', {
-    connection: redisConnection,
-    namespace: 'settings'
+    	connection: redisConnection,
+    	namespace: 'settings'
 	});
 	
-	this.string('blog_itle');
+	this.string('blog_title');
 	this.string('blog_sub_title');
 	this.timestamps();
 
@@ -90,7 +90,12 @@ exports.BlogSettings = function () {
 };
 
 var User = Resourceful.define('users', function() {
-	this.use('memory');
+	
+	this.use('redis', {
+    	connection: redisConnection,
+    	namespace: 'users'
+	});
+	
 	this.string('username');
 	this.string('password');
 	this.object('settings');

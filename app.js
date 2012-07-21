@@ -1,7 +1,8 @@
-require('nodetime').profile({
-    accountKey: '364eb6a1359d9f0a3e866a329e2ba6fab7292cdb', 
-    appName: 'Soapbox'
-});
+// require('nodetime').profile({
+//     accountKey: '364eb6a1359d9f0a3e866a329e2ba6fab7292cdb', 
+//     appName: 'Soapbox'
+// });
+
 
 var flatiron = require('flatiron'),
 	connect = require('connect'),
@@ -17,18 +18,6 @@ var flatiron = require('flatiron'),
 
 var routes = require('./routes');
 var animalRoutes = require('./routes/animals.js')
-
-console.log('REDIS URL:', process.env.REDISTOGO_URL);
-
-u = User.new(
-	{
-		"username": "zeus",
-		"password": "zeus",
-		"email": "lalkaka.zeus@gmail.com"
-	}
-);
-
-u.save();
 
 function findByUsername(username, done) {
   User.find({"username":username}, function(err, user) {
@@ -223,3 +212,18 @@ app.router.path('/\/animals', function () {
 var port = process.env.PORT || 9000;
 app.start(port);
 app.log.info("Started at http://localhost:" + port + "/");
+
+
+/// Remote REPL ///
+var net = require("net"),
+    repl = require("repl");
+
+connections = 0;
+
+net.createServer(function (socket) {
+  connections += 1;
+  repl.start("soapbox> ", socket, null, true).context.s = s;
+}).listen("/tmp/node-repl-sock");
+
+/// End Remote REPL ///
+
