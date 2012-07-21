@@ -74,7 +74,7 @@ app.use(flatiron.plugins.http, {
 	    		console.log(req.url, req.query, req.headers['user-agent']);
 	    		res.writeHead(200, {'Content-Type' : 'text/html'})
 	    		var parsed_url = req.url.split('?')[0];
-	    		render('http://localhost:9000' + parsed_url, function(html) {
+	    		render('http://localhost:' + process.env.PORT + parsed_url, function(html) {
 	    			res.end(html);	
 	    		});	    		
 	    		
@@ -214,7 +214,7 @@ app.router.path('/\/animals', function () {
 });
 
 
-var port = process.env.PORT || 9000;
+var port = process.env.PORT = process.env.PORT || 9000;
 app.start(port);
 app.log.info("Started at http://localhost:" + port + "/");
 
