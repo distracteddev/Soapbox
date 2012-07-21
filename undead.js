@@ -3,7 +3,9 @@ var page = require('webpage').create();
 var shouldPrint = false
 page.onConsoleMessage = function (msg) {
 	if (msg.indexOf("alsfjlqwjdlas") !== -1) {
-		console.log(style_html(msg.replace("alsfjlqwjdlas", "").replace(/<script[^>]*>([\\S\\s]*?)<\/script>/img, '').replace(/opacity.+;/img, '')));
+		console.log(style_html(msg.replace("alsfjlqwjdlas", "")
+			.replace(/<script[^>]*>([\\S\\s]*?)<\/script>/img, '')));
+			// .replace(/opacity.+;/img, '')));
 		phantom.exit();
 	}
 };
@@ -18,7 +20,7 @@ page.open(url, function (status) {
 			redneredHTML =  document.documentElement.outerHTML;        	
         	console.log("alsfjlqwjdlas" + redneredHTML);        	
         	// phantom.exit();
-        }, 100);
+        }, 500);
     });
 
     // var end = setTimeout(function() {    	
@@ -82,7 +84,7 @@ function style_html(html_source, options) {
   indent_character = options.indent_char || ' ';
   brace_style = options.brace_style || 'collapse';
   max_char = options.max_char == 0 ? Infinity : options.max_char || 70;
-  unformatted = options.unformatted || ['a'];
+  unformatted = options.unformatted || ['a', 'code'];
 
   function Parser() {
 

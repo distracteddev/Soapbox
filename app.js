@@ -220,15 +220,14 @@ app.log.info("Started at http://localhost:" + port + "/");
 
 
 /// Remote REPL ///
-var net = require("net"),
-    repl = require("repl");
+// var net = require("net"),
+//     repl = require("repl");
 
-connections = 0;
+// connections = 0;
 
-net.createServer(function (socket) {
-  connections += 1;
-  repl.start("soapbox> ", socket, null, true).context.s = s;
-}).listen("/tmp/node-repl-sock");
-
+// net.createServer(function (socket) {
+//   connections += 1;
+//   repl.start("soapbox> ", socket, null, true).context.s = s;
+// }).listen("/tmp/node-repl-sock");
 /// End Remote REPL ///
 
