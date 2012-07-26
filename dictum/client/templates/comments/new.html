@@ -1,0 +1,24 @@
+{{#comments}}
+	<div class="comment">
+		<p><span class="author">{{author}} </span><span class="comment-date">{{ctime}}</span></p>
+		<p><span class="comment-text">{{comment}}</span></p>
+	</div>
+	{{#replies}}
+	<div class="reply">
+		<p><span class="author">{{author}} </span><span class="comment-date">{{ctime}}</span></p>
+		<p><span class="comment-text">{{reply}}</span></p>		
+	</div>
+	{{/replies}}
+{{/comments}}
+{{#comment}}
+	<div class="comment">
+		<p><span class="author">{{author}} </span><span class="comment-date">{{ctime}}</span></p>
+		<p><span class="comment-text">{{comment}}</span></p>
+	</div>
+	{{#replies}}
+	<div class="reply">
+		<p><span class="author">{{author}} </span><span class="comment-date">{{ctime}}</span></p>
+		<p><span class="comment-text">{{reply}}</span></p>		
+	</div>
+	{{/replies}}
+{{/comment}}

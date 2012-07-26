@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+
+  <link href="/assets/main/1343257713836.css" media="screen" rel="stylesheet" type="text/css"><script src="/assets/main/1343257713836.js" type="text/javascript"></script><script type="text/javascript">(function(){var ht=Hogan.Template,t=require('socketstream').tmpl;t['chat-message']=new ht(function(c,p,i){var _=this;_.b(i=i||"");_.b("<p>");_.b("\n" + i);_.b("  <span class=\"time\">");_.b(_.v(_.f("time",c,p,0)));_.b("</span>");_.b("\n" + i);_.b("  <span class=\"message\">");_.b(_.v(_.f("message",c,p,0)));_.b("</span>");_.b("\n" + i);_.b("</p>");_.b("\n");return _.fl();;});t['comments-new']=new ht(function(c,p,i){var _=this;_.b(i=i||"");if(_.s(_.f("comments",c,p,1),c,p,0,13,105,"{{ }}")){_.rs(c,p,function(c,p,_){_.b("<p>");_.b("\n" + i);_.b("  <span class=\"time\">");_.b(_.v(_.f("author",c,p,0)));_.b("</span>");_.b("\n" + i);_.b("  <span class=\"message\">");_.b(_.v(_.f("comment",c,p,0)));_.b("</span>");_.b("\n" + i);_.b("</p>");_.b("\n");});c.pop();}if(_.s(_.f("comment",c,p,1),c,p,0,131,223,"{{ }}")){_.rs(c,p,function(c,p,_){_.b("<p>");_.b("\n" + i);_.b("  <span class=\"time\">");_.b(_.v(_.f("author",c,p,0)));_.b("</span>");_.b("\n" + i);_.b("  <span class=\"message\">");_.b(_.v(_.f("comment",c,p,0)));_.b("</span>");_.b("\n" + i);_.b("</p>");_.b("\n");});c.pop();}return _.fl();;});}).call(this);</script>
+
+
+	<meta charset="utf-8" />
+	
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=device-width", minimum-scale=1.0, maximum-scale=1.0>
+	<meta name="description" content="">
+  <meta name="author" content="">
+
+	<title>Zeus</title>
+  
+	<!-- Included CSS Files -->
+	<link rel="stylesheet" href="/stylesheets/foundation.css">
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <link rel="stylesheet" href="/stylesheets/code_styles/monokai.css">
+	<!-- Includ Web Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
+
+  <link href='http://fonts.googleapis.com/css?family=Iceland|Quantico:400,700italic,700,400italic|Electrolize|Orbitron:400,500,900,700' rel='stylesheet' type='text/css'>
+
+	<!-- Load Modernizr before all other scripts -->
+	<script src="/javascripts/modernizr.foundation.js"></script>
+  
+
+
+
+	<!--[if lt IE 9]>
+		<link rel="stylesheet" href="stylesheets/ie.css">
+	<![endif]-->
+
+	<!-- IE Fix for HTML5 Tags -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+	<script type="text/x-handlebars" data-template-name="single-post">
+      {{#with App.PostController.selectedPost}}
+      <!--START OF POST-HEADER ROW-->
+      <div class="post row">
+        <section class="post-header columns eight centered">
+
+          <h2 class="post-title">{{editable title}}</h2>
+          <hr/>
+          <h5 class="post-sub-title">{{editable sub_title}}</h5>
+          <section class="post post-sidebar desktop-only">
+            <div class="post-date">
+             <span>{{date ctime}}</span>
+             {{editable tags classNames="clearfix"}}
+            </div> 
+          </section>
+        </section>
+      </div>
+
+      <!--START OF POST-BODY ROW-->
+      <div class="post-body post row">
+         <section class="post post-sidebar">
+          {{#if App.PostController.authorized}}
+            {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
+            {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
+              Save
+            {{/view}}
+            {{#if isDirty}}
+               {{#view App.PostButton action="revert" tagName="button" classNames="button yellow"}}
+                 Cancel
+               {{/view}}
+            {{/if}}
+            {{#view App.PostButton action="confirmDelete" tagName="button" classNames="button
+              red"}}Delete{{/view}}
+          {{/if}}
+        </section>
+
+        <section class="columns eight centered">
+					{{editable body textArea="true" tagName="div"}}
+        </section>        
+      </div>      
+      {{/with}}
+
+      <!--START OF THE BUTTON CONTROLS ROW-->
+      <section class="row" id="button-row">
+        <div class="clearfix ten columns centered">
+          {{#unless App.PostController.noPreviousPost}}
+            <a class="ember-view ember-button small previous" href="/blog/{{unbound App.PostController.previousPostURL}}">
+              &laquo; {{App.PostController.previousPostTitle}}
+            </a>
+          {{/unless}}
+          {{#unless App.PostController.noNextPost}}
+            <a class="ember-view ember-button small next" href="/blog/{{unbound App.PostController.nextPostURL}}">
+              {{App.PostController.nextPostTitle}} &raquo;
+            </a>
+          {{/unless}}
+          {{#if App.PostController.authorized}}
+            {{#view App.PostButton action="selectNewPost"
+                classNames="new-post button black" tagName="button"}}New
+            Post <span id="plus">&#43;</span>{{/view}}
+          {{/if}}
+        </div>
+      </section>
+      <!-- END OF BUTTON CONTROL ROW -->
+
+      <!-- START OF COMMENTS ROW -->
+      <section class="row" id="comment-row">
+        <!--<iframe id="commentsFrame" src="http://localhost:3000/services/comments" width="100%" sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts">
+        </iframe> -->
+        <div id="comments">
+        </div>
+        <textarea id="myMessage" type="text" autocomplete="off">
+        </textarea>        
+      </section>
+      <!-- END OF COMMENTS ROW -->
+
+
+	</script>
+
+
+  <script type="text/x-handlebars" data-template-name="header">
+    <div id="switch">
+      <a href="#blog_dark">[ Lights Off ]</a>
+    </div>
+
+    <div class="six columns centered clearfix">	
+        <div class="alert-box success" id="login-sucess">
+          Go Write Some Shit.
+          <a href="#" class="close">&times;</a>
+      </div>
+      
+      <section id="nav-ctn">
+      <a href="/portfolio" id="blog-logo">
+        <img src="/images/logo.png" alt="Zeus Lalkaka's Logo" id="logo"/>
+      </a>      
+   
+      <div class="" style="position: absolute; left: 50%">
+        <dl class="sub-nav" id="blog-nav" style="position: relative; margin-left: -128px">
+          <dd>
+            <a href="/portfolio">Home</a>
+          </dd>
+          <dd>
+            <a href="/blog">Blog</a>
+          </dd>
+          <dd>
+            <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
+          </dd>
+        </dl>					
+      </div> <!-- End of ctr-ctn -->
+      </section>
+    </div> <!-- End of six columns -->
+	</script>
+
+  <script type="text/x-handlebars" data-template-name="portfolio-header">
+    <div id="switch">
+      <a href="#blog">[ Lights On ]</a>
+    </div>
+
+    <div class="six columns centered clearfix">
+      <img src="/images/home/Zeus_Logo.png" alt="Zeus Lalkaka's Logo" id="portfolio-logo"/>
+      <div class="ctr-ctn">
+        <dl class="sub-nav ctr-block">
+          <dd>
+            <a href="/portfolio">Home</a>
+          </dd>
+          <dd>
+            <a href="/blog">Blog</a>
+          </dd>
+          <dd>
+            <a href="mailto:lalkaka.zeus@gmail.com">Contact</a>
+          </dd>
+        </dl>         
+      </div> <!-- End of ctr-ctn -->       
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="portfolio-content">
+    <div class="twelve columns centered" id="face-ctn">
+      <img src="/images/home/Zeus_Face.png" alt="Zeus Lalkaka's Logo" id="face"  width="281" height="291"/>
+      <div id="nav-ring">
+        <img src="/images/home/Zeus_Name.png" alt="Zeus Lalkaka" id="zeus-name"/>
+        <a class="rect-link" href="" id="featured-project">Featured Project</a><br/>
+        <a class="rect-link" href="" id="about">Identity</a><br/>
+        <a class="rect-link" href="" id="skills">Skills / Tools</a><br/>
+        <a class="rect-link" href="/resume.pdf" id="dl-resume">Download Resume</a><br/>
+      </div>
+      <section id="featured-project-detail" class="portfolio-detail eight columns centered">
+        <h1> Hello </h1>
+        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>              
+        <a href="#back" class="portfolio-back">&laquo; Back</a> 
+      </section>
+
+      <section id="about-detail" class="portfolio-detail eight columns centered">
+        <h1> Hello </h1>
+        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>                 
+        <a href="#back" class="portfolio-back">&laquo; Back</a>
+      </section>
+
+      <section id="skills-detail" class="portfolio-detail eight columns centered">
+        <h1> Hello </h1>
+        <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper. Donec sed odio dui.</p>         
+        <a href="#back" class="portfolio-back">&laquo; Back</a>
+      </section>
+
+      <section class="portfolio-detail seven columns centered">
+      </section>      
+    </div>
+  </script>
+
+
+  <script type="text/x-handlebars" data-template-name="main-layout">
+    {{dynamicView banner}}
+    <!--START OF HEADER-->
+      <header class="row" id="headerRow">
+        {{dynamicView header}}
+      </header>
+      <!--START OF CONTENT ROW-->
+      <section id="content" class="row" style="display: none">
+        {{dynamicView}}
+      </section>
+
+      <!--Start of Footetr-->
+      <footer class="row">
+      <h1>Zeus Lalkaka</h1>
+      </footer>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="top-banner">
+  <section id="top-banner">
+    <p>
+      This page is still under construction. Feel free to click around, but just do not expect any content.
+      <a href="">&#215;</a>
+    </p>
+  </section>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="edit-field">
+    {{#if isEditing}}
+        {{#if textArea}}
+          <form class="nice" onLoad="window.Expander" id="rawMarkdown">
+            {{view Ember.TextArea valueBinding="raw" classNames="input-text expand"}}
+          </form>
+        {{else}}
+          <form class="nice" onLoad="window.Expander">
+            {{view Ember.TextField valueBinding="value" classNames="input-text expand"}}
+          </form>
+        {{/if}}
+   {{#if textArea}}
+     <section id="livePreview" class="clearfix">
+       {{preview App.PostController.postPreview}}
+     </section>
+   {{/if}}
+   {{else}}
+       {{#if tagsArray}}
+       <ul id="tag-list">
+       {{#each tagsArray}}
+        <li><span class="green label round tags">{{this}}</span></li>
+       {{/each}}
+       </ul>
+      {{else}}
+        {{#if value}}
+          {{raw value}}
+        {{else}}
+          {{#if App.PostController.authorized}}
+            <span class="no-name">Double Click to Start Editing</span>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+   {{/if}}
+   </script>
+</head>
+<body>
+
+  <!--Load Javascript within the body so it doesn't slow down page rendering-->
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+  <script src="/javascripts/jquery.min.js"></script>
+	<script src="/javascripts/jquery.reveal.js"></script>
+	<script src="/javascripts/jquery.placeholder.min.js"></script>
+	<script src="/javascripts/jquery.tooltips.js"></script>
+	<script src="/javascripts/jquery.text-expander.js"></script>
+  <script src="/javascripts/jquery.hoverIntent.min.js"></script>
+  <script src="/javascripts/lib/ember.js"></script>
+  <script src="/javascripts/lib/ember-data.js"></script>
+  <script src="/javascripts/lib/ember-routemanager.js"></script>
+  <script src="/javascripts/lib/ember-layout.js"></script>
+  <script src="/javascripts/lib/move.js"></script>
+  <script src="/javascripts/app.js"></script>
+	<script src="/app.js"></script>
+
+
+ <div class="reveal-modal" id="reveal-Login">
+    <div class="alert-box error five centered columns" id="login-fail">
+      Wow, what an asshole. Can't even remember your own password.
+      <a href="#" class="close">&times;</a>
+    </div>
+    <h2>Login</h2>
+    <form action="/login" id="login-form" class="nice" method="post">
+      <label>username</label>
+      <input type="text" class="input-text" name="username" />
+      <label>password</label>
+      <input type="password" class="input-text" name="password" />
+      <button id="submit-login" class="small radius black button">Log In</button>
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+<script type="text/x-handlebars">
+  <div class="reveal-modal" id="reveal-delete" style="display: none">
+    <h4>Are you sure you want to DELETE this post?</h4>
+    <div class="ctr-ctn">
+      <div class="ctr-block">
+        {{#view App.PostButton action="deleteSelectedPost" classNames="button green" tagName="button"}}
+          Yes
+        {{/view}}
+        {{#view App.PostButton action="revert" tagName="button"
+            classNames="button red"}}
+          No
+        {{/view}}
+      </div>
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+</script>
+
+</body>
+</html>
