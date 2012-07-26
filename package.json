@@ -27,13 +27,10 @@
   },
   "name": "soapbox",
   "engines": {
-    "node": "0.6.19",
-    "npm": "1.1.9"
+    "node": "0.8.3",
+    "npm": "1.1.43"
   },
-  "subdomain": "zeus",
   "domains": [
-    "distracteddeveloper.com",
-    "www.distracteddeveloper.com",
     "distracteddev.com",
     "www.distracteddev.com"
   ]

@@ -6,6 +6,7 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+
 	<meta charset="utf-8" />
 	
 	<!-- Set the viewport width to device width for mobile -->
@@ -32,6 +33,9 @@
 
 	<!-- Load Modernizr before all other scripts -->
 	<script src="/javascripts/modernizr.foundation.js"></script>
+  
+
+
 
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="stylesheets/ie.css">
@@ -60,6 +64,7 @@
           </section>
         </section>
       </div>
+
       <!--START OF POST-BODY ROW-->
       <div class="post-body post row">
          <section class="post post-sidebar">
@@ -83,6 +88,7 @@
         </section>        
       </div>      
       {{/with}}
+
       <!--START OF THE BUTTON CONTROLS ROW-->
       <section class="row" id="button-row">
         <div class="clearfix ten columns centered">
@@ -102,7 +108,28 @@
             Post <span id="plus">&#43;</span>{{/view}}
           {{/if}}
         </div>
-      </section>      
+      </section>
+      <!-- END OF BUTTON CONTROL ROW -->
+
+      <!-- START OF COMMENTS ROW -->
+      <section class="row" id="comment-row">
+        <div class="six columns centered post">
+          <h3>Comments</h3>
+          <div id="comments">
+          </div>
+          <form id="commentForm" class="nice">
+            <h4>LEAVE A COMMENT</h4>
+            <input name="author" type="text" class="input-text" placeholder="Name"/>
+            <input name="author-email" type="text" class="input-text" placeholder="Twitter Handle / Email Address"/>
+            <textarea id="myMessage" type="text" autocomplete="off" class="input-text" value="Do your worst.">
+            </textarea>
+            <input type="submit" class="black button">
+          </form>
+        </div> 
+      </section>
+      <!-- END OF COMMENTS ROW -->
+
+
 	</script>
 
 
@@ -221,7 +248,7 @@
   <script type="text/x-handlebars" data-template-name="top-banner">
   <section id="top-banner">
     <p>
-      This page is still under construction. Feel free to click around, but just don't expect any content.
+      This page is still under construction. Feel free to click around, but just do not expect any content.
       <a href="">&#215;</a>
     </p>
   </section>
@@ -279,7 +306,7 @@
   <script src="/javascripts/lib/move.js"></script>
   <script src="/javascripts/app.js"></script>
 	<script src="/app.js"></script>
-
+  <SocketStream>
 
  <div class="reveal-modal" id="reveal-Login">
     <div class="alert-box error five centered columns" id="login-fail">

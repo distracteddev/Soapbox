@@ -28,7 +28,7 @@ body.blog a:hover {
 }
 /* line 34, ../sass/app.scss */
 #switch a {
-  font-family: Ubuntu, Arial, sans-serif;
+  font-family: 'Quantico', Arial, sans-serif;
 }
 
 /* line 39, ../sass/app.scss */
@@ -209,12 +209,32 @@ hr {
 
 /* line 241, ../sass/app.scss */
 .post h1, .post h2, .post h3, .post h4, .post h5, .post p {
-  font-family: 'Ubuntu', Georgia, serif;
+  font-family: 'Quantico', Georgia, serif;
   color: #323232;
   letter-spacing: 2px;
-  text-align: left;
 }
 /* line 248, ../sass/app.scss */
+.post h1, .post h2, .post h3, .post h4 {
+  text-transform: uppercase;
+}
+/* line 252, ../sass/app.scss */
+.post h1 {
+  font-size: 2em;
+}
+/* line 256, ../sass/app.scss */
+.post h2 {
+  font-size: 1.6em;
+}
+/* line 260, ../sass/app.scss */
+.post h3 {
+  font-size: 1.3em;
+}
+/* line 264, ../sass/app.scss */
+.post h4 {
+  font-size: 1.1em;
+  margin-bottom: 9px;
+}
+/* line 269, ../sass/app.scss */
 .post h5 {
   font: 400 1.4em/1.6 "Oxygen", Verdana, Helvetica, sans-serif;
   letter-spacing: 2px;
@@ -222,7 +242,7 @@ hr {
   color: rgba(50, 50, 50, 0.6);
   font-variant: 0;
 }
-/* line 256, ../sass/app.scss */
+/* line 277, ../sass/app.scss */
 .post .post-title {
   /*padding-left: 30px;*/
   font-family: 'Ubuntu', Georgia, serif;
@@ -230,18 +250,18 @@ hr {
   /*font-size: 2em;*/
   text-transform: uppercase;
 }
-/* line 264, ../sass/app.scss */
+/* line 285, ../sass/app.scss */
 .post .post-sub-title {
   margin-bottom: 5px;
   font-size: 1.5rem;
 }
-/* line 269, ../sass/app.scss */
+/* line 290, ../sass/app.scss */
 .post .post-sidebar {
   position: relative;
   float: left;
   position: absolute;
 }
-/* line 274, ../sass/app.scss */
+/* line 295, ../sass/app.scss */
 .post .post-sidebar button {
   float: right;
   clear: right;
@@ -253,16 +273,16 @@ hr {
   position: fixed;
   width: 75px;
 }
-/* line 286, ../sass/app.scss */
+/* line 307, ../sass/app.scss */
 .post .post-sidebar button.green {
   top: 235px;
 }
-/* line 290, ../sass/app.scss */
+/* line 311, ../sass/app.scss */
 .post .post-sidebar button.yellow {
   top: 270px;
   background: #535;
 }
-/* line 296, ../sass/app.scss */
+/* line 317, ../sass/app.scss */
 .post p, .post blockquote {
   font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
@@ -271,7 +291,7 @@ hr {
   font-size: 1.8rem;
   line-height: 1.6;
 }
-/* line 306, ../sass/app.scss */
+/* line 327, ../sass/app.scss */
 .post p.post-body:first-letter {
   font-size: 64px;
   line-height: 10px;
@@ -279,7 +299,7 @@ hr {
   padding-right: 10px;
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
-/* line 315, ../sass/app.scss */
+/* line 336, ../sass/app.scss */
 .post .post-date {
   background: #000;
   padding: 7px 12px;
@@ -290,13 +310,13 @@ hr {
   z-index: 1;
   left: -130px;
 }
-/* line 325, ../sass/app.scss */
+/* line 346, ../sass/app.scss */
 .post .post-date .tags {
   clear: both;
   float: right;
   margin-top: 5px;
 }
-/* line 331, ../sass/app.scss */
+/* line 352, ../sass/app.scss */
 .post .post-date #tag-list {
   display: none;
   top: 40px;
@@ -308,34 +328,34 @@ hr {
   transition-duration: 1s;
   opacity: .1;
 }
-/* line 339, ../sass/app.scss */
+/* line 360, ../sass/app.scss */
 .post .post-date #tag-list:hover {
   opacity: 1.0;
 }
 
-/* line 347, ../sass/app.scss */
+/* line 368, ../sass/app.scss */
 body.blog .post .post-date {
   top: -52px;
 }
 
-/* line 352, ../sass/app.scss */
+/* line 373, ../sass/app.scss */
 #reveal-Login {
   width: 300px;
   margin-left: -200px;
 }
 
-/* line 359, ../sass/app.scss */
+/* line 380, ../sass/app.scss */
 #reveal-delete button {
   margin-right: 50px;
   margin-top: 20px;
 }
 
-/* line 365, ../sass/app.scss */
+/* line 386, ../sass/app.scss */
 .previous {
   float: left !important;
 }
 
-/* line 370, ../sass/app.scss */
+/* line 391, ../sass/app.scss */
 #livePreview {
   position: relative;
   left: 50%;
@@ -344,20 +364,20 @@ body.blog .post .post-date {
   padding-left: 20px;
 }
 
-/* line 378, ../sass/app.scss */
+/* line 399, ../sass/app.scss */
 #rawMarkdown {
   position: absolute;
   left: 00%;
   width: 500px;
   width: 50%;
 }
-/* line 384, ../sass/app.scss */
+/* line 405, ../sass/app.scss */
 #rawMarkdown textarea {
   line-height: 2.2rem;
   font-size: 1.4rem;
 }
 
-/* line 390, ../sass/app.scss */
+/* line 411, ../sass/app.scss */
 .next, .previous {
   float: right;
   font: 400 1.2em/1.2 "Oxygen", Georgia, serif;
@@ -378,27 +398,27 @@ body.blog .post .post-date {
   -o-transition-duration: 1s;
   transition-duration: 1s;
 }
-/* line 403, ../sass/app.scss */
+/* line 424, ../sass/app.scss */
 .next:hover, .previous:hover {
   color: #333;
   border-color: #333;
 }
 
-/* line 412, ../sass/app.scss */
+/* line 433, ../sass/app.scss */
 .ctr-ctn {
   float: right;
   position: relative;
   right: 50%;
 }
 
-/* line 418, ../sass/app.scss */
+/* line 439, ../sass/app.scss */
 .ctr-block {
   float: right;
   position: relative;
   right: -50%;
 }
 
-/* line 424, ../sass/app.scss */
+/* line 445, ../sass/app.scss */
 code {
   font-family: monospace, sans-serif;
   font-size: 1.5rem;
@@ -418,49 +438,49 @@ code {
   /* Internet Explorer 5.5+ */
 }
 
-/* line 443, ../sass/app.scss */
+/* line 464, ../sass/app.scss */
 body.portfolio {
   background: black url("/images/home/Galaxy_BG.jpg") no-repeat center top;
 }
-/* line 446, ../sass/app.scss */
+/* line 467, ../sass/app.scss */
 body.portfolio h1, body.portfolio h2, body.portfolio h3, body.portfolio h4, body.portfolio h5, body.portfolio h6, body.portfolio p, body.portfolio a {
   color: #9df8db;
 }
-/* line 452, ../sass/app.scss */
+/* line 473, ../sass/app.scss */
 body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .post p, body.portfolio .post a, body.portfolio .portfolio-detail h1, body.portfolio .portfolio-detail h2, body.portfolio .portfolio-detail h3, body.portfolio .portfolio-detail h4, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6, body.portfolio .portfolio-detail p, body.portfolio .portfolio-detail a {
   color: rgba(157, 248, 219, 0.9);
   margin: 0px 0 10px;
 }
-/* line 457, ../sass/app.scss */
+/* line 478, ../sass/app.scss */
 body.portfolio .post a, body.portfolio .portfolio-detail a {
   color: #fff;
 }
-/* line 460, ../sass/app.scss */
+/* line 481, ../sass/app.scss */
 body.portfolio .post a:hover, body.portfolio .portfolio-detail a:hover {
   border-bottom: 1px #bbb dotted;
 }
-/* line 465, ../sass/app.scss */
+/* line 486, ../sass/app.scss */
 body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .portfolio-detail h1, body.portfolio .portfolio-detail h2, body.portfolio .portfolio-detail h3, body.portfolio .portfolio-detail h4, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6 {
   font-family: Quantico;
 }
-/* line 470, ../sass/app.scss */
+/* line 491, ../sass/app.scss */
 body.portfolio .post h5, body.portfolio .post h6, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6 {
   margin-bottom: -9px;
   opacity: 0.6;
 }
-/* line 475, ../sass/app.scss */
+/* line 496, ../sass/app.scss */
 body.portfolio .post h5.post-sub-title, body.portfolio .portfolio-detail h5.post-sub-title {
   margin-bottom: 20px;
   font-size: .6em;
   opacity: 1.0;
   text-transform: uppercase;
 }
-/* line 482, ../sass/app.scss */
+/* line 503, ../sass/app.scss */
 body.portfolio .post .post-date, body.portfolio .portfolio-detail .post-date {
   background-color: #9df8db;
   color: black;
 }
-/* line 487, ../sass/app.scss */
+/* line 508, ../sass/app.scss */
 body.portfolio .post hr, body.portfolio .portfolio-detail hr {
   border-color: #000;
   border-width: 0px;
@@ -474,7 +494,7 @@ body.portfolio .post hr, body.portfolio .portfolio-detail hr {
   margin-bottom: 8px;
   z-index: 0;
 }
-/* line 503, ../sass/app.scss */
+/* line 524, ../sass/app.scss */
 body.portfolio #portfolio-logo {
   position: relative;
   left: 50%;
@@ -490,24 +510,24 @@ body.portfolio #portfolio-logo {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 512, ../sass/app.scss */
+/* line 533, ../sass/app.scss */
 body.portfolio #portfolio-logo:hover {
   opacity: 1.0;
 }
-/* line 517, ../sass/app.scss */
+/* line 538, ../sass/app.scss */
 body.portfolio .sub-nav {
   padding: 20px 0;
   font-family: Quantico;
   font-size: 1.0em;
   text-transform: uppercase;
 }
-/* line 528, ../sass/app.scss */
+/* line 549, ../sass/app.scss */
 body.portfolio .sub-nav dd {
   letter-spacing: .15em;
   display: block;
   position: relative;
 }
-/* line 534, ../sass/app.scss */
+/* line 555, ../sass/app.scss */
 body.portfolio .sub-nav dd a {
   display: block;
   margin-right: 10px;
@@ -522,24 +542,24 @@ body.portfolio .sub-nav dd a {
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-/* line 544, ../sass/app.scss */
+/* line 565, ../sass/app.scss */
 body.portfolio .sub-nav dd a.current, body.portfolio .sub-nav dd a:hover, body.portfolio .sub-nav dd a.current:hover, body.portfolio .sub-nav dd a:hover {
   font-weight: 700;
   z-index: 12;
   text-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   width: 110%;
 }
-/* line 552, ../sass/app.scss */
+/* line 573, ../sass/app.scss */
 body.portfolio .sub-nav dd a:hover {
   font-weight: 400;
 }
-/* line 559, ../sass/app.scss */
+/* line 580, ../sass/app.scss */
 body.portfolio #face {
   position: relative;
   left: 50%;
   margin-left: -140px;
 }
-/* line 566, ../sass/app.scss */
+/* line 587, ../sass/app.scss */
 body.portfolio #face-ctn {
   position: relatve;
   padding-top: 40px;
@@ -547,33 +567,33 @@ body.portfolio #face-ctn {
   background: url("/images/home/Pentagon_Ring.png") no-repeat center;
   background-position: 50% 0px;
 }
-/* line 574, ../sass/app.scss */
+/* line 595, ../sass/app.scss */
 body.portfolio .portfolio-detail {
   position: absolute;
   top: 10%;
   left: -100%;
 }
-/* line 579, ../sass/app.scss */
+/* line 600, ../sass/app.scss */
 body.portfolio .portfolio-detail p {
   font-size: 1.0em;
   line-height: 1.6em;
   font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
 }
-/* line 588, ../sass/app.scss */
+/* line 609, ../sass/app.scss */
 body.portfolio .portfolio-back {
   font-family: Quantico;
   font-weight: 700;
 }
-/* line 593, ../sass/app.scss */
+/* line 614, ../sass/app.scss */
 body.portfolio #headerRow {
   padding-top: 2.5%;
 }
-/* line 599, ../sass/app.scss */
+/* line 620, ../sass/app.scss */
 body.portfolio #nav-ring #featured-project {
   min-width: 200px !important;
 }
-/* line 603, ../sass/app.scss */
+/* line 624, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link {
   position: relative;
   z-index: 10;
@@ -596,14 +616,14 @@ body.portfolio #nav-ring .rect-link {
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-/* line 623, ../sass/app.scss */
+/* line 644, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:hover {
   -moz-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   -webkit-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   -o-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
 }
-/* line 631, ../sass/app.scss */
+/* line 652, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:before {
   content: "";
   display: block;
@@ -616,124 +636,189 @@ body.portfolio #nav-ring .rect-link:before {
   border: 2px solid #000;
 }
 
-/* line 649, ../sass/app.scss */
+/* line 670, ../sass/app.scss */
 .button.new-post {
   position: fixed;
   top: 0px;
   right: 0px;
 }
 
-/* line 656, ../sass/app.scss */
+/* line 677, ../sass/app.scss */
 body.portfolio .post-body .post {
   color: white !important;
   margin-top: 20px;
 }
 
+/* line 685, ../sass/app.scss */
+#comment-row h3, #comment-row h4, #comment-row .author, #comment-row .comment-date {
+  font-family: Quantico;
+}
+/* line 689, ../sass/app.scss */
+#comment-row p {
+  margin-bottom: 2px;
+}
+/* line 693, ../sass/app.scss */
+#comment-row h3 {
+  margin-bottom: 25px;
+  padding-bottom: 5px;
+  background: #333;
+  padding: 5px 10px;
+  color: #eee;
+  display: inline-block;
+  text-transform: uppercase;
+}
+/* line 706, ../sass/app.scss */
+#comment-row .comment-date {
+  float: right;
+  font-size: .4em;
+  text-transform: uppercase;
+}
+/* line 712, ../sass/app.scss */
+#comment-row .author {
+  font-weight: bold;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  background: #3cffdb;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 1px 10px 0px 10px;
+  min-width: 50px;
+  display: inline-block;
+  text-align: center;
+}
+/* line 725, ../sass/app.scss */
+#comment-row .comment {
+  padding: 10px;
+  border-bottom: 1px solid #dedede;
+}
+/* line 730, ../sass/app.scss */
+#comment-row .comment-text {
+  font-size: .8em;
+}
+/* line 734, ../sass/app.scss */
+#comment-row .reply {
+  padding: 10px 10px 10px 10%;
+  border-bottom: 1px solid #dedede;
+}
+/* line 738, ../sass/app.scss */
+#comment-row .reply .author {
+  background: #53ff88;
+}
+/* line 743, ../sass/app.scss */
+#comment-row #commentForm {
+  margin-top: 20px;
+}
+/* line 745, ../sass/app.scss */
+#comment-row #commentForm textarea {
+  width: 100%;
+  min-height: 150px;
+}
+
 @media only screen and (min-width: 768px) {
-  /* line 663, ../sass/app.scss */
+  /* line 756, ../sass/app.scss */
   #dl-resume {
     left: 23%;
     bottom: 90px;
   }
 
-  /* line 670, ../sass/app.scss */
+  /* line 763, ../sass/app.scss */
   #about {
     left: 60%;
     bottom: 556px;
   }
 
-  /* line 675, ../sass/app.scss */
+  /* line 768, ../sass/app.scss */
   #featured-project {
     bottom: 475px;
     left: -15%;
   }
 
-  /* line 680, ../sass/app.scss */
+  /* line 773, ../sass/app.scss */
   #skills {
     bottom: 260px;
     left: 75%;
   }
 
-  /* line 685, ../sass/app.scss */
+  /* line 778, ../sass/app.scss */
   #zeus-name {
     position: relative;
     bottom: 190px;
     left: 6%;
   }
 
-  /* line 691, ../sass/app.scss */
+  /* line 784, ../sass/app.scss */
   body.portfolio .portfolio-content {
     margin-top: 0px;
   }
 }
 @media only screen and (min-width: 860px) {
-  /* line 697, ../sass/app.scss */
+  /* line 790, ../sass/app.scss */
   #dl-resume {
     left: 30%;
     bottom: 90px;
   }
 
-  /* line 704, ../sass/app.scss */
+  /* line 797, ../sass/app.scss */
   #about {
     left: 60%;
   }
 
-  /* line 709, ../sass/app.scss */
+  /* line 802, ../sass/app.scss */
   #featured-project {
     left: 0%;
   }
 
-  /* line 713, ../sass/app.scss */
+  /* line 806, ../sass/app.scss */
   #skills {
     left: 70%;
   }
 
-  /* line 718, ../sass/app.scss */
+  /* line 811, ../sass/app.scss */
   #zeus-name {
     position: relative;
     bottom: 190px;
     left: 6%;
   }
 
-  /* line 724, ../sass/app.scss */
+  /* line 817, ../sass/app.scss */
   body.portfolio #content {
     margin-top: 40px;
   }
 }
 @media only screen and (max-width: 767px) {
-  /* line 754, ../sass/app.scss */
+  /* line 847, ../sass/app.scss */
   #zeus-name {
     margin-bottom: 20px;
     display: block;
   }
 
-  /* line 759, ../sass/app.scss */
+  /* line 852, ../sass/app.scss */
   #face-ctn {
     background: none !important;
   }
 
-  /* line 764, ../sass/app.scss */
+  /* line 857, ../sass/app.scss */
   #nav-ring .rect-link {
     position: relative !important;
     display: inline-block !important;
   }
 
-  /* line 770, ../sass/app.scss */
+  /* line 863, ../sass/app.scss */
   #nav-ring {
     margin-top: 20px;
     padding-bottom: -25%;
   }
 
-  /* line 776, ../sass/app.scss */
+  /* line 869, ../sass/app.scss */
   .touch body.portfolio {
     padding: 0 20px;
   }
-  /* line 779, ../sass/app.scss */
+  /* line 872, ../sass/app.scss */
   .touch body.portfolio .container {
     padding: 0;
   }
 
-  /* line 784, ../sass/app.scss */
+  /* line 877, ../sass/app.scss */
   body.portfolio .portfolio-detail {
     position: relative;
     margin-top: 20px;

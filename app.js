@@ -3,22 +3,28 @@
 //     appName: 'Soapbox'
 // });
 
+process.env.SS_DIRECTORY = '/dictum';
 
 var flatiron = require('flatiron'),
 	connect = require('connect'),
 	resourceful = require('resourceful'),
     path = require('path'),
     director = require('director'),
+    http = require('http'),
+    httpProxy = require('http-proxy'),
     fs = require('fs'),
     //qs = require('querystring'),
     passport = require('passport'),
-    User = require('./models').User();
+    User = require('./models').User(),
     LocalStrategy = require('passport-local').Strategy,
-    render = require('./no_script'),
+    render = require('./no_script'),    
     app = flatiron.app;
 
 var routes = require('./routes');
 var animalRoutes = require('./routes/animals.js')
+var proxy = new httpProxy.RoutingProxy();
+
+
 
 function findByUsername(username, done) {
   User.find({"username":username}, function(err, user) {
@@ -33,6 +39,10 @@ function findByUsername(username, done) {
   	}
   });
 }
+
+
+
+
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -67,8 +77,43 @@ passport.deserializeUser(function(username, done) {
   });
 });
 
+
+eventMiddleware = function(req, res, next) {
+  var initialDir;
+  initialDir = req.url.split('/')[1];
+  if (initialDir === '_serveDev') {
+    req.url = transformURL(req.url);
+  }
+  if (staticDirs.indexOf(initialDir) >= 0 || !router.route(req.url, req, res)) {
+    return next();
+  }
+};
+
+transformURL = function(url) {
+  var i, x, _i;
+  i = 0;
+  for (x = _i = 0; _i <= 1; x = ++_i) {
+    i = url.indexOf('/', i + 1);
+  }
+  if (url[i] === '/') {
+    url = url.replace('?', '&');
+    url = url.substr(0, i) + '?' + url.substr(i + 1);
+  }
+  return url;
+};
+
+
 app.use(flatiron.plugins.http, {
 	before: [
+		function(req, res) {							
+		  var initialDir;
+		  initialDir = req.url.split('/')[1];
+		  if (initialDir === '_serveDev') {
+		    req.url = transformURL(req.url);
+		    console.log("TRANSFORMED: ", req.url);
+		  }
+		  res.emit('next');
+		},
 	    function(req, res) {
 	    	if (req.headers['user-agent'].indexOf('Google') > -1 || req.query.no_script === 'true') {
 	    		console.log(req.url, req.query, req.headers['user-agent']);
@@ -85,7 +130,7 @@ app.use(flatiron.plugins.http, {
 	    connect.static(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
 		connect.cookieParser('lolcats'),
-		connect.session({secret: "9ajk21mas8"}),
+		// connect.session({secret: "lolcats"}),
 		connect.methodOverride(),
 		passport.initialize(),
 		passport.session()
@@ -95,44 +140,73 @@ app.use(flatiron.plugins.http, {
 });
 
 
+process.SS_ROUTER = app.router;
+// console.log(process.SS_ROUTER);
+ss = require('socketstream'),
+
+ss.client.templateEngine.use(require('ss-hogan'));
+ss.client.formatters.add(require('ss-coffee'));
+ss.client.formatters.add(require('ss-stylus'));
+// ss.client.packAssets();
+
+ss.client.define('main', {
+  view: 'index.html',
+  css:  [],
+  code: ['app'],
+  // tmpl: '*'
+});
+
+
 app.router.path('/', function () {
 	this.get(function () {
+		// var self = this;
+		// fs.readFile('index.html', function(err, data) {
+		// 	if(err) {
+		// 		self.res.writeHead(404, {'Content-Type': 'text/html'});
+		// 		self.res.end("404");
+		// 		return;
+		// 	}
+		// 	self.res.writeHead(200, {'Content-Type': 'text/html'});
+		// 	self.res.end(data);
+		// });
 		var self = this;
-		fs.readFile('index.html', function(err, data) {
-			if(err) {
-				self.res.writeHead(404, {'Content-Type': 'text/html'});
-				self.res.end("404");
-				return;
-			}
-			self.res.writeHead(200, {'Content-Type': 'text/html'});
-			self.res.end(data);
-		});
+		var union = require('union');
+		console.log(union.RoutingStream.prototype.serveClient);
+		union.RoutingStream.prototype.serveClient.call(self.res, 'main');		
 	});
 
 	this.get('/:name', function(name) {
+		// var self = this;
+		// fs.readFile('public/index.html', function(err, data) {
+		// 	if(err) {
+		// 		self.res.writeHead(404, {'Content-Type': 'text/html'});
+		// 		self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
+		// 		return;
+		// 	}
+		// 	self.res.writeHead(200, {'Content-Type': 'text/html'});
+		// 	self.res.end(data);
+		// });
 		var self = this;
-		fs.readFile('public/index.html', function(err, data) {
-			if(err) {
-				self.res.writeHead(404, {'Content-Type': 'text/html'});
-				self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
-				return;
-			}
-			self.res.writeHead(200, {'Content-Type': 'text/html'});
-			self.res.end(data);
-		});
+		var union = require('union');
+		console.log(union.RoutingStream.prototype.serveClient);
+		union.RoutingStream.prototype.serveClient.call(self.res, 'main');		
 	});
 
 	this.get('blog/:name', function(name) {
+		// var self = this;
+		// fs.readFile('public/index.html', function(err, data) {
+		// 	if(err) {
+		// 		self.res.writeHead(404, {'Content-Type': 'text/html'});
+		// 		self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
+		// 		return;
+		// 	}
+		// 	self.res.writeHead(200, {'Content-Type': 'text/html'});
+		// 	self.res.end(data);
+		// });
 		var self = this;
-		fs.readFile('public/index.html', function(err, data) {
-			if(err) {
-				self.res.writeHead(404, {'Content-Type': 'text/html'});
-				self.res.end(__dirname + " 404:\n" + JSON.stringify(err));
-				return;
-			}
-			self.res.writeHead(200, {'Content-Type': 'text/html'});
-			self.res.end(data);
-		});
+		var union = require('union');
+		console.log(union.RoutingStream.prototype.serveClient);
+		union.RoutingStream.prototype.serveClient.call(self.res, 'main');
 	});
 
 	this.get('portfolio/:name', function(name) {
@@ -199,6 +273,27 @@ app.router.path('/services/blog_posts/:id', function() {
   this.delete(routes.deleteBP);
 });
 
+app.router.path('/services/comments', function() {
+	this.get(function() {
+		var self = this;
+		var union = require('union');
+		console.log(union.RoutingStream.prototype.serveClient);
+		union.RoutingStream.prototype.serveClient.call(self.res, 'main');
+	});
+});
+
+
+// app.router.path('/(\\w+)', function() {
+	// this.get(function() {
+	// 	var self = this;
+	// 	proxy.proxyRequest(self.req, self.res, {
+	// 		host: 'localhost',
+	// 		port: '3000'
+	// 	});
+	// 	self.req.end("Hello");
+	// });
+// });
+
 app.router.path('/services/blog_settings', function() {
 	this.get(routes.getSettings);
 	this.post(routes.postSettings);
@@ -218,6 +313,9 @@ var port = process.env.PORT = process.env.PORT || 9000;
 app.start(port);
 app.log.info("Started at http://localhost:" + port + "/");
 
+ss.start(app.server)
+
+// console.log(app.router)
 
 /// Remote REPL ///
 // var net = require("net"),

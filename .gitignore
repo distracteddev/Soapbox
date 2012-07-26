@@ -1,2 +1,5 @@
 node_modules
-public/.sass_cache
+public/.sass_cache/
+.DS_store
+soapbox.session
+.livereload

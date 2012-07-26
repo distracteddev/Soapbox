@@ -32,7 +32,7 @@ body.blog a {
   background: black;
   padding: 5px;
   a {
-    font-family: Ubuntu, Arial, sans-serif;
+    font-family: 'Quantico', Arial, sans-serif;
   }
 }
 
@@ -239,11 +239,32 @@ hr {
 .post {
 
 	h1, h2, h3, h4, h5, p {
-  		font-family: 'Ubuntu', Georgia, serif;
+  		font-family: 'Quantico', Georgia, serif;
   		color: rgba($pale-green, 1.0);
   		letter-spacing: 2px;
-      text-align: left;
+      
 	}
+
+  h1,h2,h3,h4 {
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+    margin-bottom: 9px;
+  }
  
 	h5 {
 	  font: 400 1.4em/1.6 'Oxygen', Verdana, Helvetica, sans-serif;
@@ -656,7 +677,79 @@ body.portfolio {
 body.portfolio .post-body .post {
   color: white !important;
   margin-top: 20px;
+
 }
+
+#comment-row {
+
+  h3, h4, .author, .comment-date {
+    font-family: Quantico;
+  }
+
+  p {
+    margin-bottom: 2px;
+  }
+
+  h3 {
+      margin-bottom: 25px;
+      padding-bottom: 5px;
+      // border-bottom: 2px solid #222;
+      background: #333;
+      padding: 5px 10px;
+      color: #eee;
+      display: inline-block;
+      text-transform: uppercase;      
+  } 
+
+  // position: relative;
+  // left: -5%;
+  .comment-date {
+    float: right;
+    font-size: .4em;
+    text-transform: uppercase;
+  }
+
+  .author {
+    font-weight: bold;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    background: #3cffdb;
+    color: #fff;
+    box-sizing: border-box;
+    padding: 1px 10px 0px 10px;
+    min-width: 50px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .comment {
+    padding: 10px;
+    border-bottom: 1px solid #dedede;
+  }
+
+  .comment-text {
+    font-size: .8em;
+  }
+
+  .reply {
+    padding: 10px 10px 10px 10%;
+    border-bottom: 1px solid #dedede;
+
+    .author {
+      background: #53ff88;
+    }
+  }
+
+  #commentForm {
+    margin-top: 20px;
+    textarea {
+      width: 100%;
+      min-height: 150px;
+    }
+  }
+
+}
+
 
 
 @media only screen and (min-width: 768px) {

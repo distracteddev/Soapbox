@@ -325,11 +325,20 @@ App.PostController = Ember.ArrayController.create({
       }
       return this.get('postPreview');
   }.observes('selectedPost.body_raw')
-
-
-
-
 });
+
+
+App.CommentsController = Ember.ArrayController.create({ 
+
+  comments: [],
+
+
+  selectedComments: function(post_id) {
+    post_id = App.PostController.get('selectedPost').get('_id');
+    return post_id;
+  }.property('selectedIndex','content.@each')
+
+}); 
 
 
 /*
@@ -368,7 +377,8 @@ App.postView = Em.View.create({
 
 App.selectedPostView = Em.View.create({
   templateName: "single-post",
-  selectedPostBinding: "App.PostController.selectedPost"
+  selectedPostBinding: "App.PostController.selectedPost",
+  commentsBinding: "App.CommentsController.selectedComments"
 });
 
 App.PostButton = Em.Button.extend({
@@ -540,6 +550,13 @@ var bindLinks = function() {
       $("#blog-nav").slideUp();
     });
 
+    require('./app').bindSubmit();
+
+    var t = setTimeout(function() {
+      require('./app').getAll();  
+    }, 500)
+    
+
   });
 }
 
@@ -550,6 +567,10 @@ var updateNav = function(loc) {
     console.log(selector);
     $(selector).addClass('current');
   });
+}
+
+window.insertComments = function() {
+
 }
 
 App.routeManager = Ember.RouteManager.create({
@@ -617,7 +638,7 @@ App.routeManager = Ember.RouteManager.create({
       //App.layout.set('header', App.portfolioHeaderView);
       updateNav(this.route);
       //App.layout.set('content', App.selectedPostView);
-      bindLinks();
+      // bindLinks();
       //setTimeout(function() {
         //$("#content").fadeIn();
       //}, 500);
