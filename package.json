@@ -15,6 +15,10 @@
     "resourceful": "git://github.com/distracteddev/resourceful.git",
     "nodetime": "*",
     "redis": "*",
+    "socketstream": "*",
+    "ss-hogan": "*",
+    "ss-coffee": "*",
+    "ss-stylus": "*",
     "resourceful-redis": "*"
   },
   "devDependencies": {

@@ -11,7 +11,6 @@ var flatiron = require('flatiron'),
     path = require('path'),
     director = require('director'),
     http = require('http'),
-    httpProxy = require('http-proxy'),
     fs = require('fs'),
     //qs = require('querystring'),
     passport = require('passport'),
@@ -22,7 +21,6 @@ var flatiron = require('flatiron'),
 
 var routes = require('./routes');
 var animalRoutes = require('./routes/animals.js')
-var proxy = new httpProxy.RoutingProxy();
 
 
 
@@ -281,18 +279,6 @@ app.router.path('/services/comments', function() {
 		union.RoutingStream.prototype.serveClient.call(self.res, 'main');
 	});
 });
-
-
-// app.router.path('/(\\w+)', function() {
-	// this.get(function() {
-	// 	var self = this;
-	// 	proxy.proxyRequest(self.req, self.res, {
-	// 		host: 'localhost',
-	// 		port: '3000'
-	// 	});
-	// 	self.req.end("Hello");
-	// });
-// });
 
 app.router.path('/services/blog_settings', function() {
 	this.get(routes.getSettings);
