@@ -334,7 +334,9 @@ App.CommentsController = Ember.ArrayController.create({
 
 
   selectedComments: function(post_id) {
-    post_id = App.PostController.get('selectedPost').get('_id');
+    if (App.PostController && App.PostController.get('selectedPost')) {
+      post_id = App.PostController.get('selectedPost').get('_id');
+    }
     return post_id;
   }.property('selectedIndex','content.@each')
 

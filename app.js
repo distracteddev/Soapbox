@@ -125,13 +125,18 @@ app.use(flatiron.plugins.http, {
 	    		res.emit('next');
 	    	}
 	    },
-	    connect.static(__dirname + '/public'),
+	  connect.static(__dirname + '/public'),
 		connect.favicon('./public/favicon.ico'),
-		connect.cookieParser('lolcats'),
-		// connect.session({secret: "lolcats"}),
-		connect.methodOverride(),
-		passport.initialize(),
-		passport.session()
+		connect.cookieParser('SocketStream'),
+     connect.session({
+       cookie: {
+         path: '/',
+         httpOnly: false
+       }
+     }),
+    connect.methodOverride(),
+    passport.initialize(),
+    passport.session()
 	],
 
 	after: []

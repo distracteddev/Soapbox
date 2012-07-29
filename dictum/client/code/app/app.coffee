@@ -45,7 +45,7 @@ exports.bindSubmit = () ->
 
 
 exports.getAll = () ->
-  post_id = App.CommentsController.get('selectedComments');
+  if App.PostController then post_id = App.CommentsController.get('selectedComments');
   console.log("POST_ID: ", post_id)
   ss.rpc 'comments.allComments', post_id, (comments) -> 
     
