@@ -15,7 +15,7 @@
     "resourceful": "git://github.com/distracteddev/resourceful.git",
     "nodetime": "*",
     "redis": "*",
-    "socketstream": "*",
+    "socketstream": "git://github.com/distracteddev/socketstream.git",
     "ss-hogan": "*",
     "ss-coffee": "*",
     "ss-stylus": "*",
