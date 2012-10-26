@@ -46,10 +46,7 @@ exports.getBP = function(id) {
           posts.sort(function(a, b) {
             return (+b.ctime)-(+a.ctime);
           });
-      posts.forEach(function(post) {
-        post.published = JSON.parse(post.published);
-        post.tags = JSON.parse(post.tags);
-      });
+
       if (self.res) self.res.end('{"blog_posts":' + JSON.stringify(posts) + "}");
       console.log(posts);
       return posts;
