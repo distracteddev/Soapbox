@@ -68,24 +68,24 @@ Ember.registerBoundHelper = function(name, func) {
 // END OF BOUND HANDLEBARS HELPER DEFINITION
 
 // START OF PATH REPLACEMENT
-	var replacePath = function() {
-		var path = window.location.pathname;
+  var replacePath = function() {
+    var path = window.location.pathname;
 
-		if (path !== "/") {
-			console.log("PATH:" + path);
-			//newState = window.location.origin 
-			//	+  "/#" + (window.location.pathname.slice(1
-			// Turns /pathName into pathName
-		    var newState = (window.location.pathname.slice(1));
-		    //App.routeManager.set('baseURI', window.location.origin);
-		    //window.history.pushState(null, null, window.location.origin);
-			console.log(newState);
-			App.routeManager.set('location', newState);
-			//window.location.pathname = "";
-			//window.location.hash = newState;
+    if (path !== "/") {
+      console.log("PATH:" + path);
+      //newState = window.location.origin 
+      //  +  "/#" + (window.location.pathname.slice(1
+      // Turns /pathName into pathName
+        var newState = (window.location.pathname.slice(1));
+        //App.routeManager.set('baseURI', window.location.origin);
+        //window.history.pushState(null, null, window.location.origin);
+      console.log(newState);
+      App.routeManager.set('location', newState);
+      //window.location.pathname = "";
+      //window.location.hash = newState;
 
-		}		
-	};		
+    }   
+  };    
 // END OF PATH REPLACEMENT
 
 var App = Em.Application.create();
@@ -93,6 +93,7 @@ var App = Em.Application.create();
 // Custom Ember Data Structure to Store an Array of tags
 DS.attr.transforms.array = {
     from: function(serialized) {
+      console.log("Serialized", serialized);
       if (typeof serialized !== 'string') {
         return serialized.join(', ');
       } else {
@@ -101,74 +102,75 @@ DS.attr.transforms.array = {
     },
 
     to: function(deserialized) {
-    	return deserialized.split(', ');
+      console.log("Deserialized", deserialized);
+      return deserialized.split(', ');
     }
 };
 
 // Initialize the Data Store provided by Ember-Data. 
 App.store = DS.Store.create({
-	revision: 4,
-  	// Use the default REST adapter. 
-	adapter: DS.RESTAdapter.create({
-		bulkCommit: false,
-		namespace: 'services'
-	})	
+  revision: 4,
+    // Use the default REST adapter. 
+  adapter: DS.RESTAdapter.create({
+    bulkCommit: false,
+    namespace: 'services'
+  })  
 });
 
 /*
  *START OF EMBER-DATA MODELS
  */
 App.BlogSetting = DS.Model.extend({
-	blog_title: DS.attr('string'),
-	resource: DS.attr('string'),
-	_id: DS.attr('string'),
-	_rev: DS.attr('string'),
-	ctime: DS.attr('date'),
-	mtime: DS.attr('date'),
-	primaryKey: "_id",
-	blog_sub_title: DS.attr('string'),
+  blog_title: DS.attr('string'),
+  resource: DS.attr('string'),
+  _id: DS.attr('string'),
+  _rev: DS.attr('string'),
+  ctime: DS.attr('date'),
+  mtime: DS.attr('date'),
+  primaryKey: "_id",
+  blog_sub_title: DS.attr('string'),
 
-	didLoad: function() {
-		//console.log("BlogSettings Loaded with id: " + this.get("_id"));	
-		//console.log(this);
-	}
+  didLoad: function() {
+    //console.log("BlogSettings Loaded with id: " + this.get("_id")); 
+    //console.log(this);
+  }
 });
 
-App.BlogPost = DS.Model.extend({	
-	title: DS.attr('string'),
-	sub_title: DS.attr('string'),
-	published: DS.attr('boolean'),
+App.BlogPost = DS.Model.extend({  
+  title: DS.attr('string'),
+  sub_title: DS.attr('string'),
+  published: DS.attr('boolean'),
     // body holds the HTML String of the post content
-	body: DS.attr('string'),
+  body: DS.attr('string'),
     // body_raw holds the Raw Markdown of the post content
-	body_raw: DS.attr('string'),
-	// Custom Data Type gets presented to the front end as a comma seperated string of values
-	// e.g "First Tag, Second Tag, Another Tag"
-	tags: DS.attr('array'),
-	_id: DS.attr('string'),
-	_rev: DS.attr('string'),
-	ctime: DS.attr('date'),
-	mtime: DS.attr('date'),
-	primaryKey: "_id",
+  body_raw: DS.attr('string'),
+  // Custom Data Type gets presented to the front end as a comma seperated string of values
+  // e.g "First Tag, Second Tag, Another Tag"
+  tags: DS.attr('array'),
+  _id: DS.attr('string'),
+  _rev: DS.attr('string'),
+  ctime: DS.attr('date'),
+  mtime: DS.attr('date'),
+  primaryKey: "_id",
 
-	tags_array: function() {
-		return this.get('tags').split(', ');
-	}.property('tags').cacheable(),
+  tags_array: function() {
+    return this.get('tags').split(', ');
+  }.property('tags').cacheable(),
 
-	didLoad: function() {
-		console.log(this.get('ctime'));
-	},
+  didLoad: function() {
+    console.log(this.get('ctime'));
+  },
 
-  	didUpdate: function() {
-	    console.log(this.get("body") + " was updated");
-	    // Refresh the view so that it updates with the latest content
-	    // TODO: Refactor this so that Ember native observers work as intended
-	    Ember.run.later(function() {
-	      App.layout.set('content', '');
-	      App.layout.set('content', App.selectedPostView);
-	      console.log("later");
-	    }, 800);
-  	}
+    didUpdate: function() {
+      console.log(this.get("body") + " was updated");
+      // Refresh the view so that it updates with the latest content
+      // TODO: Refactor this so that Ember native observers work as intended
+      Ember.run.later(function() {
+        App.layout.set('content', '');
+        App.layout.set('content', App.selectedPostView);
+        console.log("later");
+      }, 800);
+    }
 });
 
 
@@ -183,11 +185,11 @@ App.BlogPost = DS.Model.extend({
  *START OF CONTROLLERS
  */
 App.HeaderController = Ember.ArrayProxy.create({
-	content: []
+  content: []
 });
 
 App.PostController = Ember.ArrayController.create({
-	content: [],
+  content: [],
   selectedPost: function() {
     var ctn = this.get('content');
     return ctn.objectAt(this.get('selectedIndex'));
@@ -306,22 +308,22 @@ App.PostController = Ember.ArrayController.create({
 
   getPostPreview: function() {
       if (this.get('selectedPost')) {
-	    var rawMarkdown = this.get('selectedPost').get('body_raw');
-	    var obj = {};
-	    obj.md = rawMarkdown;
-	    var that = this;
-	    $.post('/markdown', obj, function(data) {
-	        window.d = data;
-	        console.log('getPostPreview fired');
-	        //return $(data).children();
-	        that.propertyWillChange('postPreview');
-	        that.set('postPreview',data);
-	        that.propertyDidChange('postPreview');
-	        var editedPost = that.get('selectedPost');
-	        editedPost.propertyWillChange('body');
-	        editedPost.set('body', data);
-	        editedPost.propertyDidChange('body');
-	    }, 'text');
+      var rawMarkdown = this.get('selectedPost').get('body_raw');
+      var obj = {};
+      obj.md = rawMarkdown;
+      var that = this;
+      $.post('/markdown', obj, function(data) {
+          window.d = data;
+          console.log('getPostPreview fired');
+          //return $(data).children();
+          that.propertyWillChange('postPreview');
+          that.set('postPreview',data);
+          that.propertyDidChange('postPreview');
+          var editedPost = that.get('selectedPost');
+          editedPost.propertyWillChange('body');
+          editedPost.set('body', data);
+          editedPost.propertyDidChange('body');
+      }, 'text');
       }
       return this.get('postPreview');
   }.observes('selectedPost.body_raw')
@@ -367,14 +369,14 @@ App.faceView = Ember.View.create({
 });
 
 App.headerView = Em.View.create({
-	templateName: "header",
-	contentBinding: 'App.HeaderController.content',
-	tagsBinding: 'App.TagController.content'
+  templateName: "header",
+  contentBinding: 'App.HeaderController.content',
+  tagsBinding: 'App.TagController.content'
 });
 
 App.postView = Em.View.create({
-	templateName: "posts",
-	contentBinding: "App.PostController.content"
+  templateName: "posts",
+  contentBinding: "App.PostController.content"
 });
 
 App.selectedPostView = Em.View.create({
@@ -404,8 +406,8 @@ App.HeaderController.set('content', App.store.find(App.BlogSetting));
 var allPosts = App.store.find(App.BlogPost);
 // Filter out the unpublished posts and add the remaining objects
 // to the PostController's content attribute
-var publishedPosts = App.store.filter(App.BlogPost, function(post) {	
-	return post.get('published');
+var publishedPosts = App.store.filter(App.BlogPost, function(post) {  
+  return post.get('published');
 });
 App.PostController.set('content', publishedPosts);
 // CUSTOM FIELD VIEW FOR EMBER TO ALLOW FOR INLINE PAGE EDITING
@@ -696,7 +698,7 @@ App.routeManager = Ember.RouteManager.create({
   }),
 
   show: Em.State.create({
-  	route: 'blog/:id',
+    route: 'blog/:id',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       var postID = stateManager.get('params').id           

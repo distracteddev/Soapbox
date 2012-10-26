@@ -13,7 +13,7 @@ ss.event.on 'newMessage', (message) ->
 
 
 ss.event.on 'newComment', (comment) ->
-  console.log "Recieved", comment
+  #console.log "Recieved New Comment", comment
   html = ss.tmpl['comments-new'].render({comment: comment})
 
   # Append it to the #chatlog div and show effect
@@ -21,36 +21,38 @@ ss.event.on 'newComment', (comment) ->
 
 
 ss.event.on 'newReply', (reply) ->
-  console.log "Recieved", reply
+  #console.log "Recieved", reply
   exports.getAll()
 
 # Show the chat form and bind to the submit action
 exports.bindSubmit = () ->
-  $('#commentForm').submit ->
+  console.log $('#commentForm').data('events')
+  unless $('#commentForm').data('events')
+    console.log "**************Binding Submit**************"
+    $('#commentForm').submit () ->
+      # Grab the message from the text box
+      text = $('#myMessage').val()
+      author = $("input[name=author]").val()
+      authorEmail = $("input[name=author-email]").val()
+      # Call the 'send' funtion (below) to ensure it's valid before sending to the server
+      exports.send author, authorEmail, text, (success) ->
+        if success
+          $('#myMessage').val('') # clear text box
+          $("input[name=author]").val('')
+          $("input[name=author-email]").val('')        
+        else
+          alert('Oops! Unable to send message')
 
-    # Grab the message from the text box
-    text = $('#myMessage').val()
-    author = $("input[name=author]").val()
-    authorEmail = $("input[name=author-email]").val()
-    # Call the 'send' funtion (below) to ensure it's valid before sending to the server
-    exports.send author, authorEmail, text, (success) ->
-      if success
-        $('#myMessage').val('') # clear text box
-        $("input[name=author]").val('')
-        $("input[name=author-email]").val('')        
-      else
-        alert('Oops! Unable to send message')
-
-    return false
+      return false
 
 
 exports.getAll = () ->
   if App.PostController then post_id = App.CommentsController.get('selectedComments');
-  console.log("POST_ID: ", post_id)
+  #console.log("POST_ID: ", post_id)
   ss.rpc 'comments.allComments', post_id, (comments) -> 
     
     comments = JSON.parse comments
-    console.log "Recieved", comments
+    #console.log "Recieved All Comments", comments
 
     html = ss.tmpl['comments-new'].render({comments: comments})
 
@@ -59,10 +61,10 @@ exports.getAll = () ->
     $("#comments").html($(html).hide().delay(100).slideDown())
 
 
-# Demonstrates sharing code between modules by exporting function
 exports.send = (author, authorEmail, text, cb) ->
   post_id = App.CommentsController.get('selectedComments');
   if valid(text) and valid(post_id) and valid(author) and valid(authorEmail)
+    console.log("Adding a valid comment");
     ss.rpc('comments.addComment', post_id, author, text, authorEmail, cb);
   else
     cb(false)

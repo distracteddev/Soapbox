@@ -17,12 +17,13 @@ exports.actions = (req, res, ss) ->
       comment: comment
       # Not Required
       authorEmail: authorEmail      
-    
+
     newComment.save (err, saved) ->
       if err is null
         console.log "New Comment Saved Succesfully", saved
         # Push out to subscribers of this post
-        saved.ctime = (new Date(saved.ctime)).toLocaleDateString()
+        saved.ctime = (new Date(+saved.ctime)).toLocaleDateString()
+        saved.replies = JSON.parse(saved.replies) if typeof saved.replies is 'string'
         ss.publish.channel post_id, 'newComment', saved
         res(true)
       else

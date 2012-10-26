@@ -70,9 +70,9 @@ Comment.prototype.getReplies = (cb) ->
 	Reply.find comment_id: @._id, (err, replies) ->
 		if err then throw err
 		# Append them to our Comment object stored in self		
-		reply.ctime = (new Date(reply.ctime)).toLocaleDateString() for reply in replies
+		reply.ctime = (new Date(+reply.ctime)).toLocaleDateString() for reply in replies
 		self.replies = replies
-		self.ctime = (new Date(self.ctime)).toLocaleDateString()
+		self.ctime = (new Date(+self.ctime)).toLocaleDateString()
 		cb()
 		return
 	return
