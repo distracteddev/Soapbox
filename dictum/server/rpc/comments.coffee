@@ -43,7 +43,8 @@ exports.actions = (req, res, ss) ->
     newReply.save (err, saved_reply) ->        
       if err is null
         # console.log "Reply added to Comment Succesfully", saved_reply
-        saved_reply.ctime = (new Date(saved_reply.ctime)).toLocaleDateString()
+        saved_reply.ctime = (new Date(+saved_reply.ctime)).toLocaleDateString()
+        saved.replies = JSON.parse(saved.replies) if typeof saved.replies is 'string'
         ss.publish.channel post_id, 'newReply', saved_reply
         res(true)
       else
