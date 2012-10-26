@@ -554,13 +554,13 @@ var bindLinks = function() {
       $("#blog-nav").slideUp();
     });
 
-    require('./app').bindSubmit();
+    if (typeof require === 'function') {
+      require('./app').bindSubmit();
 
-    var t = setTimeout(function() {
-      require('./app').getAll();  
-    }, 500)
-    
-
+      var t = setTimeout(function() {
+        require('./app').getAll();  
+      }, 500)
+    }
   });
 }
 
