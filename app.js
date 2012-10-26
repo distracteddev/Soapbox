@@ -293,6 +293,7 @@ app.router.path('/\/animals', function () {
 });
 
 
+console.log(process.env);
 var port = process.env.PORT = process.env.PORT || process.env.app_port || 9000;
 app.start(port);
 app.log.info("Started at http://localhost:" + port + "/");
