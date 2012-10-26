@@ -12,14 +12,14 @@
     "passport-local": "*",
     "marked": "*",
     "highlight": "*",
-    "resourceful": "git://github.com/distracteddev/resourceful.git",
+    "resourceful": "git://github.com/distracteddev/resourceful.git#0.2.3",
     "nodetime": "*",
     "redis": "*",
     "socketstream": "git://github.com/distracteddev/socketstream.git",
     "ss-hogan": "*",
     "ss-coffee": "*",
     "ss-stylus": "*",
-    "resourceful-redis": "*"
+    "resourceful-redis": "git://github.com/distracteddev/resourceful-redis.git"
   },
   "devDependencies": {
     "api-easy": "0.3.4",
