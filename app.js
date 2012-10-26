@@ -142,7 +142,6 @@ app.use(flatiron.plugins.http, {
 
 
 process.SS_ROUTER = app.router;
-// console.log(process.SS_ROUTER);
 ss = require('socketstream'),
 
 ss.client.templateEngine.use(require('ss-hogan'));
@@ -172,7 +171,6 @@ app.router.path('/', function () {
     // });
     var self = this;
     var union = require('union');
-    //console.log(union.RoutingStream.prototype.serveClient);
     union.RoutingStream.prototype.serveClient.call(self.res, 'main');   
   });
 
@@ -189,7 +187,6 @@ app.router.path('/', function () {
     // });
     var self = this;
     var union = require('union');
-    console.log(union.RoutingStream.prototype.serveClient);
     union.RoutingStream.prototype.serveClient.call(self.res, 'main');   
   });
 
@@ -206,7 +203,6 @@ app.router.path('/', function () {
     // });
     var self = this;
     var union = require('union');
-    console.log(union.RoutingStream.prototype.serveClient);
     union.RoutingStream.prototype.serveClient.call(self.res, 'main');
   });
 
@@ -278,7 +274,6 @@ app.router.path('/services/comments', function() {
   this.get(function() {
     var self = this;
     var union = require('union');
-    console.log(union.RoutingStream.prototype.serveClient);
     union.RoutingStream.prototype.serveClient.call(self.res, 'main');
   });
 });
@@ -302,7 +297,7 @@ var port = process.env.PORT = process.env.PORT || 9000;
 app.start(port);
 app.log.info("Started at http://localhost:" + port + "/");
 
-ss.start(app.server)
+ss.start(app.server);
 
 // console.log(app.router)
 
