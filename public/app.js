@@ -224,7 +224,7 @@ App.PostController = Ember.ArrayController.create({
   },
 
   selectLatestPost: function() {
-    this.set('selectedIndex', 0)
+    this.set('selectedIndex', 0);
   },
 
   setSelectedPost: function(title) {    
@@ -665,6 +665,7 @@ App.routeManager = Ember.RouteManager.create({
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
       console.log("Entering Blog");
+      App.PostController.selectPost(0);
       //$('body').removeClass('portfolio').addClass('blog');
       //App.layout.set('header', App.headerView);
       //App.layout.set('content', App.selectedPostView);
@@ -701,7 +702,7 @@ App.routeManager = Ember.RouteManager.create({
     route: 'blog/:id',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
-      var postID = stateManager.get('params').id           
+      var postID = stateManager.get('params').id;        
       console.log("Showing Blog Post: " + postID);
       $('body').removeClass('portfolio').addClass('blog');
       App.layout.set('banner', '');
@@ -719,7 +720,7 @@ App.routeManager = Ember.RouteManager.create({
         }, 200);
       });
     }
-  }),
+  })
 
 });
     
