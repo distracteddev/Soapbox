@@ -187,9 +187,8 @@ body.blog #headerRow dl.sub-nav dd.active a {
   color: #323232;
   padding-bottom: 3px;
   padding: 10px 20px;
-  -moz-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
   -webkit-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
-  -o-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
+  -moz-box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
   box-shadow: rgba(100, 100, 0, 0.25) 0px 0px 10px inset;
 }
 
@@ -322,8 +321,8 @@ hr {
   top: 40px;
   position: absolute;
   left: 25px;
-  -moz-transition-duration: 1s;
   -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
   -o-transition-duration: 1s;
   transition-duration: 1s;
   opacity: .1;
@@ -389,12 +388,12 @@ body.blog .post .post-date {
   text-overflow: ellipsis;
   position: relative;
   border-bottom: 1px #bbb dotted;
-  -moz-transition-property: all;
   -webkit-transition-property: all;
+  -moz-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -moz-transition-duration: 1s;
   -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
   -o-transition-duration: 1s;
   transition-duration: 1s;
 }
@@ -501,12 +500,12 @@ body.portfolio #portfolio-logo {
   margin-left: -55px;
   opacity: 1.0;
   display: block;
-  -moz-transition-property: opacity;
   -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
   -o-transition-property: opacity;
   transition-property: opacity;
-  -moz-transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
@@ -533,12 +532,12 @@ body.portfolio .sub-nav dd a {
   margin-right: 10px;
   padding: 10px 0;
   position: relative;
-  -moz-transition-property: all;
   -webkit-transition-property: all;
+  -moz-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -moz-transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
@@ -607,20 +606,19 @@ body.portfolio #nav-ring .rect-link {
   text-align: center;
   display: inline-block;
   min-width: 160px;
-  -moz-transition-property: all;
   -webkit-transition-property: all;
+  -moz-transition-property: all;
   -o-transition-property: all;
   transition-property: all;
-  -moz-transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
 /* line 644, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:hover {
-  -moz-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   -webkit-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
-  -o-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
+  -moz-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
 }
 /* line 652, ../sass/app.scss */
