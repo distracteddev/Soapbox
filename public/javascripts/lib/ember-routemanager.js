@@ -548,7 +548,7 @@ Ember.RouteManager = Ember.StateManager.extend({
 
   popState: function(event) {
     var routes = this;
-    console.log("Routes:", routes)
+    //console.log("Routes:", routes)
     var base = get(routes, 'baseURI'), loc = (base.charAt(0) === '/') ? document.location.pathname : document.location.href;
 
     if(loc.slice(0, base.length) === base) {

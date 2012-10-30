@@ -26,9 +26,9 @@ ss.event.on 'newReply', (reply) ->
 
 # Show the chat form and bind to the submit action
 exports.bindSubmit = () ->
-  console.log $('#commentForm').data('events')
+  #console.log $('#commentForm').data('events')
   unless $('#commentForm').data('events')
-    console.log "**************Binding Submit**************"
+    #console.log "**************Binding Submit**************"
     $('#commentForm').submit () ->
       # Grab the message from the text box
       text = $('#myMessage').val()

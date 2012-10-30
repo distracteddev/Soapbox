@@ -69,7 +69,7 @@
       <div class="post-body post row">
          <section class="post post-sidebar">
           {{#if App.PostController.authorized}}
-            {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom"}}
+            {{view Ember.Checkbox title="Published" valueBinding="published" classNames="custom published" tagName="form"}}
             {{#view App.PostButton action="save" classNames="button green" tagName="button"}}
               Save
             {{/view}}
@@ -299,6 +299,7 @@
 	<script src="/javascripts/jquery.tooltips.js"></script>
 	<script src="/javascripts/jquery.text-expander.js"></script>
   <script src="/javascripts/jquery.hoverIntent.min.js"></script>
+  <script src="/javascripts/jquery.customforms.js"></script>
   <script src="/javascripts/lib/ember.js"></script>
   <script src="/javascripts/lib/ember-data.js"></script>
   <script src="/javascripts/lib/ember-routemanager.js"></script>

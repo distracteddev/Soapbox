@@ -72,14 +72,14 @@ Ember.registerBoundHelper = function(name, func) {
     var path = window.location.pathname;
 
     if (path !== "/") {
-      console.log("PATH:" + path);
+      //console.log("PATH:" + path);
       //newState = window.location.origin 
       //  +  "/#" + (window.location.pathname.slice(1
       // Turns /pathName into pathName
         var newState = (window.location.pathname.slice(1));
         //App.routeManager.set('baseURI', window.location.origin);
         //window.history.pushState(null, null, window.location.origin);
-      console.log(newState);
+      //console.log(newState);
       App.routeManager.set('location', newState);
       //window.location.pathname = "";
       //window.location.hash = newState;
@@ -93,7 +93,7 @@ var App = Em.Application.create();
 // Custom Ember Data Structure to Store an Array of tags
 DS.attr.transforms.array = {
     from: function(serialized) {
-      console.log("Serialized", serialized);
+      //console.log("Serialized", serialized);
       if (typeof serialized !== 'string') {
         return serialized.join(', ');
       } else {
@@ -102,7 +102,7 @@ DS.attr.transforms.array = {
     },
 
     to: function(deserialized) {
-      console.log("Deserialized", deserialized);
+      //console.log("Deserialized", deserialized);
       return deserialized.split(', ');
     }
 };
@@ -158,17 +158,16 @@ App.BlogPost = DS.Model.extend({
   }.property('tags').cacheable(),
 
   didLoad: function() {
-    console.log(this.get('ctime'));
+    //console.log(this.get('ctime'));
   },
 
     didUpdate: function() {
-      console.log(this.get("body") + " was updated");
+      //console.log(this.get("body") + " was updated");
       // Refresh the view so that it updates with the latest content
       // TODO: Refactor this so that Ember native observers work as intended
       Ember.run.later(function() {
         App.layout.set('content', '');
         App.layout.set('content', App.selectedPostView);
-        console.log("later");
       }, 800);
     }
 });
@@ -195,13 +194,13 @@ App.PostController = Ember.ArrayController.create({
     return ctn.objectAt(this.get('selectedIndex'));
   }.property('selectedIndex','content.@each'),
 
-  selectedIndex: null,
+  selectedIndex: 0,
   hasEdited: false,
   postPreview: null,
 
   save: function () {
     App.store.commit();
-    console.log("Store was committed");
+    //console.log("Store was committed");
   },
 
   revert: function() {
@@ -230,7 +229,7 @@ App.PostController = Ember.ArrayController.create({
   setSelectedPost: function(title) {    
     var clientId = App.store.find(App.BlogPost, title).clientId;     
     var targetIndex = this.get('content').get('content').indexOf(clientId);
-    console.log("clientId: ", clientId, "targetIndex", targetIndex);
+    //console.log("clientId: ", clientId, "targetIndex", targetIndex);
     if (targetIndex !== -1 ) {
       this.set('selectedIndex', targetIndex);
     } else {
@@ -243,7 +242,9 @@ App.PostController = Ember.ArrayController.create({
       this.selectLatestPost();
     }
     else {
-      this.set('selectedIndex', this.selectedIndex + idx);
+      if (this.get('selectedIndex') + idx > 0) {
+        this.set('selectedIndex', this.get('selectedIndex') + idx);
+      }
     }
   },
 
@@ -307,6 +308,7 @@ App.PostController = Ember.ArrayController.create({
   }.property('selectedIndex', 'content.@each'),  
 
   getPostPreview: function() {
+      console.log("Selected Post", this.get('selectedPost'));
       if (this.get('selectedPost')) {
       var rawMarkdown = this.get('selectedPost').get('body_raw');
       var obj = {};
@@ -314,15 +316,17 @@ App.PostController = Ember.ArrayController.create({
       var that = this;
       $.post('/markdown', obj, function(data) {
           window.d = data;
-          console.log('getPostPreview fired');
+          //console.log('getPostPreview fired');
           //return $(data).children();
           that.propertyWillChange('postPreview');
           that.set('postPreview',data);
           that.propertyDidChange('postPreview');
           var editedPost = that.get('selectedPost');
-          editedPost.propertyWillChange('body');
-          editedPost.set('body', data);
-          editedPost.propertyDidChange('body');
+          if (editedPost) {  
+            editedPost.propertyWillChange('body');
+            editedPost.set('body', data);
+            editedPost.propertyDidChange('body');
+          }
       }, 'text');
       }
       return this.get('postPreview');
@@ -394,6 +398,11 @@ App.PostButton = Em.Button.extend({
 App.bannerView = Ember.View.create({
   templateName: 'top-banner'
 });
+
+Ember.Checkbox.prototype.didInsertElement = function() {
+  $.foundation.customForms.appendCustomMarkup();
+};
+
 
 /*
  *END OF EMBER-VIEWS
@@ -469,15 +478,15 @@ App.EditField = Ember.View.extend({
 // {{ editable blog_post_content textArea="true"}}
 Ember.Handlebars.registerHelper('editable', function(path, options) {
   options.hash.valueBinding = path;
-  console.log(path);
+  //console.log(path);
   if (path === "body") {
     options.hash.rawBinding = path + "_raw";
-    console.log(options.hash);
+    //console.log(options.hash);
   }
   else if (path == "tags") {
     options.hash.tagsArrayBinding = path + "_array";
   }
-  else { console.log(path); }
+  //else { console.log(path); }
   return Ember.Handlebars.helpers.view.call(this, App.EditField, options);
 });
 
@@ -494,7 +503,7 @@ Ember.registerBoundHelper('preview', function(path) {
 
 // Returns a nicely formatted and localized date from a javascript Date() object
 Ember.Handlebars.registerHelper('date', function(path, options) {
- console.log(path);
+ //console.log(path);
  date = options.contexts[0].get(path);
  if (typeof date === "undefined") {date = new Date()}
  dateArray = date.toDateString().split(' ');
@@ -513,7 +522,7 @@ Ember.Handlebars.registerHelper('date', function(path, options) {
 var bindLinks = function() {
     // Bind all HashMark Links to 
   Ember.run.next(function() {
-    console.log(" BINDING LINKS ")
+    //console.log(" BINDING LINKS ")
     $('a').click(function() {
       var el = $(this);
       var target = el.attr('href').replace('#', '');
@@ -559,23 +568,52 @@ var bindLinks = function() {
 
       var t = setTimeout(function() {
         require('./app').getAll();  
-      }, 500)
+      }, 500);
     }
   });
-}
+};
 
 var updateNav = function(loc) {
   Ember.run.next(function() {
     $('.sub-nav a').show().removeClass('current');
-    var selector = "a[href=#" + loc + "]"
-    console.log(selector);
+    var selector = "a[href=#" + loc + "]";
+    //console.log(selector);
     $(selector).addClass('current');
   });
-}
+};
 
 window.insertComments = function() {
 
-}
+};
+
+App.autoLogin = function(username, password) {
+
+  if (arguments.length > 0) {
+    setLoginInfo();
+  } else {
+    login();
+  }
+
+  function setLoginInfo() {
+    if (window.localStorage) {
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+    }
+  }
+
+  function login() {
+    if (window.localStorage) {
+      var username = localStorage.getItem('username');
+      var pass = localStorage.getItem('password');
+      if (username && pass) {
+        $("input[name=username]").val(username);
+        $("input[name=password]").val(pass);
+        Author.getObject().logIn();
+      }
+    }
+  }
+
+};
 
 App.routeManager = Ember.RouteManager.create({
 
@@ -585,7 +623,8 @@ App.routeManager = Ember.RouteManager.create({
   home: Em.State.create({
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
-      App.routeManager.set('location', 'portfolio')
+      App.routeManager.set('location', 'blog');
+      App.autoLogin();
     }
   }),
 
@@ -604,6 +643,7 @@ App.routeManager = Ember.RouteManager.create({
         // App.layout.set('content', App.selectedPostView);
         bindLinks();
         bindPortfolioAnimation();
+        App.autoLogin();
         Ember.run.next(function() {
           $("#switch").hide();
           $("#content").hide();
@@ -620,10 +660,11 @@ App.routeManager = Ember.RouteManager.create({
         this._super(stateManager, transition);
         var params = stateManager.get('params');
         var postId = params.id;
-        console.log(postId);
+        //console.log(postId);
         $('body').removeClass('blog').addClass('portfolio');
         App.layout.set('header', App.portfolioHeaderView);
         App.layout.set('content', App.faceView);
+        App.autoLogin();
       }
     })    
   }),
@@ -632,11 +673,12 @@ App.routeManager = Ember.RouteManager.create({
     route: 'blog',
     enter: function(stateManager, transition) {
       this._super(stateManager, transition);
-      console.log("Entering Blog");
+      //console.log("Entering Blog");
       $('body').removeClass('portfolio').addClass('blog');
       App.layout.set('banner', '');
       App.layout.set('header', App.headerView);
       App.layout.set('content', App.selectedPostView);
+      App.autoLogin();
       //bindLinks();  
       //$('body').removeClass('blog').addClass('portfolio');
       //App.layout.set('header', App.portfolioHeaderView);
@@ -694,6 +736,7 @@ App.routeManager = Ember.RouteManager.create({
       enter: function(statemanager, transition) {
         this._super(statemanager, transition);
         $("#reveal-Login").reveal();
+        $("input[name=username]").focus();
       }
     })
   }),
@@ -708,6 +751,7 @@ App.routeManager = Ember.RouteManager.create({
       App.layout.set('banner', '');
       App.layout.set('header', App.headerView);
       App.layout.set('content', App.selectedPostView);   
+      App.autoLogin();
       bindLinks();
         $('body').hide();
       Ember.run.next(function() {
@@ -742,8 +786,9 @@ ExposedAuthor = function() {
   var authorized = false;
 
   var loginPrivate = function() {
-      $.post("login", $("#login-form").serialize(), function(data) {
-        var auth = String(data)
+    var form = $("#login-form");
+      $.post("/login", form.serialize(), function(data) {
+        var auth = String(data);
         if (auth === 'true') {
           $("#login-sucess").fadeIn().delay(3000).fadeOut();
           App.PostController.propertyWillChange('authorized');
@@ -753,6 +798,8 @@ ExposedAuthor = function() {
           App.PostController.set('content', allPosts);
           App.PostController.propertyDidChange('content');
           $("#reveal-Login").trigger("reveal:close");
+          var formData = form.serializeArray();
+          App.autoLogin(formData[0].value, formData[1].value);
         }
         else {
           authorized = false;
@@ -767,12 +814,13 @@ ExposedAuthor = function() {
     isLoggedIn: function() {
       return authorized;
     }
-  }
+  };
 }();
 
-function objectHider(obj)
-{
-    this.getObject=function(){return obj;}
+function objectHider(obj) {
+    this.getObject=function(){
+      return obj;
+    };
 }
 // Call Author.getObject() to get the instance of our hidden
 // ExposedAuthor object.
@@ -790,7 +838,6 @@ $(function() {
     // Bind the reveal:close event so that it replaces the route-managers
     // state with its previous one.
     $('body').bind('reveal:close', function () {
-      console.log("reveal was closed");
       App.routeManager.set('location','blog'); 
     });
 
@@ -813,7 +860,6 @@ $(function() {
       });
 
       $("#login").click(function() {
-        console.log(" I RAN ");
         App.routeManager.set('location', 'login');
         return false;
       });     
@@ -821,7 +867,7 @@ $(function() {
 
     $('body').bind("soapbox:blog_posts_loaded.soapbox",function() {
       Ember.run.next(function() {
-        App.PostController.selectNextPost();
+        App.PostController.selectLatestPost();
       });
     });
     var hiddenText = $("#ce");

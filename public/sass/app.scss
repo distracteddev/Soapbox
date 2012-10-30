@@ -9,6 +9,16 @@ $text-color: #000;
 ///// GLOBAL STYLES ////////
 ////////////////////////////
 
+h1, h2, h3, h4, h5, h6 {
+  color: #ccc;
+}
+
+form.custom span.custom.checkbox {
+  position: relative;
+  top: 3px;
+  left: -5px;
+}
+
 // Hide all Alert Boxes at first
 div.alert-box {
     display: none;
@@ -444,7 +454,7 @@ body.blog .post .post-date {
 
 code {
   font-family: monospace, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   letter-spacing: 0px;
   background-color: #000;
   line-height: 1.3em;
