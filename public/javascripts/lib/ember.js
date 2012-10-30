@@ -103,7 +103,7 @@ window.ember_deprecate = function(message, test) {
     stackStr = "\n    " + stack.slice(2).join("\n    ");
   }
 
-  console.warn("DEPRECATION: "+message+stackStr);
+  //console.warn("DEPRECATION: "+message+stackStr);
 };
 
 
