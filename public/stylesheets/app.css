@@ -254,6 +254,11 @@ hr {
   font-variant: 0;
 }
 /* line 287, ../sass/app.scss */
+.post img {
+  display: block;
+  margin: 5px auto;
+}
+/* line 292, ../sass/app.scss */
 .post .post-title {
   /*padding-left: 30px;*/
   font-family: 'Ubuntu', Georgia, serif;
@@ -261,18 +266,18 @@ hr {
   /*font-size: 2em;*/
   text-transform: uppercase;
 }
-/* line 295, ../sass/app.scss */
+/* line 300, ../sass/app.scss */
 .post .post-sub-title {
   margin-bottom: 5px;
   font-size: 1.5rem;
 }
-/* line 300, ../sass/app.scss */
+/* line 305, ../sass/app.scss */
 .post .post-sidebar {
   position: relative;
   float: left;
   position: absolute;
 }
-/* line 305, ../sass/app.scss */
+/* line 310, ../sass/app.scss */
 .post .post-sidebar button {
   float: right;
   clear: right;
@@ -284,16 +289,16 @@ hr {
   position: fixed;
   width: 75px;
 }
-/* line 317, ../sass/app.scss */
+/* line 322, ../sass/app.scss */
 .post .post-sidebar button.green {
   top: 235px;
 }
-/* line 321, ../sass/app.scss */
+/* line 326, ../sass/app.scss */
 .post .post-sidebar button.yellow {
   top: 270px;
   background: #535;
 }
-/* line 327, ../sass/app.scss */
+/* line 332, ../sass/app.scss */
 .post p, .post blockquote {
   font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
@@ -302,7 +307,7 @@ hr {
   font-size: 1.8rem;
   line-height: 1.6;
 }
-/* line 337, ../sass/app.scss */
+/* line 342, ../sass/app.scss */
 .post p.post-body:first-letter {
   font-size: 64px;
   line-height: 10px;
@@ -310,7 +315,7 @@ hr {
   padding-right: 10px;
   font: 400 45px/0.8 "Pacifico", Georgia, serif;
 }
-/* line 346, ../sass/app.scss */
+/* line 351, ../sass/app.scss */
 .post .post-date {
   background: #000;
   padding: 7px 12px;
@@ -321,13 +326,13 @@ hr {
   z-index: 1;
   left: -130px;
 }
-/* line 356, ../sass/app.scss */
+/* line 361, ../sass/app.scss */
 .post .post-date .tags {
   clear: both;
   float: right;
   margin-top: 5px;
 }
-/* line 362, ../sass/app.scss */
+/* line 367, ../sass/app.scss */
 .post .post-date #tag-list {
   display: none;
   top: 40px;
@@ -339,34 +344,34 @@ hr {
   transition-duration: 1s;
   opacity: .1;
 }
-/* line 370, ../sass/app.scss */
+/* line 375, ../sass/app.scss */
 .post .post-date #tag-list:hover {
   opacity: 1.0;
 }
 
-/* line 378, ../sass/app.scss */
+/* line 383, ../sass/app.scss */
 body.blog .post .post-date {
   top: -52px;
 }
 
-/* line 383, ../sass/app.scss */
+/* line 388, ../sass/app.scss */
 #reveal-Login {
   width: 300px;
   margin-left: -200px;
 }
 
-/* line 390, ../sass/app.scss */
+/* line 395, ../sass/app.scss */
 #reveal-delete button {
   margin-right: 50px;
   margin-top: 20px;
 }
 
-/* line 396, ../sass/app.scss */
+/* line 401, ../sass/app.scss */
 .previous {
   float: left !important;
 }
 
-/* line 401, ../sass/app.scss */
+/* line 406, ../sass/app.scss */
 #livePreview {
   position: relative;
   left: 50%;
@@ -375,20 +380,20 @@ body.blog .post .post-date {
   padding-left: 20px;
 }
 
-/* line 409, ../sass/app.scss */
+/* line 414, ../sass/app.scss */
 #rawMarkdown {
   position: absolute;
   left: 00%;
   width: 500px;
   width: 50%;
 }
-/* line 415, ../sass/app.scss */
+/* line 420, ../sass/app.scss */
 #rawMarkdown textarea {
   line-height: 2.2rem;
   font-size: 1.4rem;
 }
 
-/* line 421, ../sass/app.scss */
+/* line 426, ../sass/app.scss */
 .next, .previous {
   float: right;
   font: 400 1.2em/1.2 "Oxygen", Georgia, serif;
@@ -409,27 +414,27 @@ body.blog .post .post-date {
   -o-transition-duration: 1s;
   transition-duration: 1s;
 }
-/* line 434, ../sass/app.scss */
+/* line 439, ../sass/app.scss */
 .next:hover, .previous:hover {
   color: #333;
   border-color: #333;
 }
 
-/* line 443, ../sass/app.scss */
+/* line 448, ../sass/app.scss */
 .ctr-ctn {
   float: right;
   position: relative;
   right: 50%;
 }
 
-/* line 449, ../sass/app.scss */
+/* line 454, ../sass/app.scss */
 .ctr-block {
   float: right;
   position: relative;
   right: -50%;
 }
 
-/* line 455, ../sass/app.scss */
+/* line 460, ../sass/app.scss */
 code {
   font-family: monospace, sans-serif;
   font-size: 1.2rem;
@@ -449,49 +454,49 @@ code {
   /* Internet Explorer 5.5+ */
 }
 
-/* line 474, ../sass/app.scss */
+/* line 479, ../sass/app.scss */
 body.portfolio {
   background: black url("/images/home/Galaxy_BG.jpg") no-repeat center top;
 }
-/* line 477, ../sass/app.scss */
+/* line 482, ../sass/app.scss */
 body.portfolio h1, body.portfolio h2, body.portfolio h3, body.portfolio h4, body.portfolio h5, body.portfolio h6, body.portfolio p, body.portfolio a {
   color: #9df8db;
 }
-/* line 483, ../sass/app.scss */
+/* line 488, ../sass/app.scss */
 body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .post p, body.portfolio .post a, body.portfolio .portfolio-detail h1, body.portfolio .portfolio-detail h2, body.portfolio .portfolio-detail h3, body.portfolio .portfolio-detail h4, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6, body.portfolio .portfolio-detail p, body.portfolio .portfolio-detail a {
   color: rgba(157, 248, 219, 0.9);
   margin: 0px 0 10px;
 }
-/* line 488, ../sass/app.scss */
+/* line 493, ../sass/app.scss */
 body.portfolio .post a, body.portfolio .portfolio-detail a {
   color: #fff;
 }
-/* line 491, ../sass/app.scss */
+/* line 496, ../sass/app.scss */
 body.portfolio .post a:hover, body.portfolio .portfolio-detail a:hover {
   border-bottom: 1px #bbb dotted;
 }
-/* line 496, ../sass/app.scss */
+/* line 501, ../sass/app.scss */
 body.portfolio .post h1, body.portfolio .post h2, body.portfolio .post h3, body.portfolio .post h4, body.portfolio .post h5, body.portfolio .post h6, body.portfolio .portfolio-detail h1, body.portfolio .portfolio-detail h2, body.portfolio .portfolio-detail h3, body.portfolio .portfolio-detail h4, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6 {
   font-family: Quantico;
 }
-/* line 501, ../sass/app.scss */
+/* line 506, ../sass/app.scss */
 body.portfolio .post h5, body.portfolio .post h6, body.portfolio .portfolio-detail h5, body.portfolio .portfolio-detail h6 {
   margin-bottom: -9px;
   opacity: 0.6;
 }
-/* line 506, ../sass/app.scss */
+/* line 511, ../sass/app.scss */
 body.portfolio .post h5.post-sub-title, body.portfolio .portfolio-detail h5.post-sub-title {
   margin-bottom: 20px;
   font-size: .6em;
   opacity: 1.0;
   text-transform: uppercase;
 }
-/* line 513, ../sass/app.scss */
+/* line 518, ../sass/app.scss */
 body.portfolio .post .post-date, body.portfolio .portfolio-detail .post-date {
   background-color: #9df8db;
   color: black;
 }
-/* line 518, ../sass/app.scss */
+/* line 523, ../sass/app.scss */
 body.portfolio .post hr, body.portfolio .portfolio-detail hr {
   border-color: #000;
   border-width: 0px;
@@ -505,7 +510,7 @@ body.portfolio .post hr, body.portfolio .portfolio-detail hr {
   margin-bottom: 8px;
   z-index: 0;
 }
-/* line 534, ../sass/app.scss */
+/* line 539, ../sass/app.scss */
 body.portfolio #portfolio-logo {
   position: relative;
   left: 50%;
@@ -521,24 +526,24 @@ body.portfolio #portfolio-logo {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 543, ../sass/app.scss */
+/* line 548, ../sass/app.scss */
 body.portfolio #portfolio-logo:hover {
   opacity: 1.0;
 }
-/* line 548, ../sass/app.scss */
+/* line 553, ../sass/app.scss */
 body.portfolio .sub-nav {
   padding: 20px 0;
   font-family: Quantico;
   font-size: 1.0em;
   text-transform: uppercase;
 }
-/* line 559, ../sass/app.scss */
+/* line 564, ../sass/app.scss */
 body.portfolio .sub-nav dd {
   letter-spacing: .15em;
   display: block;
   position: relative;
 }
-/* line 565, ../sass/app.scss */
+/* line 570, ../sass/app.scss */
 body.portfolio .sub-nav dd a {
   display: block;
   margin-right: 10px;
@@ -553,24 +558,24 @@ body.portfolio .sub-nav dd a {
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-/* line 575, ../sass/app.scss */
+/* line 580, ../sass/app.scss */
 body.portfolio .sub-nav dd a.current, body.portfolio .sub-nav dd a:hover, body.portfolio .sub-nav dd a.current:hover, body.portfolio .sub-nav dd a:hover {
   font-weight: 700;
   z-index: 12;
   text-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   width: 110%;
 }
-/* line 583, ../sass/app.scss */
+/* line 588, ../sass/app.scss */
 body.portfolio .sub-nav dd a:hover {
   font-weight: 400;
 }
-/* line 590, ../sass/app.scss */
+/* line 595, ../sass/app.scss */
 body.portfolio #face {
   position: relative;
   left: 50%;
   margin-left: -140px;
 }
-/* line 597, ../sass/app.scss */
+/* line 602, ../sass/app.scss */
 body.portfolio #face-ctn {
   position: relatve;
   padding-top: 40px;
@@ -578,33 +583,33 @@ body.portfolio #face-ctn {
   background: url("/images/home/Pentagon_Ring.png") no-repeat center;
   background-position: 50% 0px;
 }
-/* line 605, ../sass/app.scss */
+/* line 610, ../sass/app.scss */
 body.portfolio .portfolio-detail {
   position: absolute;
   top: 10%;
   left: -100%;
 }
-/* line 610, ../sass/app.scss */
+/* line 615, ../sass/app.scss */
 body.portfolio .portfolio-detail p {
   font-size: 1.0em;
   line-height: 1.6em;
   font-family: 'Oxygen', Verdana, Helvetica, sans-serif;
   letter-spacing: 1px;
 }
-/* line 619, ../sass/app.scss */
+/* line 624, ../sass/app.scss */
 body.portfolio .portfolio-back {
   font-family: Quantico;
   font-weight: 700;
 }
-/* line 624, ../sass/app.scss */
+/* line 629, ../sass/app.scss */
 body.portfolio #headerRow {
   padding-top: 2.5%;
 }
-/* line 630, ../sass/app.scss */
+/* line 635, ../sass/app.scss */
 body.portfolio #nav-ring #featured-project {
   min-width: 200px !important;
 }
-/* line 634, ../sass/app.scss */
+/* line 639, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link {
   position: relative;
   z-index: 10;
@@ -627,13 +632,13 @@ body.portfolio #nav-ring .rect-link {
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-/* line 654, ../sass/app.scss */
+/* line 659, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:hover {
   -webkit-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   -moz-box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
   box-shadow: rgba(157, 248, 219, 0.5) 0px 0px 10px, rgba(157, 248, 219, 0.8) 0px 0px 5px, rgba(157, 248, 219, 0.1) 0px 0px 15px;
 }
-/* line 662, ../sass/app.scss */
+/* line 667, ../sass/app.scss */
 body.portfolio #nav-ring .rect-link:before {
   content: "";
   display: block;
@@ -646,28 +651,28 @@ body.portfolio #nav-ring .rect-link:before {
   border: 2px solid #000;
 }
 
-/* line 680, ../sass/app.scss */
+/* line 685, ../sass/app.scss */
 .button.new-post {
   position: fixed;
   top: 0px;
   right: 0px;
 }
 
-/* line 687, ../sass/app.scss */
+/* line 692, ../sass/app.scss */
 body.portfolio .post-body .post {
   color: white !important;
   margin-top: 20px;
 }
 
-/* line 695, ../sass/app.scss */
+/* line 700, ../sass/app.scss */
 #comment-row h3, #comment-row h4, #comment-row .author, #comment-row .comment-date {
   font-family: Quantico;
 }
-/* line 699, ../sass/app.scss */
+/* line 704, ../sass/app.scss */
 #comment-row p {
   margin-bottom: 2px;
 }
-/* line 703, ../sass/app.scss */
+/* line 708, ../sass/app.scss */
 #comment-row h3 {
   margin-bottom: 25px;
   padding-bottom: 5px;
@@ -677,13 +682,13 @@ body.portfolio .post-body .post {
   display: inline-block;
   text-transform: uppercase;
 }
-/* line 716, ../sass/app.scss */
+/* line 721, ../sass/app.scss */
 #comment-row .comment-date {
   float: right;
   font-size: .4em;
   text-transform: uppercase;
 }
-/* line 722, ../sass/app.scss */
+/* line 727, ../sass/app.scss */
 #comment-row .author {
   font-weight: bold;
   font-size: 0.7em;
@@ -696,139 +701,139 @@ body.portfolio .post-body .post {
   display: inline-block;
   text-align: center;
 }
-/* line 735, ../sass/app.scss */
+/* line 740, ../sass/app.scss */
 #comment-row .comment {
   padding: 10px;
   border-bottom: 1px solid #dedede;
 }
-/* line 740, ../sass/app.scss */
+/* line 745, ../sass/app.scss */
 #comment-row .comment-text {
   font-size: .8em;
 }
-/* line 744, ../sass/app.scss */
+/* line 749, ../sass/app.scss */
 #comment-row .reply {
   padding: 10px 10px 10px 10%;
   border-bottom: 1px solid #dedede;
 }
-/* line 748, ../sass/app.scss */
+/* line 753, ../sass/app.scss */
 #comment-row .reply .author {
   background: #53ff88;
 }
-/* line 753, ../sass/app.scss */
+/* line 758, ../sass/app.scss */
 #comment-row #commentForm {
   margin-top: 20px;
 }
-/* line 755, ../sass/app.scss */
+/* line 760, ../sass/app.scss */
 #comment-row #commentForm textarea {
   width: 100%;
   min-height: 150px;
 }
 
 @media only screen and (min-width: 768px) {
-  /* line 766, ../sass/app.scss */
+  /* line 771, ../sass/app.scss */
   #dl-resume {
     left: 23%;
     bottom: 90px;
   }
 
-  /* line 773, ../sass/app.scss */
+  /* line 778, ../sass/app.scss */
   #about {
     left: 60%;
     bottom: 556px;
   }
 
-  /* line 778, ../sass/app.scss */
+  /* line 783, ../sass/app.scss */
   #featured-project {
     bottom: 475px;
     left: -15%;
   }
 
-  /* line 783, ../sass/app.scss */
+  /* line 788, ../sass/app.scss */
   #skills {
     bottom: 260px;
     left: 75%;
   }
 
-  /* line 788, ../sass/app.scss */
+  /* line 793, ../sass/app.scss */
   #zeus-name {
     position: relative;
     bottom: 190px;
     left: 6%;
   }
 
-  /* line 794, ../sass/app.scss */
+  /* line 799, ../sass/app.scss */
   body.portfolio .portfolio-content {
     margin-top: 0px;
   }
 }
 @media only screen and (min-width: 860px) {
-  /* line 800, ../sass/app.scss */
+  /* line 805, ../sass/app.scss */
   #dl-resume {
     left: 30%;
     bottom: 90px;
   }
 
-  /* line 807, ../sass/app.scss */
+  /* line 812, ../sass/app.scss */
   #about {
     left: 60%;
   }
 
-  /* line 812, ../sass/app.scss */
+  /* line 817, ../sass/app.scss */
   #featured-project {
     left: 0%;
   }
 
-  /* line 816, ../sass/app.scss */
+  /* line 821, ../sass/app.scss */
   #skills {
     left: 70%;
   }
 
-  /* line 821, ../sass/app.scss */
+  /* line 826, ../sass/app.scss */
   #zeus-name {
     position: relative;
     bottom: 190px;
     left: 6%;
   }
 
-  /* line 827, ../sass/app.scss */
+  /* line 832, ../sass/app.scss */
   body.portfolio #content {
     margin-top: 40px;
   }
 }
 @media only screen and (max-width: 767px) {
-  /* line 857, ../sass/app.scss */
+  /* line 862, ../sass/app.scss */
   #zeus-name {
     margin-bottom: 20px;
     display: block;
   }
 
-  /* line 862, ../sass/app.scss */
+  /* line 867, ../sass/app.scss */
   #face-ctn {
     background: none !important;
   }
 
-  /* line 867, ../sass/app.scss */
+  /* line 872, ../sass/app.scss */
   #nav-ring .rect-link {
     position: relative !important;
     display: inline-block !important;
   }
 
-  /* line 873, ../sass/app.scss */
+  /* line 878, ../sass/app.scss */
   #nav-ring {
     margin-top: 20px;
     padding-bottom: -25%;
   }
 
-  /* line 879, ../sass/app.scss */
+  /* line 884, ../sass/app.scss */
   .touch body.portfolio {
     padding: 0 20px;
   }
-  /* line 882, ../sass/app.scss */
+  /* line 887, ../sass/app.scss */
   .touch body.portfolio .container {
     padding: 0;
   }
 
-  /* line 887, ../sass/app.scss */
+  /* line 892, ../sass/app.scss */
   body.portfolio .portfolio-detail {
     position: relative;
     margin-top: 20px;
