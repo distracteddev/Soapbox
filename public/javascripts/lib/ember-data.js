@@ -2871,9 +2871,6 @@ DS.attr = function(type, options) {
     }
 
     return transformFrom(value);
-  // `data` is never set directly. However, it may be
-  // invalidated from the state manager's setData
-  // event.
   }).property('data').cacheable().meta(meta);
 };
 
