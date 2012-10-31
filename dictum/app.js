@@ -11,7 +11,7 @@ consoleServer.listen(5000);
 ss.client.define('main', {
   view: 'app.html',
   css:  ['libs/reset.css', 'app.styl'],
-  code: ['libs/jquery.min.js', 'app'],
+  code: ['libs', 'app'],
   tmpl: '*'
 });
 
