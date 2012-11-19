@@ -145,7 +145,9 @@ ss = require('socketstream'),
 ss.client.templateEngine.use(require('ss-hogan'));
 ss.client.formatters.add(require('ss-coffee'));
 ss.client.formatters.add(require('ss-stylus'));
-// ss.client.packAssets();
+if (ss.env === 'production') {
+  ss.client.packAssets();
+}
 
 ss.client.define('main', {
   view: 'index.html',
