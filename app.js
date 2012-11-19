@@ -4,6 +4,7 @@
 // });
 
 process.env.SS_DIRECTORY = '/dictum';
+process.env.SS_ENV = process.env.NODE_ENV;
 
 var flatiron = require('flatiron'),
     connect = require('connect'),
@@ -11,7 +12,6 @@ var flatiron = require('flatiron'),
     director = require('director'),
     http = require('http'),
     fs = require('fs'),
-    //qs = require('querystring'),
     passport = require('passport'),
     User = require('./models').User(),
     LocalStrategy = require('passport-local').Strategy,
@@ -36,8 +36,6 @@ function findByUsername(username, done) {
     }
   });
 }
-
-
 
 
 
@@ -123,7 +121,7 @@ app.use(flatiron.plugins.http, {
       res.emit('next');
     }
   },
-  connect.static(__dirname + '/public'),
+  connect['static'](__dirname + '/public'),
   connect.favicon('./public/favicon.ico'),
   connect.cookieParser('SocketStream'),
   connect.session({
@@ -236,11 +234,11 @@ app.router.path('/', function () {
               }
               passport.authenticate('local', function(err, user) {
                 // console.log(user);
-                if (err) { self.res.end("SERVER ERROR\n") }
-                if (!user) { self.res.end("false") }
+                if (err) { self.res.end("SERVER ERROR\n"); }
+                if (!user) { self.res.end("false"); }
                 else {
                   self.req.logIn(user, function(err) {
-                    if (err) {throw err}
+                    if (err) {throw err;}
                     self.res.writeHead(200, {'Content-Type': 'text/html',
                                        'Authentication': JSON.stringify(self.req._passport.session)});
                                        self.res.end("true");
@@ -267,7 +265,7 @@ app.router.path('/services/blog_posts/:id', function() {
   this.get(routes.getBP);
   this.post(routes.postBP);
   this.put(routes.postBP);
-  this.delete(routes.deleteBP);
+  this['delete'](routes.deleteBP);
 });
 
 app.router.path('/services/comments', function() {
