@@ -4,7 +4,7 @@
 // });
 
 process.env.SS_DIRECTORY = '/dictum';
-process.env.SS_ENV = process.env.NODE_ENV;
+//process.env.SS_ENV = process.env.NODE_ENV;
 
 var flatiron = require('flatiron'),
     connect = require('connect'),
